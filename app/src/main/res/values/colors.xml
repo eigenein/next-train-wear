@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="yellow_app">#FFEB3B</color>
+    <color name="yellow_accent">#FFF280</color>
+    <color name="yellow_active_element">#A69926</color>
+    <color name="yellow_lighter_element">#8C8120</color>
+    <color name="yellow_darker_element">#665E17</color>
+    <color name="yellow_lighter_background">#4D2C18</color>
+    <color name="yellow_dark_background">#26160C</color>
+
+    <color name="blue_app">#2196F3</color>
+    <color name="blue_accent">#80C6FF</color>
+    <color name="blue_active_element">#1766A6</color>
+    <color name="blue_lighter_element">#14568C</color>
+    <color name="blue_darker_element">#0E3F66</color>
+    <color name="blue_lighter_background">#002A4D</color>
+    <color name="blue_dark_background">#001C33</color>
+
+</resources>

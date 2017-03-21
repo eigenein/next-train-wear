@@ -7,23 +7,16 @@
     android:layout_height="match_parent"
     tools:deviceIds="wear">
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/content"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"/>
-
-    </android.support.v4.widget.NestedScrollView>
+        android:layout_height="match_parent"
+        android:id="@+id/content_frame"/>
 
     <android.support.wearable.view.drawer.WearableNavigationDrawer
         android:id="@+id/navigation_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/blue_lighter_background"
         app:navigation_style="single_page"/>
 
 </android.support.wearable.view.drawer.WearableDrawerLayout>

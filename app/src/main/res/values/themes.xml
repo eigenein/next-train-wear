@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="android:Theme.Material">
+        <item name="android:colorBackground">@color/blue_dark_background</item>
+        <item name="android:colorAccent">@color/blue_accent</item>
+    </style>
+</resources>
