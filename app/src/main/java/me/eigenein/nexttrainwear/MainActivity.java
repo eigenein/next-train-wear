@@ -17,22 +17,27 @@ public class MainActivity extends WearableActivity {
         setContentView(R.layout.activity_main);
         setAmbientEnabled();
 
+        // https://developer.android.com/training/wearables/ui/ui-nav-actions.html
         drawerLayout = (WearableDrawerLayout)findViewById(R.id.drawer_layout);
         navigationDrawer = (WearableNavigationDrawer)findViewById(R.id.navigation_drawer);
+        navigationDrawer.setShouldOnlyOpenWhenAtTop(false);
     }
 
     @Override
     public void onEnterAmbient(Bundle ambientDetails) {
         super.onEnterAmbient(ambientDetails);
+        // TODO
     }
 
     @Override
     public void onUpdateAmbient() {
         super.onUpdateAmbient();
+        // TODO
     }
 
     @Override
     public void onExitAmbient() {
         super.onExitAmbient();
+        // TODO
     }
 }
