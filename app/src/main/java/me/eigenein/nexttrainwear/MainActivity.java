@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.drawer.WearableNavigationDrawer;
 
-public class MainActivity extends WearableActivity implements NavigationDrawerAdapter.OnItemSelectedListener {
+public class MainActivity
+    extends WearableActivity
+    implements NavigationDrawerAdapter.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
