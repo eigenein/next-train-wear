@@ -11,10 +11,12 @@ public class NavigationDrawerAdapter extends WearableNavigationDrawerAdapter {
     @ColorInt
     private static final int WHITE = 0xFFFFFFFF;
 
+    private final OnItemSelectedListener listener;
     private final String[] texts;
     private final Drawable[] icons;
 
-    public NavigationDrawerAdapter(final Context context) {
+    public NavigationDrawerAdapter(final Context context, final OnItemSelectedListener listener) {
+        this.listener = listener;
         this.texts = context.getResources().getStringArray(R.array.navigation_drawer_texts);
 
         // Load icons.
@@ -39,11 +41,15 @@ public class NavigationDrawerAdapter extends WearableNavigationDrawerAdapter {
 
     @Override
     public void onItemSelected(final int index) {
-        // TODO
+        listener.onItemSelected(index);
     }
 
     @Override
     public int getCount() {
         return texts.length;
+    }
+
+    public interface OnItemSelectedListener {
+        void onItemSelected(final int index);
     }
 }

@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class StationsFragment extends Fragment {
+
     private static final String ARG_PARAM1 = "param1";
 
     private String param1;
-
-    private OnFragmentInteractionListener listener;
 
     public StationsFragment() {
         // Do nothing.
@@ -34,24 +33,11 @@ public class StationsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(
+        final LayoutInflater inflater,
+        final ViewGroup container,
+        final Bundle savedInstanceState
+    ) {
         return inflater.inflate(R.layout.fragment_stations, container, false);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        listener = (OnFragmentInteractionListener)context;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction();
     }
 }
