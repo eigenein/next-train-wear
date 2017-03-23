@@ -12,6 +12,7 @@ public class StationsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
 
     private String param1;
+    private StationCatalogue catalogue;
 
     public StationsFragment() {
         // Do nothing.
@@ -25,7 +26,7 @@ public class StationsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             // param1 = getArguments().getString(ARG_PARAM1);
@@ -39,5 +40,11 @@ public class StationsFragment extends Fragment {
         final Bundle savedInstanceState
     ) {
         return inflater.inflate(R.layout.fragment_stations, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        catalogue = StationCatalogue.newInstance(getActivity());
     }
 }
