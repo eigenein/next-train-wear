@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="ripple">#42FFFFFF</color>
+
     <color name="yellow_app">#FFEB3B</color>
     <color name="yellow_accent">#FFF280</color>
     <color name="yellow_active_element">#A69926</color>

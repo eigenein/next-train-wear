@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_headlines">22sp</dimen>
+    <dimen name="text_notification">20sp</dimen>
+    <dimen name="text_confirmation">18sp</dimen>
+    <dimen name="text_body">16sp</dimen>
+    <dimen name="text_list_item_description">14sp</dimen>
+    <dimen name="text_timestamp">12sp</dimen>
+</resources>
