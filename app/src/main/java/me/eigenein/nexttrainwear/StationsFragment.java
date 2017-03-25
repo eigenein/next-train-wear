@@ -3,16 +3,14 @@ package me.eigenein.nexttrainwear;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.wearable.view.WearableRecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 public class StationsFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-
-    private String param1;
-    private StationCatalogue catalogue;
+    private WearableRecyclerView recyclerView;
 
     public StationsFragment() {
         // Do nothing.
@@ -28,9 +26,6 @@ public class StationsFragment extends Fragment {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            // param1 = getArguments().getString(ARG_PARAM1);
-        }
     }
 
     @Override
@@ -39,12 +34,15 @@ public class StationsFragment extends Fragment {
         final ViewGroup container,
         final Bundle savedInstanceState
     ) {
-        return inflater.inflate(R.layout.fragment_stations, container, false);
+        recyclerView = (WearableRecyclerView)inflater.inflate(R.layout.fragment_stations, container, false);
+        return recyclerView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        catalogue = StationCatalogue.newInstance(getActivity());
+        recyclerView.setAdapter(new StationsAdapter(
+            StationCatalogue.newInstance(getActivity()),
+            Preferences.getStations(getActivity())));
     }
 }

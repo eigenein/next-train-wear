@@ -2,13 +2,14 @@ package me.eigenein.nexttrainwear;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
-import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Station catalogue.
@@ -50,6 +51,11 @@ public class StationCatalogue {
                                 station.code = parser.nextText();
                                 break;
 
+                            case "Land":
+                                assert station != null;
+                                station.land = parser.nextText();
+                                break;
+
                             case "Lang":
                                 assert station != null;
                                 station.longName = parser.nextText();
@@ -70,14 +76,20 @@ public class StationCatalogue {
                     case XmlPullParser.END_TAG:
                         if (parser.getName().equals("Station")) {
                             assert station != null;
-                            stations.add(station);
-                            Log.d(TAG, station.toString());
+                            if (station.land.equals("NL")) {
+                                stations.add(station);
+                            }
                             station = null;
                         }
                         break;
 
                     case XmlPullParser.END_DOCUMENT:
-                        Log.i(TAG, "read " + stations.size() + " stations");
+                        Collections.sort(stations, new Comparator<Station>() {
+                            @Override
+                            public int compare(final Station station1, final Station station2) {
+                                return station1.longName.compareTo(station2.longName);
+                            }
+                        });
                         return;
                 }
                 parser.next();

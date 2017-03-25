@@ -2,8 +2,12 @@ package me.eigenein.nexttrainwear;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.drawer.WearableNavigationDrawer;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity
     extends WearableActivity
@@ -20,7 +24,11 @@ public class MainActivity
         navigationDrawer.setAdapter(new NavigationDrawerAdapter(this, this));
         navigationDrawer.setShouldOnlyOpenWhenAtTop(false);
 
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, TrainsFragment.newInstance()).commit();
+        final Set<String> stations = Preferences.getStations(this);
+        getFragmentManager()
+            .beginTransaction()
+            .replace(R.id.content_frame, stations.size() != 0 ? TrainsFragment.newInstance() : StationsFragment.newInstance())
+            .commit();
     }
 
     @Override
