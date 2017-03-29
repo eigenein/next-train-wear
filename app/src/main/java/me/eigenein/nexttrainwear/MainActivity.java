@@ -1,7 +1,11 @@
 package me.eigenein.nexttrainwear;
 
+import android.Manifest;
 import android.app.Fragment;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.drawer.WearableNavigationDrawer;
 
@@ -15,6 +19,8 @@ import me.eigenein.nexttrainwear.fragments.TrainsFragment;
 public class MainActivity
     extends WearableActivity
     implements NavigationDrawerAdapter.OnItemSelectedListener {
+
+    private static final int REQUEST_CODE_PERMISSIONS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,15 @@ public class MainActivity
             .beginTransaction()
             .replace(R.id.content_frame, stations.size() != 0 ? TrainsFragment.newInstance() : StationsFragment.newInstance())
             .commit();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_PERMISSIONS);
+        }
     }
 
     @Override
@@ -66,5 +81,16 @@ public class MainActivity
                 return;
         }
         getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+        final int requestCode,
+        @NonNull final String[] permissions,
+        @NonNull final int[] grantResults
+    ) {
+        if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+            finish();
+        }
     }
 }
