@@ -2,12 +2,15 @@ package me.eigenein.nexttrainwear;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.drawer.WearableNavigationDrawer;
 
-import java.util.HashSet;
 import java.util.Set;
+
+import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter;
+import me.eigenein.nexttrainwear.fragments.SettingsFragment;
+import me.eigenein.nexttrainwear.fragments.StationsFragment;
+import me.eigenein.nexttrainwear.fragments.TrainsFragment;
 
 public class MainActivity
     extends WearableActivity

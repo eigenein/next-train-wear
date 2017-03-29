@@ -1,4 +1,4 @@
-package me.eigenein.nexttrainwear;
+package me.eigenein.nexttrainwear.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +8,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import java.util.Set;
+
+import me.eigenein.nexttrainwear.Preferences;
+import me.eigenein.nexttrainwear.R;
+import me.eigenein.nexttrainwear.Station;
+import me.eigenein.nexttrainwear.StationCatalogue;
 
 public class StationsAdapter extends RecyclerView.Adapter {
 

@@ -1,10 +1,12 @@
-package me.eigenein.nexttrainwear;
+package me.eigenein.nexttrainwear.adapters;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.wearable.view.drawer.WearableNavigationDrawer.WearableNavigationDrawerAdapter;
+
+import me.eigenein.nexttrainwear.R;
 
 public class NavigationDrawerAdapter extends WearableNavigationDrawerAdapter {
 

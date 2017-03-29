@@ -1,12 +1,16 @@
-package me.eigenein.nexttrainwear;
+package me.eigenein.nexttrainwear.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.wearable.view.WearableRecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import me.eigenein.nexttrainwear.Preferences;
+import me.eigenein.nexttrainwear.R;
+import me.eigenein.nexttrainwear.StationCatalogue;
+import me.eigenein.nexttrainwear.adapters.StationsAdapter;
 
 public class StationsFragment extends Fragment {
 
