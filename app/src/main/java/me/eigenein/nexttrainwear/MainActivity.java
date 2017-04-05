@@ -9,8 +9,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.drawer.WearableNavigationDrawer;
 
-import java.util.Set;
-
 import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter;
 import me.eigenein.nexttrainwear.fragments.SettingsFragment;
 import me.eigenein.nexttrainwear.fragments.StationsFragment;
@@ -33,10 +31,9 @@ public class MainActivity
         navigationDrawer.setAdapter(new NavigationDrawerAdapter(this, this));
         navigationDrawer.setShouldOnlyOpenWhenAtTop(false);
 
-        final Set<String> stations = Preferences.getStations(this);
         getFragmentManager()
             .beginTransaction()
-            .replace(R.id.content_frame, stations.size() != 0 ? TrainsFragment.newInstance() : StationsFragment.newInstance())
+            .replace(R.id.content_frame, TrainsFragment.newInstance())
             .commit();
     }
 
@@ -50,7 +47,7 @@ public class MainActivity
     }
 
     @Override
-    public void onEnterAmbient(Bundle ambientDetails) {
+    public void onEnterAmbient(final Bundle ambientDetails) {
         super.onEnterAmbient(ambientDetails);
     }
 

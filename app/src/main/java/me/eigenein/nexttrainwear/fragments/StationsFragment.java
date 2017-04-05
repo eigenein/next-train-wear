@@ -21,15 +21,7 @@ public class StationsFragment extends Fragment {
     }
 
     public static StationsFragment newInstance() {
-        final StationsFragment fragment = new StationsFragment();
-        final Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        return new StationsFragment();
     }
 
     @Override
@@ -47,6 +39,7 @@ public class StationsFragment extends Fragment {
         super.onStart();
         recyclerView.setAdapter(new StationsAdapter(
             StationCatalogue.newInstance(getActivity()),
-            Preferences.getStations(getActivity())));
+            Preferences.getStations(getActivity()))
+        );
     }
 }

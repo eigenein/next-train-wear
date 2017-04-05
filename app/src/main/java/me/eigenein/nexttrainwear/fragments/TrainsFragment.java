@@ -2,6 +2,7 @@ package me.eigenein.nexttrainwear.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -62,8 +63,11 @@ public class TrainsFragment
 
     @Override
     public void onConnected(@Nullable final Bundle bundle) {
-        // LocationServices.FusedLocationApi.getLastLocation(apiClient);
-        // TODO
+        try {
+            final Location location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+        } catch (final SecurityException e) {
+            // TODO
+        }
     }
 
     @Override
