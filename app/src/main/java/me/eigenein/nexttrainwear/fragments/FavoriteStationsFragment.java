@@ -11,16 +11,16 @@ import me.eigenein.nexttrainwear.Preferences;
 import me.eigenein.nexttrainwear.R;
 import me.eigenein.nexttrainwear.adapters.StationCatalogueAdapter;
 
-public class StationsFragment extends Fragment {
+public class FavoriteStationsFragment extends Fragment {
 
     private WearableRecyclerView recyclerView;
 
-    public StationsFragment() {
+    public FavoriteStationsFragment() {
         // Do nothing.
     }
 
-    public static StationsFragment newInstance() {
-        return new StationsFragment();
+    public static FavoriteStationsFragment newInstance() {
+        return new FavoriteStationsFragment();
     }
 
     @Override
@@ -29,13 +29,13 @@ public class StationsFragment extends Fragment {
         final ViewGroup container,
         final Bundle savedInstanceState
     ) {
-        recyclerView = (WearableRecyclerView)inflater.inflate(R.layout.fragment_stations, container, false);
+        recyclerView = (WearableRecyclerView)inflater.inflate(R.layout.fragment_favorite_stations, container, false);
         return recyclerView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        recyclerView.setAdapter(new StationCatalogueAdapter(Preferences.getStations(getActivity())));
+        recyclerView.setAdapter(new StationCatalogueAdapter(Preferences.getFavoriteStations(getActivity())));
     }
 }

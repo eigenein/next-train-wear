@@ -78,7 +78,7 @@ public class StationCatalogueAdapter extends RecyclerView.Adapter {
             } else {
                 checkedStations.remove(station.code);
             }
-            Preferences.setStations(checkBox.getContext(), checkedStations);
+            Preferences.setFavoriteStations(checkBox.getContext(), checkedStations);
         }
     }
 }

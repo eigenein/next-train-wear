@@ -12,7 +12,7 @@ import android.util.Log;
 
 import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter;
 import me.eigenein.nexttrainwear.fragments.SettingsFragment;
-import me.eigenein.nexttrainwear.fragments.StationsFragment;
+import me.eigenein.nexttrainwear.fragments.FavoriteStationsFragment;
 import me.eigenein.nexttrainwear.fragments.TrainsFragment;
 
 public class MainActivity
@@ -23,7 +23,7 @@ public class MainActivity
     private static final int REQUEST_CODE_PERMISSIONS = 1;
     private static final Fragment FRAGMENTS[] = {
         TrainsFragment.newInstance(),
-        StationsFragment.newInstance(),
+        FavoriteStationsFragment.newInstance(),
         SettingsFragment.newInstance(),
     };
 

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Next Train</string>
     <string name="navigation_drawer_trains">Trains</string>
-    <string name="navigation_drawer_stations">Stations</string>
+    <string name="navigation_drawer_stations">Favorite Stations</string>
     <string name="navigation_drawer_settings">Settings</string>
     <string name="list_item_stations_hint">Tick your favourite stations</string>
     <string name="fragment_trains_detecting_location">Detecting location</string>

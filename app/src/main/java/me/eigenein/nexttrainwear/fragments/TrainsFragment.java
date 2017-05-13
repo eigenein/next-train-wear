@@ -117,8 +117,8 @@ public class TrainsFragment
             station = DEFAULT_STATION;
         }
 
-        final Set<String> stations = Preferences.getStations(getActivity());
-        stations.remove(station.code); // don't go to the current station
+        final Set<String> favoriteStations = Preferences.getFavoriteStations(getActivity());
+        favoriteStations.remove(station.code); // don't go to the current station
         // TODO: sort stations by distance from the current station.
         // TODO: empty station set (pick some nearest ones).
         // TODO: destinations adapter.
