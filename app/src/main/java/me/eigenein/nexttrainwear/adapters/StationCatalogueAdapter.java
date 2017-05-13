@@ -14,11 +14,11 @@ import me.eigenein.nexttrainwear.R;
 import me.eigenein.nexttrainwear.Station;
 import me.eigenein.nexttrainwear.StationCatalogue;
 
-public class StationsAdapter extends RecyclerView.Adapter {
+public class StationCatalogueAdapter extends RecyclerView.Adapter {
 
     private final Set<String> checkedStations;
 
-    public StationsAdapter(final Set<String> checkedStations) {
+    public StationCatalogueAdapter(final Set<String> checkedStations) {
         this.checkedStations = checkedStations;
     }
 

@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.drawer.WearableNavigationDrawer;
+import android.util.Log;
 
 import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter;
 import me.eigenein.nexttrainwear.fragments.SettingsFragment;
@@ -18,6 +19,7 @@ public class MainActivity
     extends WearableActivity
     implements NavigationDrawerAdapter.OnItemSelectedListener {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_CODE_PERMISSIONS = 1;
     private static final Fragment FRAGMENTS[] = {
         TrainsFragment.newInstance(),
@@ -78,7 +80,7 @@ public class MainActivity
         @NonNull final int[] grantResults
     ) {
         if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-            finish();
+            Log.w(TAG, "Permission is not granted");
         }
     }
 }

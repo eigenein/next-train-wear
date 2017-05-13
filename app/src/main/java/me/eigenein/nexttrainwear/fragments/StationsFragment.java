@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 
 import me.eigenein.nexttrainwear.Preferences;
 import me.eigenein.nexttrainwear.R;
-import me.eigenein.nexttrainwear.StationCatalogue;
-import me.eigenein.nexttrainwear.adapters.StationsAdapter;
+import me.eigenein.nexttrainwear.adapters.StationCatalogueAdapter;
 
 public class StationsFragment extends Fragment {
 
@@ -37,6 +36,6 @@ public class StationsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        recyclerView.setAdapter(new StationsAdapter(Preferences.getStations(getActivity())));
+        recyclerView.setAdapter(new StationCatalogueAdapter(Preferences.getStations(getActivity())));
     }
 }

@@ -6,6 +6,9 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.wearable.view.WearableRecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.Set;
+
+import me.eigenein.nexttrainwear.Preferences;
 import me.eigenein.nexttrainwear.R;
 import me.eigenein.nexttrainwear.Station;
 import me.eigenein.nexttrainwear.StationCatalogue;
@@ -25,8 +31,7 @@ public class TrainsFragment
     implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     final private static String TAG = TrainsFragment.class.getSimpleName();
-
-    private View detectingLocationView;
+    final private static Station DEFAULT_STATION = StationCatalogue.STATION_BY_CODE.get("ASD");
 
     public static TrainsFragment newInstance() {
         return new TrainsFragment();
@@ -45,7 +50,13 @@ public class TrainsFragment
         final Bundle savedInstanceState
     ) {
         final View view = inflater.inflate(R.layout.fragment_trains, container, false);
-        detectingLocationView = view.findViewById(R.id.fragment_trains_detecting_location);
+
+        final WearableRecyclerView stationsRecyclerView =
+            (WearableRecyclerView)view.findViewById(R.id.fragment_stations_recycler_view);
+        stationsRecyclerView.setLayoutManager(
+            new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        new LinearSnapHelper().attachToRecyclerView(stationsRecyclerView);
+
         return view;
     }
 
@@ -80,11 +91,11 @@ public class TrainsFragment
                 onStationDetected(Utils.getNearestStation(location));
             } else {
                 Log.e(TAG, "Missing last known location");
-                onStationDetected(Utils.DEFAULT_STATION);
+                onStationDetected(null);
             }
         } catch (final SecurityException e) {
             Log.e(TAG, "Forbidden to obtain last known location", e);
-            onStationDetected(Utils.DEFAULT_STATION);
+            onStationDetected(null);
         }
     }
 
@@ -96,11 +107,21 @@ public class TrainsFragment
     @Override
     public void onConnectionFailed(@NonNull final ConnectionResult connectionResult) {
         Log.e(TAG, "Connection failed: " + connectionResult);
-        onStationDetected(Utils.DEFAULT_STATION);
+        onStationDetected(null);
     }
 
-    private void onStationDetected(final Station station) {
+    private void onStationDetected(Station station) {
         Log.d(TAG, "Detected station: " + station);
-        detectingLocationView.setVisibility(View.GONE);
+        if (station == null) {
+            Log.w(TAG, "Using default station");
+            station = DEFAULT_STATION;
+        }
+
+        final Set<String> stations = Preferences.getStations(getActivity());
+        stations.remove(station.code); // don't go to the current station
+        // TODO: sort stations by distance from the current station.
+        // TODO: empty station set (pick some nearest ones).
+        // TODO: destinations adapter.
+        // TODO: ride adapter.
     }
 }
