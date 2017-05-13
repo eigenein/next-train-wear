@@ -16,11 +16,9 @@ import me.eigenein.nexttrainwear.StationCatalogue;
 
 public class StationsAdapter extends RecyclerView.Adapter {
 
-    private final StationCatalogue catalogue;
     private final Set<String> checkedStations;
 
-    public StationsAdapter(final StationCatalogue catalogue, final Set<String> checkedStations) {
-        this.catalogue = catalogue;
+    public StationsAdapter(final Set<String> checkedStations) {
         this.checkedStations = checkedStations;
     }
 
@@ -38,13 +36,13 @@ public class StationsAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (position != 0) {
-            ((StationViewHolder)holder).bind(catalogue.stations.get(position - 1));
+            ((StationViewHolder)holder).bind(StationCatalogue.STATIONS[position - 1]);
         }
     }
 
     @Override
     public int getItemCount() {
-        return catalogue.stations.size() + 1;
+        return StationCatalogue.STATIONS.length + 1;
     }
 
     private static class DummyViewHolder extends RecyclerView.ViewHolder {
