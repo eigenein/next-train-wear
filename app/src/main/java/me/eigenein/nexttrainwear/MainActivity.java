@@ -19,6 +19,11 @@ public class MainActivity
     implements NavigationDrawerAdapter.OnItemSelectedListener {
 
     private static final int REQUEST_CODE_PERMISSIONS = 1;
+    private static final Fragment FRAGMENTS[] = {
+        TrainsFragment.newInstance(),
+        StationsFragment.newInstance(),
+        SettingsFragment.newInstance(),
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,21 +68,7 @@ public class MainActivity
 
     @Override
     public void onItemSelected(final int index) {
-        final Fragment fragment;
-        switch (index) {
-            case 0:
-                fragment = TrainsFragment.newInstance();
-                break;
-            case 1:
-                fragment = StationsFragment.newInstance();
-                break;
-            case 2:
-                fragment = SettingsFragment.newInstance();
-                break;
-            default:
-                return;
-        }
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, FRAGMENTS[index]).commit();
     }
 
     @Override
