@@ -1,12 +1,16 @@
 package me.eigenein.nexttrainwear;
 
+import java.util.HashMap;
+
 /**
  * Station catalogue.
- * Auto-generated on 2017-05-13 19:51:34.045121.
+ * Auto-generated on 2017-05-13 21:08:00.453065.
  */
 public class StationCatalogue {
 
+    public static final HashMap<String, Station> STATION_BY_CODE = new HashMap<>();
     public static final Station[] STATIONS = {
+
         new Station("HT", "'s-Hertogenbosch", "NL", 51.69048f, 5.29362f),
         new Station("HTO", "'s-Hertogenbosch Oost", "NL", 51.700553894043f, 5.3183331489563f),
         new Station("HDE", "'t Harde", "NL", 52.4091682f, 5.893611f),
@@ -627,7 +631,14 @@ public class StationCatalogue {
         new Station("OETZ", "Ötztal", "A", 47.23848f, 10.85911f),
     };
 
+    static {
+        for (final Station station : STATIONS) {
+            STATION_BY_CODE.put(station.code, station);
+        }
+    }
+
     private StationCatalogue() {
         // Do nothing.
     }
 }
+

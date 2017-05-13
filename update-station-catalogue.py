@@ -10,6 +10,37 @@ import click
 import requests
 
 
+HEADER = f'''
+package me.eigenein.nexttrainwear;
+
+import java.util.HashMap;
+
+/**
+ * Station catalogue.
+ * Auto-generated on {datetime.datetime.now()}.
+ */
+public class StationCatalogue {{
+
+    public static final HashMap<String, Station> STATION_BY_CODE = new HashMap<>();
+    public static final Station[] STATIONS = {{
+'''.lstrip('\r\n')
+
+FOOTER = '''
+    };
+
+    static {
+        for (final Station station : STATIONS) {
+            STATION_BY_CODE.put(station.code, station);
+        }
+    }
+
+    private StationCatalogue() {
+        // Do nothing.
+    }
+}
+'''.lstrip('\r\n')
+
+
 @click.command()
 @click.option('-n', '--user', required=True, help='NS API username')
 @click.option('-p', '--password', required=True, prompt=True, hide_input=True, help='NS API password')
@@ -21,17 +52,7 @@ def main(user, password):
 
     catalogue_path = Path(__file__).parent / 'app' / 'src' / 'main' / 'java' / 'me' / 'eigenein' / 'nexttrainwear' / 'StationCatalogue.java'
     with catalogue_path.open('wt', encoding='utf-8') as catalogue_file:
-        print(os.linesep.join([
-            'package me.eigenein.nexttrainwear;',
-            '',
-            '/**',
-            ' * Station catalogue.',
-            f' * Auto-generated on {datetime.datetime.now()}.',
-            ' */',
-            'public class StationCatalogue {',
-            '',
-            '    public static final Station[] STATIONS = {',
-        ]), file=catalogue_file)
+        print(HEADER, file=catalogue_file)
 
         stations_element = ElementTree.fromstring(response.content)
         for station_element in stations_element:
@@ -42,14 +63,7 @@ def main(user, password):
             longitude = station_element.find('Lon').text
             print(f'        new Station("{code}", "{long_name}", "{land}", {latitude}f, {longitude}f),', file=catalogue_file)
 
-        print(os.linesep.join([
-            '    };',
-            '',
-            '    private StationCatalogue() {',
-            '        // Do nothing.',
-            '    }',
-            '}',
-        ]), file=catalogue_file)
+        print(FOOTER, file=catalogue_file)
 
 
 if __name__ == '__main__':

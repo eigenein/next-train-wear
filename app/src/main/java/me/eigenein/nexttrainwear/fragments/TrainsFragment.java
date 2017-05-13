@@ -6,6 +6,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,17 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
 import me.eigenein.nexttrainwear.R;
+import me.eigenein.nexttrainwear.Station;
+import me.eigenein.nexttrainwear.StationCatalogue;
+import me.eigenein.nexttrainwear.Utils;
 
 public class TrainsFragment
     extends Fragment
     implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+    final private static String TAG = TrainsFragment.class.getSimpleName();
+
+    private View detectingLocationView;
 
     public static TrainsFragment newInstance() {
         return new TrainsFragment();
@@ -36,7 +44,9 @@ public class TrainsFragment
         final ViewGroup container,
         final Bundle savedInstanceState
     ) {
-        return inflater.inflate(R.layout.fragment_trains, container, false);
+        final View view = inflater.inflate(R.layout.fragment_trains, container, false);
+        detectingLocationView = view.findViewById(R.id.fragment_trains_detecting_location);
+        return view;
     }
 
     @Override
@@ -65,8 +75,16 @@ public class TrainsFragment
     public void onConnected(@Nullable final Bundle bundle) {
         try {
             final Location location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+            if (location != null) {
+                Log.d(TAG, "Found location: " + location);
+                onStationDetected(Utils.getNearestStation(location));
+            } else {
+                Log.e(TAG, "Missing last known location");
+                onStationDetected(Utils.DEFAULT_STATION);
+            }
         } catch (final SecurityException e) {
-            // TODO
+            Log.e(TAG, "Forbidden to obtain last known location", e);
+            onStationDetected(Utils.DEFAULT_STATION);
         }
     }
 
@@ -77,6 +95,12 @@ public class TrainsFragment
 
     @Override
     public void onConnectionFailed(@NonNull final ConnectionResult connectionResult) {
-        // TODO
+        Log.e(TAG, "Connection failed: " + connectionResult);
+        onStationDetected(Utils.DEFAULT_STATION);
+    }
+
+    private void onStationDetected(final Station station) {
+        Log.d(TAG, "Detected station: " + station);
+        detectingLocationView.setVisibility(View.GONE);
     }
 }
