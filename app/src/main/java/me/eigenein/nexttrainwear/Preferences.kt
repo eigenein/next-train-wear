@@ -10,7 +10,7 @@ object Preferences {
     private val KEY_FAVORITE_STATIONS = "favorite_stations"
     private val EMPTY_SET = HashSet<String>()
 
-    fun getFavoriteStations(context: Context): Set<String> {
+    fun getFavoriteStations(context: Context): MutableSet<String> {
         return PreferenceManager
             .getDefaultSharedPreferences(context)
             .getStringSet(KEY_FAVORITE_STATIONS, EMPTY_SET)
