@@ -57,7 +57,8 @@ class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             val location = LocationServices.FusedLocationApi.getLastLocation(apiClient)
             if (location != null) {
                 Log.d(TAG, "Found location: " + location)
-                onStationDetected(Utils.getNearestStation(location))
+                val nearestStation = StationCatalogue.STATIONS.minBy { it.distanceTo(location) }
+                onStationDetected(nearestStation)
             } else {
                 Log.e(TAG, "Missing last known location")
                 onStationDetected(null)
