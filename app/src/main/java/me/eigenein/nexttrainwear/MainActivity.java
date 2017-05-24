@@ -24,7 +24,7 @@ public class MainActivity
     private static final Fragment FRAGMENTS[] = {
         TrainsFragment.newInstance(),
         FavoriteStationsFragment.newInstance(),
-        SettingsFragment.newInstance(),
+        SettingsFragment.Companion.newInstance(),
     };
 
     @Override
