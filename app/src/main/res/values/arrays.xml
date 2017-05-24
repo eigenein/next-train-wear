@@ -1,16 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <integer-array name="navigation_drawer_icons">
-        <item>@drawable/ic_train_black_24dp</item>
-        <item>@drawable/ic_list_black_24dp</item>
-        <item>@drawable/ic_settings_black_24dp</item>
-    </integer-array>
-
-    <string-array name="navigation_drawer_texts">
-        <item>@string/navigation_drawer_trains</item>
-        <item>@string/navigation_drawer_stations</item>
-        <item>@string/navigation_drawer_settings</item>
-    </string-array>
-
 </resources>
