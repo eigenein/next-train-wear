@@ -1,14 +1,11 @@
 package me.eigenein.nexttrainwear
 
-import java.util.HashMap
-
 /**
  * Station catalogue.
- * Auto-generated on 2017-05-25 01:10:47.306623.
+ * Auto-generated on 2017-05-25 01:56:13.722289.
  */
 object StationCatalogue {
 
-    val STATION_BY_CODE = HashMap<String, Station>()
     val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137f, 4.90027761459351f)
     val STATIONS = arrayOf(
         AMSTERDAM_CENTRAAL,
@@ -630,11 +627,5 @@ object StationCatalogue {
         Station("ZUE", "Zürich HB", "CH", 47.37819f, 8.5392f),
         Station("OETZ", "Ötztal", "A", 47.23848f, 10.85911f)
     )
-
-    init {
-        // Create index by code.
-        for (station in STATIONS) {
-            STATION_BY_CODE.put(station.code, station)
-        }
-    }
+    val STATION_BY_CODE = STATIONS.map { Pair(it.code, it) }.toMap()
 }

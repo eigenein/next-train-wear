@@ -13,15 +13,12 @@ import requests
 HEADER = f'''
 package me.eigenein.nexttrainwear
 
-import java.util.HashMap
-
 /**
  * Station catalogue.
  * Auto-generated on {datetime.datetime.now()}.
  */
 object StationCatalogue {{
 
-    val STATION_BY_CODE = HashMap<String, Station>()
     val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137f, 4.90027761459351f)
     val STATIONS = arrayOf(
         AMSTERDAM_CENTRAAL
@@ -29,13 +26,7 @@ object StationCatalogue {{
 
 FOOTER = '''
     )
-
-    init {
-        // Create index by code.
-        for (station in STATIONS) {
-            STATION_BY_CODE.put(station.code, station)
-        }
-    }
+    val STATION_BY_CODE = STATIONS.map { Pair(it.code, it) }.toMap()
 }'''
 
 
