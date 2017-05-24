@@ -79,7 +79,7 @@ class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     }
 
     private fun onStationDetected(station: Station?) {
-        val currentStation = station ?: DEFAULT_STATION
+        val currentStation = station ?: StationCatalogue.AMSTERDAM_CENTRAAL
         Log.d(TAG, "Detected station: " + currentStation)
 
         val favoriteStations = Preferences.getFavoriteStations(activity)
@@ -93,7 +93,6 @@ class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     companion object {
 
         private val TAG = TrainsFragment::class.java.simpleName
-        private val DEFAULT_STATION = StationCatalogue.STATION_BY_CODE["ASD"]
 
         fun newInstance(): TrainsFragment {
             return TrainsFragment()

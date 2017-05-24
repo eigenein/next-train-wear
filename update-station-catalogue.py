@@ -11,34 +11,32 @@ import requests
 
 
 HEADER = f'''
-package me.eigenein.nexttrainwear;
+package me.eigenein.nexttrainwear
 
-import java.util.HashMap;
+import java.util.HashMap
 
 /**
  * Station catalogue.
  * Auto-generated on {datetime.datetime.now()}.
  */
-public class StationCatalogue {{
+object StationCatalogue {{
 
-    public static final HashMap<String, Station> STATION_BY_CODE = new HashMap<>();
-    public static final Station[] STATIONS = {{
-'''.lstrip('\r\n')
+    val STATION_BY_CODE = HashMap<String, Station>()
+    val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137f, 4.90027761459351f)
+    val STATIONS = arrayOf(
+        AMSTERDAM_CENTRAAL
+'''.strip('\r\n')
 
 FOOTER = '''
-    };
+    )
 
-    static {
-        for (final Station station : STATIONS) {
-            STATION_BY_CODE.put(station.code, station);
+    init {
+        // Create index by code.
+        for (station in STATIONS) {
+            STATION_BY_CODE.put(station.code, station)
         }
     }
-
-    private StationCatalogue() {
-        // Do nothing.
-    }
-}
-'''.lstrip('\r\n')
+}'''
 
 
 @click.command()
@@ -50,18 +48,20 @@ def main(user, password):
     response = requests.get('http://webservices.ns.nl/ns-api-stations-v2', auth=(user, password))
     response.raise_for_status()
 
-    catalogue_path = Path(__file__).parent / 'app' / 'src' / 'main' / 'java' / 'me' / 'eigenein' / 'nexttrainwear' / 'StationCatalogue.java'
+    catalogue_path = Path(__file__).parent / 'app' / 'src' / 'main' / 'java' / 'me' / 'eigenein' / 'nexttrainwear' / 'StationCatalogue.kt'
     with catalogue_path.open('wt', encoding='utf-8') as catalogue_file:
-        print(HEADER, file=catalogue_file)
+        print(HEADER, file=catalogue_file, end='')
 
         stations_element = ElementTree.fromstring(response.content)
         for station_element in stations_element:
             code = station_element.find('Code').text
+            if code == 'ASD':
+                continue  # it's put in the header
             land = station_element.find('Land').text
             long_name = station_element.find('Namen').find('Lang').text
             latitude = station_element.find('Lat').text
             longitude = station_element.find('Lon').text
-            print(f'        new Station("{code}", "{long_name}", "{land}", {latitude}f, {longitude}f),', file=catalogue_file)
+            print(f',{os.linesep}        Station("{code}", "{long_name}", "{land}", {latitude}f, {longitude}f)', file=catalogue_file, end='')
 
         print(FOOTER, file=catalogue_file)
 

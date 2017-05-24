@@ -36,13 +36,13 @@ public class StationCatalogueAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (position != 0) {
-            ((StationViewHolder)holder).bind(StationCatalogue.STATIONS[position - 1]);
+            ((StationViewHolder)holder).bind(StationCatalogue.INSTANCE.getSTATIONS()[position - 1]);
         }
     }
 
     @Override
     public int getItemCount() {
-        return StationCatalogue.STATIONS.length + 1;
+        return StationCatalogue.INSTANCE.getSTATIONS().length + 1;
     }
 
     private static class DummyViewHolder extends RecyclerView.ViewHolder {
