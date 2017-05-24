@@ -36,6 +36,6 @@ public class FavoriteStationsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        recyclerView.setAdapter(new StationCatalogueAdapter(Preferences.getFavoriteStations(getActivity())));
+        recyclerView.setAdapter(new StationCatalogueAdapter(Preferences.INSTANCE.getFavoriteStations(getActivity())));
     }
 }
