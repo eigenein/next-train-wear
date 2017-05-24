@@ -23,7 +23,7 @@ public class MainActivity
     private static final int REQUEST_CODE_PERMISSIONS = 1;
     private static final Fragment FRAGMENTS[] = {
         TrainsFragment.newInstance(),
-        FavoriteStationsFragment.newInstance(),
+        FavoriteStationsFragment.Companion.newInstance(),
         SettingsFragment.Companion.newInstance(),
     };
 
