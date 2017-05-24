@@ -52,7 +52,7 @@ public class TrainsFragment
         final View view = inflater.inflate(R.layout.fragment_trains, container, false);
 
         final WearableRecyclerView stationsRecyclerView =
-            (WearableRecyclerView)view.findViewById(R.id.fragment_stations_recycler_view);
+            (WearableRecyclerView)view.findViewById(R.id.fragment_trains_stations_recycler_view);
         stationsRecyclerView.setLayoutManager(
             new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         new LinearSnapHelper().attachToRecyclerView(stationsRecyclerView);
@@ -88,7 +88,7 @@ public class TrainsFragment
             final Location location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
             if (location != null) {
                 Log.d(TAG, "Found location: " + location);
-                onStationDetected(Utils.getNearestStation(location));
+                onStationDetected(Utils.INSTANCE.getNearestStation(location));
             } else {
                 Log.e(TAG, "Missing last known location");
                 onStationDetected(null);
@@ -118,7 +118,7 @@ public class TrainsFragment
         }
 
         final Set<String> favoriteStations = Preferences.getFavoriteStations(getActivity());
-        favoriteStations.remove(station.code); // don't go to the current station
+        favoriteStations.remove(station.getCode()); // don't go to the current station
         // TODO: sort stations by distance from the current station.
         // TODO: empty station set (pick some nearest ones).
         // TODO: destinations adapter.

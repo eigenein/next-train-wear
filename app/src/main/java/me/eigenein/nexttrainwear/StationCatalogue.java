@@ -633,7 +633,7 @@ public class StationCatalogue {
 
     static {
         for (final Station station : STATIONS) {
-            STATION_BY_CODE.put(station.code, station);
+            STATION_BY_CODE.put(station.getCode(), station);
         }
     }
 

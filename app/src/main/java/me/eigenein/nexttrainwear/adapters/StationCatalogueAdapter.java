@@ -67,16 +67,16 @@ public class StationCatalogueAdapter extends RecyclerView.Adapter {
 
         public void bind(final Station station) {
             this.station = station;
-            checkBox.setText(station.longName);
-            checkBox.setChecked(checkedStations.contains(station.code));
+            checkBox.setText(station.getLongName());
+            checkBox.setChecked(checkedStations.contains(station.getCode()));
         }
 
         @Override
         public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             if (isChecked) {
-                checkedStations.add(station.code);
+                checkedStations.add(station.getCode());
             } else {
-                checkedStations.remove(station.code);
+                checkedStations.remove(station.getCode());
             }
             Preferences.setFavoriteStations(checkBox.getContext(), checkedStations);
         }
