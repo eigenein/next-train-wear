@@ -93,9 +93,5 @@ class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     companion object {
 
         private val TAG = TrainsFragment::class.java.simpleName
-
-        fun newInstance(): TrainsFragment {
-            return TrainsFragment()
-        }
     }
 }

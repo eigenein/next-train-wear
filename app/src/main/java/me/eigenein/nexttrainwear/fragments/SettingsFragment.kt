@@ -17,14 +17,4 @@ class SettingsFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
-
-    companion object {
-
-        fun newInstance(): SettingsFragment {
-            val fragment = SettingsFragment()
-            val args = Bundle()
-            fragment.arguments = args
-            return fragment
-        }
-    }
 }

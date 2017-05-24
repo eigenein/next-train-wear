@@ -28,11 +28,4 @@ class FavoriteStationsFragment : Fragment() {
         super.onStart()
         recyclerView!!.adapter = StationCatalogueAdapter(Preferences.getFavoriteStations(activity))
     }
-
-    companion object {
-
-        fun newInstance(): FavoriteStationsFragment {
-            return FavoriteStationsFragment()
-        }
-    }
 }
