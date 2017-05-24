@@ -22,7 +22,7 @@ public class MainActivity
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_CODE_PERMISSIONS = 1;
     private static final Fragment FRAGMENTS[] = {
-        TrainsFragment.newInstance(),
+        TrainsFragment.Companion.newInstance(),
         FavoriteStationsFragment.Companion.newInstance(),
         SettingsFragment.Companion.newInstance(),
     };
@@ -40,7 +40,7 @@ public class MainActivity
 
         getFragmentManager()
             .beginTransaction()
-            .replace(R.id.content_frame, TrainsFragment.newInstance())
+            .replace(R.id.content_frame, TrainsFragment.Companion.newInstance())
             .commit();
     }
 

@@ -2,7 +2,7 @@ package me.eigenein.nexttrainwear
 
 import android.location.Location
 
-class Station(
+data class Station(
     val code: String,
     val longName: String,
     val land: String,
@@ -14,9 +14,5 @@ class Station(
         val distance = FloatArray(1)
         Location.distanceBetween(latitude.toDouble(), longitude.toDouble(), location.latitude, location.longitude, distance)
         return distance[0]
-    }
-
-    override fun toString(): String {
-        return String.format("%s (%s): %s, %s", longName, code, latitude, longitude)
     }
 }

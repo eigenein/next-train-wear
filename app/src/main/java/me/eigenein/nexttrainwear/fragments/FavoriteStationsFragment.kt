@@ -18,7 +18,7 @@ class FavoriteStationsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle
+        savedInstanceState: Bundle?
     ): View? {
         recyclerView = inflater.inflate(R.layout.fragment_favorite_stations, container, false) as WearableRecyclerView
         return recyclerView
