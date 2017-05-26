@@ -15,9 +15,9 @@ package me.eigenein.nexttrainwear
 
 /**
  * Station catalogue.
- * Auto-generated on {datetime.datetime.now()}.
+ * Auto-generated on {datetime.datetime.now().replace(microsecond=0)}.
  */
-object StationCatalogue {{
+object Stations {{
 
     val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137f, 4.90027761459351f)
     val STATIONS = arrayOf(
@@ -39,7 +39,7 @@ def main(user, password):
     response = requests.get('http://webservices.ns.nl/ns-api-stations-v2', auth=(user, password))
     response.raise_for_status()
 
-    catalogue_path = Path(__file__).parent / 'app' / 'src' / 'main' / 'java' / 'me' / 'eigenein' / 'nexttrainwear' / 'StationCatalogue.kt'
+    catalogue_path = Path(__file__).parent / 'app' / 'src' / 'main' / 'java' / 'me' / 'eigenein' / 'nexttrainwear' / 'Stations.kt'
     with catalogue_path.open('wt', encoding='utf-8') as catalogue_file:
         print(HEADER, file=catalogue_file, end='')
 

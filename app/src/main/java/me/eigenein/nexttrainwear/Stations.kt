@@ -2,9 +2,9 @@ package me.eigenein.nexttrainwear
 
 /**
  * Station catalogue.
- * Auto-generated on 2017-05-25 01:56:13.722289.
+ * Auto-generated on 2017-05-26 19:15:48.
  */
-object StationCatalogue {
+object Stations {
 
     val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137f, 4.90027761459351f)
     val STATIONS = arrayOf(
