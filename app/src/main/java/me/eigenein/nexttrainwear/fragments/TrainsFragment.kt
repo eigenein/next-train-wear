@@ -82,7 +82,7 @@ class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         val currentStation = station ?: Stations.AMSTERDAM_CENTRAAL
         Log.d(TAG, "Detected station: " + currentStation)
 
-        val favoriteStations = Preferences.getFavoriteStations(activity)
+        val favoriteStations = Preferences.getStations(activity)
         // TODO: exclude current station.
         // TODO: sort stations by distance from the current station.
         // TODO: empty station set (pick some nearest ones).

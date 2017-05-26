@@ -11,7 +11,7 @@ import me.eigenein.nexttrainwear.Preferences
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.adapters.StationsAdapter
 
-class FavoriteStationsFragment : Fragment() {
+class StationsFragment : Fragment() {
 
     private var recyclerView: WearableRecyclerView? = null
 
@@ -20,12 +20,12 @@ class FavoriteStationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        recyclerView = inflater.inflate(R.layout.fragment_favorite_stations, container, false) as WearableRecyclerView
+        recyclerView = inflater.inflate(R.layout.fragment_stations, container, false) as WearableRecyclerView
         return recyclerView
     }
 
     override fun onStart() {
         super.onStart()
-        recyclerView!!.adapter = StationsAdapter(Preferences.getFavoriteStations(activity))
+        recyclerView!!.adapter = StationsAdapter(Preferences.getStations(activity).toMutableSet())
     }
 }

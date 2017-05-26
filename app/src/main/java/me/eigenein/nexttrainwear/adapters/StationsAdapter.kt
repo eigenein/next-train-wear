@@ -56,7 +56,7 @@ class StationsAdapter(private val checkedStations: MutableSet<String>) : Recycle
             } else {
                 checkedStations.remove(station!!.code)
             }
-            Preferences.setFavoriteStations(checkBox.context, checkedStations)
+            Preferences.setStations(checkBox.context, checkedStations)
         }
     }
 }

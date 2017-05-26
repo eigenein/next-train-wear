@@ -8,7 +8,7 @@ import android.support.wearable.activity.WearableActivity
 import android.support.wearable.view.drawer.WearableNavigationDrawer
 import android.util.Log
 import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter
-import me.eigenein.nexttrainwear.fragments.FavoriteStationsFragment
+import me.eigenein.nexttrainwear.fragments.StationsFragment
 import me.eigenein.nexttrainwear.fragments.SettingsFragment
 import me.eigenein.nexttrainwear.fragments.TrainsFragment
 
@@ -70,7 +70,7 @@ class MainActivity : WearableActivity(), NavigationDrawerAdapter.OnItemSelectedL
         private val REQUEST_CODE_PERMISSIONS = 1
         private val FRAGMENTS = arrayOf(
             { TrainsFragment() },
-            { FavoriteStationsFragment() },
+            { StationsFragment() },
             { SettingsFragment() }
         )
     }

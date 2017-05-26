@@ -10,4 +10,4 @@
     android:paddingBottom="60dp"
     android:clipToPadding="false"
     android:scrollbars="vertical"
-    tools:context="me.eigenein.nexttrainwear.fragments.FavoriteStationsFragment"/>
+    tools:context="me.eigenein.nexttrainwear.fragments.StationsFragment"/>
