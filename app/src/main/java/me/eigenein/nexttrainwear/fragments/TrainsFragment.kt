@@ -57,14 +57,14 @@ class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             val location = LocationServices.FusedLocationApi.getLastLocation(apiClient)
             if (location != null) {
                 Log.d(TAG, "Found location: " + location)
-                onStationDetected(Station.findNearestStation(location))
+                updateStation(Station.findNearestStation(location))
             } else {
                 Log.e(TAG, "Missing last known location")
-                onStationDetected(null)
+                updateStation(null)
             }
         } catch (e: SecurityException) {
             Log.e(TAG, "Forbidden to obtain last known location", e)
-            onStationDetected(null)
+            updateStation(null)
         }
 
     }
@@ -75,23 +75,45 @@ class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
         Log.e(TAG, "Connection failed: " + connectionResult)
-        onStationDetected(null)
+        updateStation(null)
     }
 
-    private fun onStationDetected(station: Station?) {
-        val currentStation = station ?: Stations.AMSTERDAM_CENTRAAL
-        Log.d(TAG, "Detected station: " + currentStation)
+    /**
+     * Updates the fragment based on the current station.
+     */
+    private fun updateStation(station: Station?) {
+        val departureStation = station ?: Stations.AMSTERDAM_CENTRAAL // FIXME
+        Log.d(TAG, "Update station: " + departureStation)
 
-        val favoriteStations = Preferences.getStations(activity)
-        // TODO: exclude current station.
-        // TODO: sort stations by distance from the current station.
-        // TODO: empty station set (pick some nearest ones).
+        val destinations = selectDestinations(departureStation)
+        Log.d(TAG, "Found destinations: " + destinations.size)
+
         // TODO: destinations adapter.
         // TODO: ride adapter.
+    }
+
+    /**
+     * Select destination stations to go to from the specified departureStation.
+     */
+    private fun selectDestinations(departureStation: Station): List<Station> {
+        // Select favorite stations sorted by distance.
+        val stations = Preferences.getStations(activity)
+            .filter { it != departureStation.code }
+            .mapNotNull { Stations.STATION_BY_CODE[it] }
+            .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
+        if (!stations.isEmpty()) {
+            return stations
+        }
+
+        // Select some nearby stations.
+        return Stations.STATIONS
+            .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
+            .take(NEARBY_STATION_COUNT)
     }
 
     companion object {
 
         private val TAG = TrainsFragment::class.java.simpleName
+        private val NEARBY_STATION_COUNT = 3 // FIXME
     }
 }

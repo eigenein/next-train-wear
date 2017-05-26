@@ -19,7 +19,7 @@ package me.eigenein.nexttrainwear
  */
 object Stations {{
 
-    val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137f, 4.90027761459351f)
+    val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137, 4.90027761459351)
     val STATIONS = arrayOf(
         AMSTERDAM_CENTRAAL
 '''.strip('\r\n')
@@ -52,7 +52,7 @@ def main(user, password):
             long_name = station_element.find('Namen').find('Lang').text
             latitude = station_element.find('Lat').text
             longitude = station_element.find('Lon').text
-            print(f',{os.linesep}        Station("{code}", "{long_name}", "{land}", {latitude}f, {longitude}f)', file=catalogue_file, end='')
+            print(f',{os.linesep}        Station("{code}", "{long_name}", "{land}", {latitude}, {longitude})', file=catalogue_file, end='')
 
         print(FOOTER, file=catalogue_file)
 

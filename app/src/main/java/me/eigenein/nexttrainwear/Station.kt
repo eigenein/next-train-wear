@@ -6,17 +6,20 @@ data class Station(
     val code: String,
     val longName: String,
     val land: String,
-    val latitude: Float,
-    val longitude: Float
+    val latitude: Double,
+    val longitude: Double
 ) {
 
-    fun distanceTo(location: Location): Float {
+    fun distanceTo(latitude: Double, longitude: Double): Float {
         val distance = FloatArray(1)
-        Location.distanceBetween(latitude.toDouble(), longitude.toDouble(), location.latitude, location.longitude, distance)
+        Location.distanceBetween(latitude, longitude, latitude, longitude, distance)
         return distance[0]
     }
 
     companion object {
-        fun findNearestStation(location: Location): Station? = Stations.STATIONS.minBy { it.distanceTo(location) }
+        fun findNearestStation(latitude: Double, longitude: Double): Station? =
+            Stations.STATIONS.minBy { it.distanceTo(latitude, longitude) }
+        fun findNearestStation(location: Location): Station? =
+            findNearestStation(location.latitude, location.longitude)
     }
 }
