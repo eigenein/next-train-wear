@@ -9,7 +9,7 @@ import android.view.ViewGroup
 
 import me.eigenein.nexttrainwear.Preferences
 import me.eigenein.nexttrainwear.R
-import me.eigenein.nexttrainwear.adapters.StationCatalogueAdapter
+import me.eigenein.nexttrainwear.adapters.StationsAdapter
 
 class FavoriteStationsFragment : Fragment() {
 
@@ -26,6 +26,6 @@ class FavoriteStationsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        recyclerView!!.adapter = StationCatalogueAdapter(Preferences.getFavoriteStations(activity))
+        recyclerView!!.adapter = StationsAdapter(Preferences.getFavoriteStations(activity))
     }
 }
