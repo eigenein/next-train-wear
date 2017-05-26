@@ -16,7 +16,10 @@ import com.google.android.gms.location.LocationServices
 import me.eigenein.nexttrainwear.*
 import me.eigenein.nexttrainwear.adapters.RoutesAdapter
 
-class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+class TrainsFragment :
+    Fragment(),
+    GoogleApiClient.ConnectionCallbacks,
+    GoogleApiClient.OnConnectionFailedListener {
 
     private var apiClient: GoogleApiClient? = null
 

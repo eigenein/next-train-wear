@@ -24,8 +24,8 @@ class StationsFragment : Fragment() {
         return recyclerView
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         recyclerView!!.adapter = StationsAdapter(Preferences.getStations(activity).toMutableSet())
     }
 }

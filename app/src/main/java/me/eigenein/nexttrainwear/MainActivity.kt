@@ -12,7 +12,11 @@ import me.eigenein.nexttrainwear.fragments.StationsFragment
 import me.eigenein.nexttrainwear.fragments.SettingsFragment
 import me.eigenein.nexttrainwear.fragments.TrainsFragment
 
-class MainActivity : WearableActivity(), NavigationDrawerAdapter.OnItemSelectedListener {
+class MainActivity :
+    WearableActivity(),
+    NavigationDrawerAdapter.OnItemSelectedListener {
+
+    var ambientListener: AmbientListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,14 +44,17 @@ class MainActivity : WearableActivity(), NavigationDrawerAdapter.OnItemSelectedL
 
     override fun onEnterAmbient(ambientDetails: Bundle?) {
         super.onEnterAmbient(ambientDetails)
+        ambientListener?.onEnterAmbient()
     }
 
     override fun onUpdateAmbient() {
         super.onUpdateAmbient()
+        ambientListener?.onUpdateAmbient()
     }
 
     override fun onExitAmbient() {
         super.onExitAmbient()
+        ambientListener?.onExitAmbient()
     }
 
     override fun onItemSelected(index: Int) {
@@ -73,5 +80,12 @@ class MainActivity : WearableActivity(), NavigationDrawerAdapter.OnItemSelectedL
             { StationsFragment() },
             { SettingsFragment() }
         )
+    }
+
+    interface AmbientListener {
+
+        fun onEnterAmbient()
+        fun onUpdateAmbient()
+        fun onExitAmbient()
     }
 }
