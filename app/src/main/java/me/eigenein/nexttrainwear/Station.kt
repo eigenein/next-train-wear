@@ -15,4 +15,8 @@ data class Station(
         Location.distanceBetween(latitude.toDouble(), longitude.toDouble(), location.latitude, location.longitude, distance)
         return distance[0]
     }
+
+    companion object {
+        fun findNearestStation(location: Location): Station? = Stations.STATIONS.minBy { it.distanceTo(location) }
+    }
 }
