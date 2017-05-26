@@ -49,6 +49,8 @@ def main(user, password):
             if code == 'ASD':
                 continue  # it's put in the header
             land = station_element.find('Land').text
+            if land != 'NL':
+                continue  # skip stations outside The Netherlands
             long_name = station_element.find('Namen').find('Lang').text
             latitude = station_element.find('Lat').text
             longitude = station_element.find('Lon').text

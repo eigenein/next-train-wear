@@ -12,7 +12,7 @@ data class Station(
 
     fun distanceTo(latitude: Double, longitude: Double): Float {
         val distance = FloatArray(1)
-        Location.distanceBetween(latitude, longitude, latitude, longitude, distance)
+        Location.distanceBetween(this.latitude, this.longitude, latitude, longitude, distance)
         return distance[0]
     }
 

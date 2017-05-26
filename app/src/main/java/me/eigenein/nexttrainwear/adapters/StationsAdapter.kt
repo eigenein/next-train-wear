@@ -12,11 +12,11 @@ import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.Station
 import me.eigenein.nexttrainwear.Stations
 
-class StationsAdapter(private val checkedStations: MutableSet<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class StationsAdapter(private val checkedStations: MutableSet<String>)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position != 0) R.layout.list_item_station else R.layout.list_item_stations_hint
-    }
+    override fun getItemViewType(position: Int): Int =
+        if (position != 0) R.layout.list_item_station else R.layout.list_item_stations_hint
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
@@ -29,9 +29,7 @@ class StationsAdapter(private val checkedStations: MutableSet<String>) : Recycle
         }
     }
 
-    override fun getItemCount(): Int {
-        return Stations.STATIONS.size + 1
-    }
+    override fun getItemCount(): Int = Stations.STATIONS.size + 1
 
     private class DummyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

@@ -14,10 +14,16 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
 import me.eigenein.nexttrainwear.*
+import me.eigenein.nexttrainwear.adapters.RoutesAdapter
 
 class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private var apiClient: GoogleApiClient? = null
+
+    /**
+     * Scrolls destinations horizontally.
+     */
+    private var destinationsRecyclerView: WearableRecyclerView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,9 +32,9 @@ class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     ): View? {
         val view = inflater.inflate(R.layout.fragment_trains, container, false)
 
-        val stationsRecyclerView = view.findViewById(R.id.fragment_trains_stations_recycler_view) as WearableRecyclerView
-        stationsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        LinearSnapHelper().attachToRecyclerView(stationsRecyclerView)
+        destinationsRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView?
+        destinationsRecyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        LinearSnapHelper().attachToRecyclerView(destinationsRecyclerView)
 
         return view
     }
@@ -88,32 +94,31 @@ class TrainsFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         val destinations = selectDestinations(departureStation)
         Log.d(TAG, "Found destinations: " + destinations.size)
 
-        // TODO: destinations adapter.
-        // TODO: ride adapter.
+        destinationsRecyclerView!!.adapter = RoutesAdapter(destinations.map { Route(departureStation, it) })
     }
 
     /**
-     * Select destination stations to go to from the specified departureStation.
+     * Select destinationStation stations to go to from the specified departureStation.
      */
     private fun selectDestinations(departureStation: Station): List<Station> {
+        val stationCodes = Preferences.getStations(activity)
+
         // Select favorite stations sorted by distance.
-        val stations = Preferences.getStations(activity)
+        val favoriteStations = stationCodes
             .filter { it != departureStation.code }
             .mapNotNull { Stations.STATION_BY_CODE[it] }
             .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
-        if (!stations.isEmpty()) {
-            return stations
-        }
 
-        // Select some nearby stations.
-        return Stations.STATIONS
+        // Select all other stations sorted by distance from current.
+        val allStations = Stations.STATIONS
+            .filter { it.code !in stationCodes && it.code != departureStation.code }
             .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
-            .take(NEARBY_STATION_COUNT)
+
+        return favoriteStations + allStations
     }
 
     companion object {
 
         private val TAG = TrainsFragment::class.java.simpleName
-        private val NEARBY_STATION_COUNT = 3 // FIXME
     }
 }

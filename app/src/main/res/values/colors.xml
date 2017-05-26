@@ -19,4 +19,12 @@
     <color name="blue_lighter_background">#002A4D</color>
     <color name="blue_dark_background">#001C33</color>
 
+    <color name="app">@color/blue_app</color>
+    <color name="accent">@color/blue_accent</color>
+    <color name="active_element">@color/blue_active_element</color>
+    <color name="lighter_element">@color/blue_lighter_element</color>
+    <color name="darker_element">@color/blue_darker_element</color>
+    <color name="lighter_background">@color/blue_lighter_background</color>
+    <color name="dark_background">@color/blue_dark_background</color>
+
 </resources>

@@ -16,7 +16,7 @@
         android:id="@+id/navigation_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blue_lighter_background"
+        android:background="@color/lighter_background"
         app:navigation_style="single_page"/>
 
 </android.support.wearable.view.drawer.WearableDrawerLayout>
