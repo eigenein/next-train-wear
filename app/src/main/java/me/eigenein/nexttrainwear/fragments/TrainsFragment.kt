@@ -14,10 +14,13 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
 import me.eigenein.nexttrainwear.*
 import me.eigenein.nexttrainwear.adapters.RoutesAdapter
+import me.eigenein.nexttrainwear.interfaces.AmbientListenable
+import me.eigenein.nexttrainwear.interfaces.AmbientListener
 
-class TrainsFragment : Fragment() {
+class TrainsFragment : Fragment(), AmbientListener {
 
     private var apiClient: GoogleApiClient? = null
+    private var ambientListenable: AmbientListenable? = null
 
     /**
      * Scrolls destinations horizontally.
@@ -48,43 +51,62 @@ class TrainsFragment : Fragment() {
             })
             .addOnConnectionFailedListener { connectionResult ->
                 Log.e(TAG, "Connection failed: " + connectionResult)
-                updateStation(null)
+                updateDepartureStation(null)
             }
             .build()
+        ambientListenable = activity as AmbientListenable
     }
 
     override fun onResume() {
         super.onResume()
+
+        // FIXME: show and hide "detecting location" progress.
         apiClient!!.connect()
+        ambientListenable?.ambientListener = this
     }
 
     override fun onPause() {
         super.onPause()
+        
         apiClient!!.disconnect()
+        ambientListenable?.ambientListener = null
+    }
+
+    override fun onEnterAmbient() {
+        // TODO: try to go with app theme changes.
+    }
+
+    override fun onUpdateAmbient() {
+        // TODO: try to go with app theme changes.
+    }
+
+    override fun onExitAmbient() {
+        // TODO: try to go with app theme changes.
     }
 
     private fun onApiClientConnected() {
+        // FIXME: show and hide "detecting location" progress.
         try {
             val location = LocationServices.FusedLocationApi.getLastLocation(apiClient)
             if (location != null) {
                 Log.d(TAG, "Found location: " + location)
-                updateStation(Station.findNearestStation(location))
+                updateDepartureStation(Station.findNearestStation(location))
             } else {
                 Log.e(TAG, "Missing last known location")
-                updateStation(null)
+                updateDepartureStation(null)
             }
         } catch (e: SecurityException) {
             Log.e(TAG, "Forbidden to obtain last known location", e)
-            updateStation(null)
+            updateDepartureStation(null)
         }
     }
 
     /**
-     * Updates the fragment based on the current station.
+     * Updates the fragment based on the departure station.
      */
-    private fun updateStation(station: Station?) {
+    private fun updateDepartureStation(station: Station?) {
         val departureStation = station ?: Stations.AMSTERDAM_CENTRAAL // FIXME
-        Log.d(TAG, "Update station: " + departureStation)
+        Log.d(TAG, "Update departure station: " + departureStation)
 
         val destinations = selectDestinations(departureStation)
         Log.d(TAG, "Found destinations: " + destinations.size)
@@ -93,7 +115,7 @@ class TrainsFragment : Fragment() {
     }
 
     /**
-     * Select destinationStation stations to go to from the specified departureStation.
+     * Select destination stations to go to from the specified departure station.
      */
     private fun selectDestinations(departureStation: Station): List<Station> {
         val stationCodes = Preferences.getStations(activity)

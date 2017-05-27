@@ -11,12 +11,15 @@ import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter
 import me.eigenein.nexttrainwear.fragments.StationsFragment
 import me.eigenein.nexttrainwear.fragments.SettingsFragment
 import me.eigenein.nexttrainwear.fragments.TrainsFragment
+import me.eigenein.nexttrainwear.interfaces.AmbientListenable
+import me.eigenein.nexttrainwear.interfaces.AmbientListener
 
 class MainActivity :
     WearableActivity(),
-    NavigationDrawerAdapter.OnItemSelectedListener {
+    NavigationDrawerAdapter.OnItemSelectedListener,
+    AmbientListenable {
 
-    var ambientListener: AmbientListener? = null
+    override var ambientListener: AmbientListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,12 +83,5 @@ class MainActivity :
             { StationsFragment() },
             { SettingsFragment() }
         )
-    }
-
-    interface AmbientListener {
-
-        fun onEnterAmbient()
-        fun onUpdateAmbient()
-        fun onExitAmbient()
     }
 }
