@@ -19,14 +19,10 @@ class RoutesAdapter(val routes: List<Route>)
 
     override fun getItemCount(): Int = routes.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_destination, parent, false)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_destination, parent, false))
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(routes[position])
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

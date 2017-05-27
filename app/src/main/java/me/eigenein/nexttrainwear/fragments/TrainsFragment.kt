@@ -25,7 +25,7 @@ class TrainsFragment : Fragment(), AmbientListener {
     /**
      * Scrolls destinations horizontally.
      */
-    private var destinationsRecyclerView: WearableRecyclerView? = null
+    private lateinit var destinationsRecyclerView: WearableRecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +34,8 @@ class TrainsFragment : Fragment(), AmbientListener {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_trains, container, false)
 
-        destinationsRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView?
-        destinationsRecyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        destinationsRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView
+        destinationsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         LinearSnapHelper().attachToRecyclerView(destinationsRecyclerView)
 
         return view
@@ -111,7 +111,7 @@ class TrainsFragment : Fragment(), AmbientListener {
         val destinations = selectDestinations(departureStation)
         Log.d(TAG, "Found destinations: " + destinations.size)
 
-        destinationsRecyclerView!!.adapter = RoutesAdapter(destinations.map { Route(departureStation, it) })
+        destinationsRecyclerView.adapter = RoutesAdapter(destinations.map { Route(departureStation, it) })
     }
 
     /**

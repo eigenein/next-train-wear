@@ -7,7 +7,7 @@ import java.util.HashSet
 
 object Preferences {
 
-    private val KEY_FAVORITE_STATIONS = "stations"
+    private const val KEY_FAVORITE_STATIONS = "stations"
     private val EMPTY_SET = HashSet<String>()
 
     /**

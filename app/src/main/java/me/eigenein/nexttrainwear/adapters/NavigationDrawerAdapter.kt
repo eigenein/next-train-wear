@@ -26,21 +26,10 @@ class NavigationDrawerAdapter(
         icons.forEach { it.setTint(WHITE) }
     }
 
-    override fun getItemText(index: Int): String {
-        return texts[index]
-    }
-
-    override fun getItemDrawable(index: Int): Drawable {
-        return icons[index]
-    }
-
-    override fun onItemSelected(index: Int) {
-        listener.onItemSelected(index)
-    }
-
-    override fun getCount(): Int {
-        return texts.size
-    }
+    override fun getItemText(index: Int): String = texts[index]
+    override fun getItemDrawable(index: Int): Drawable = icons[index]
+    override fun onItemSelected(index: Int) = listener.onItemSelected(index)
+    override fun getCount(): Int = texts.size
 
     interface OnItemSelectedListener {
         fun onItemSelected(index: Int)

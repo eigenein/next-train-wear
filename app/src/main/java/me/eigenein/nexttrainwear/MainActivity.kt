@@ -76,8 +76,9 @@ class MainActivity :
 
     companion object {
 
+        private const val REQUEST_CODE_PERMISSIONS = 1
+
         private val TAG = MainActivity::class.java.simpleName
-        private val REQUEST_CODE_PERMISSIONS = 1
         private val FRAGMENTS = arrayOf(
             { TrainsFragment() },
             { StationsFragment() },

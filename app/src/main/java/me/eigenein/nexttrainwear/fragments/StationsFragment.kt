@@ -13,7 +13,7 @@ import me.eigenein.nexttrainwear.adapters.StationsAdapter
 
 class StationsFragment : Fragment() {
 
-    private var recyclerView: WearableRecyclerView? = null
+    private lateinit var recyclerView: WearableRecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +26,6 @@ class StationsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        recyclerView!!.adapter = StationsAdapter(Preferences.getStations(activity).toMutableSet())
+        recyclerView.adapter = StationsAdapter(Preferences.getStations(activity).toMutableSet())
     }
 }

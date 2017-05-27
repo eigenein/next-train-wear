@@ -35,8 +35,8 @@ class StationsAdapter(private val checkedStations: MutableSet<String>)
 
     private inner class StationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), CompoundButton.OnCheckedChangeListener {
 
-        private var station: Station? = null
         private val checkBox: CheckBox = itemView.findViewById(R.id.list_item_station_checkbox) as CheckBox
+        private lateinit var station: Station
 
         init {
             checkBox.setOnCheckedChangeListener(this)
@@ -50,9 +50,9 @@ class StationsAdapter(private val checkedStations: MutableSet<String>)
 
         override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
             if (isChecked) {
-                checkedStations.add(station!!.code)
+                checkedStations.add(station.code)
             } else {
-                checkedStations.remove(station!!.code)
+                checkedStations.remove(station.code)
             }
             Preferences.setStations(checkBox.context, checkedStations)
         }
