@@ -10,16 +10,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
 import me.eigenein.nexttrainwear.*
 import me.eigenein.nexttrainwear.adapters.RoutesAdapter
 
-class TrainsFragment :
-    Fragment(),
-    GoogleApiClient.ConnectionCallbacks,
-    GoogleApiClient.OnConnectionFailedListener {
+class TrainsFragment : Fragment() {
 
     private var apiClient: GoogleApiClient? = null
 
@@ -46,8 +42,14 @@ class TrainsFragment :
         super.onAttach(context)
         apiClient = GoogleApiClient.Builder(context)
             .addApi(LocationServices.API)
-            .addConnectionCallbacks(this)
-            .addOnConnectionFailedListener(this)
+            .addConnectionCallbacks(object : GoogleApiClient.ConnectionCallbacks {
+                override fun onConnectionSuspended(i: Int) = Unit
+                override fun onConnected(bundle: Bundle?) = onApiClientConnected()
+            })
+            .addOnConnectionFailedListener { connectionResult ->
+                Log.e(TAG, "Connection failed: " + connectionResult)
+                updateStation(null)
+            }
             .build()
     }
 
@@ -61,7 +63,7 @@ class TrainsFragment :
         apiClient!!.disconnect()
     }
 
-    override fun onConnected(bundle: Bundle?) {
+    private fun onApiClientConnected() {
         try {
             val location = LocationServices.FusedLocationApi.getLastLocation(apiClient)
             if (location != null) {
@@ -75,16 +77,6 @@ class TrainsFragment :
             Log.e(TAG, "Forbidden to obtain last known location", e)
             updateStation(null)
         }
-
-    }
-
-    override fun onConnectionSuspended(i: Int) {
-        // Do nothing.
-    }
-
-    override fun onConnectionFailed(connectionResult: ConnectionResult) {
-        Log.e(TAG, "Connection failed: " + connectionResult)
-        updateStation(null)
     }
 
     /**
