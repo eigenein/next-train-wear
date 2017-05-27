@@ -4,12 +4,16 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
 import android.support.wearable.view.WearableRecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.Route
+import me.eigenein.nexttrainwear.api.NsApiInstance
 
 /**
  * Used to display possible routes.
@@ -45,6 +49,10 @@ class RoutesAdapter(val routes: List<Route>)
             departureTextView.text = route.departureStation.longName
             destinationTextView.text = route.destinationStation.longName
             // TODO: make request, hide progress bar and set journeys adapter.
+            NsApiInstance.trainPlanner(route.departureStation.code, route.destinationStation.code)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { response -> Log.i("TEST", response.journeyOptions.size.toString()) }
         }
     }
 }
