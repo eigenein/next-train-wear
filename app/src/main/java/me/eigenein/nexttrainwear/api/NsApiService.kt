@@ -6,7 +6,6 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface NsApiService {
-    // FIXME: enable gzip.
     @Headers("Authorization:Basic ZWlnZW5laW5AZ21haWwuY29tOm90bGw3Nm15TDRFZmpMUGlPOHhxNnplNHVXUzRQNTl1VUZXX21TRVpIS0lIOFdTeWlTTlg0dw==")
     @GET("ns-api-treinplanner")
     fun trainPlanner(

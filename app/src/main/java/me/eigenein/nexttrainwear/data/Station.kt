@@ -1,4 +1,4 @@
-package me.eigenein.nexttrainwear
+package me.eigenein.nexttrainwear.data
 
 import android.location.Location
 
@@ -20,7 +20,7 @@ data class Station(
 
     companion object {
         fun findNearestStation(latitude: Double, longitude: Double): Station? =
-            Stations.STATIONS.minBy { it.distanceTo(latitude, longitude) }
+            Stations.allStations.minBy { it.distanceTo(latitude, longitude) }
         fun findNearestStation(location: Location): Station? =
             findNearestStation(location.latitude, location.longitude)
     }

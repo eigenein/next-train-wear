@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 
 /**
- * Used to display possible journeys.
+ * Used to display possible journey options.
  */
-class JourneysAdapter
-    : RecyclerView.Adapter<JourneysAdapter.ViewHolder>() {
+class JourneyOptionsAdapter
+    : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int {
         TODO("not implemented")

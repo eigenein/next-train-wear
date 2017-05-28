@@ -11,7 +11,7 @@ import requests
 
 
 HEADER = f'''
-package me.eigenein.nexttrainwear
+package me.eigenein.nexttrainwear.data
 
 /**
  * Station catalogue.
@@ -19,14 +19,14 @@ package me.eigenein.nexttrainwear
  */
 object Stations {{
 
-    val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137, 4.90027761459351)
-    val STATIONS = arrayOf(
-        AMSTERDAM_CENTRAAL
+    val amsterdamCentraal = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137, 4.90027761459351)
+    val allStations = arrayOf(
+        amsterdamCentraal
 '''.strip('\r\n')
 
 FOOTER = '''
     )
-    val STATION_BY_CODE = STATIONS.map { Pair(it.code, it) }.toMap()
+    val stationByCode = allStations.map { Pair(it.code, it) }.toMap()
 }'''
 
 
@@ -39,7 +39,7 @@ def main(user, password):
     response = requests.get('http://webservices.ns.nl/ns-api-stations-v2', auth=(user, password))
     response.raise_for_status()
 
-    catalogue_path = Path(__file__).parent / 'app' / 'src' / 'main' / 'java' / 'me' / 'eigenein' / 'nexttrainwear' / 'Stations.kt'
+    catalogue_path = Path(__file__).parent / 'app' / 'src' / 'main' / 'java' / 'me' / 'eigenein' / 'nexttrainwear' / 'data' / 'Stations.kt'
     with catalogue_path.open('wt', encoding='utf-8') as catalogue_file:
         print(HEADER, file=catalogue_file, end='')
 

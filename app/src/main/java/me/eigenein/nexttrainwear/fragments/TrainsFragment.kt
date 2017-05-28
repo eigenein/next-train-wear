@@ -14,6 +14,8 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
 import me.eigenein.nexttrainwear.*
 import me.eigenein.nexttrainwear.adapters.RoutesAdapter
+import me.eigenein.nexttrainwear.data.Station
+import me.eigenein.nexttrainwear.data.Stations
 import me.eigenein.nexttrainwear.interfaces.AmbientListenable
 import me.eigenein.nexttrainwear.interfaces.AmbientListener
 
@@ -50,7 +52,7 @@ class TrainsFragment : Fragment(), AmbientListener {
                 override fun onConnected(bundle: Bundle?) = onApiClientConnected()
             })
             .addOnConnectionFailedListener { connectionResult ->
-                Log.e(TAG, "Connection failed: " + connectionResult)
+                Log.e(tag, "Connection failed: " + connectionResult)
                 updateDepartureStation(null)
             }
             .build()
@@ -89,14 +91,14 @@ class TrainsFragment : Fragment(), AmbientListener {
         try {
             val location = LocationServices.FusedLocationApi.getLastLocation(apiClient)
             if (location != null) {
-                Log.d(TAG, "Found location: " + location)
+                Log.d(tag, "Found location: " + location)
                 updateDepartureStation(Station.findNearestStation(location))
             } else {
-                Log.e(TAG, "Missing last known location")
+                Log.e(tag, "Missing last known location")
                 updateDepartureStation(null)
             }
         } catch (e: SecurityException) {
-            Log.e(TAG, "Forbidden to obtain last known location", e)
+            Log.e(tag, "Forbidden to obtain last known location", e)
             updateDepartureStation(null)
         }
     }
@@ -105,11 +107,11 @@ class TrainsFragment : Fragment(), AmbientListener {
      * Updates the fragment based on the departure station.
      */
     private fun updateDepartureStation(station: Station?) {
-        val departureStation = station ?: Stations.AMSTERDAM_CENTRAAL // FIXME
-        Log.d(TAG, "Update departure station: " + departureStation)
+        val departureStation = station ?: Stations.amsterdamCentraal // FIXME
+        Log.d(tag, "Update departure station: " + departureStation)
 
         val destinations = selectDestinations(departureStation)
-        Log.d(TAG, "Found destinations: " + destinations.size)
+        Log.d(tag, "Found destinations: " + destinations.size)
 
         destinationsRecyclerView.adapter = RoutesAdapter(destinations.map { departureStation.routeTo(it) })
     }
@@ -123,19 +125,21 @@ class TrainsFragment : Fragment(), AmbientListener {
         // Select favorite stations sorted by distance.
         val favoriteStations = stationCodes
             .filter { it != departureStation.code }
-            .mapNotNull { Stations.STATION_BY_CODE[it] }
+            .mapNotNull { Stations.stationByCode[it] }
             .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
 
-        // Select all other stations sorted by distance from current.
-        val allStations = Stations.STATIONS
+        // Select some other stations sorted by distance from current.
+        val allStations = Stations.allStations
             .filter { it.code !in stationCodes && it.code != departureStation.code }
             .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
+            .take(nearestStationCount)
 
         return favoriteStations + allStations
     }
 
     companion object {
 
-        private val TAG = TrainsFragment::class.java.simpleName
+        private const val nearestStationCount = 10 // TODO
+        private val logTag = TrainsFragment::class.java.simpleName
     }
 }
