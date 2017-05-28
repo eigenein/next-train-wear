@@ -9,4 +9,4 @@
     android:paddingBottom="10dp"
     android:textSize="@dimen/text_list_item_description"
     android:textColor="@color/accent"
-    android:text="@string/list_item_stations_hint"/>
+    android:text="@string/item_stations_hint"/>

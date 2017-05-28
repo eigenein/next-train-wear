@@ -16,11 +16,11 @@ class StationsAdapter(private val checkedStations: MutableSet<String>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int =
-        if (position != 0) R.layout.list_item_station else R.layout.list_item_stations_hint
+        if (position != 0) R.layout.item_station else R.layout.item_stations_hint
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
-        return if (viewType == R.layout.list_item_station) StationViewHolder(view) else DummyViewHolder(view)
+        return if (viewType == R.layout.item_station) StationViewHolder(view) else DummyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -35,7 +35,7 @@ class StationsAdapter(private val checkedStations: MutableSet<String>)
 
     private inner class StationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), CompoundButton.OnCheckedChangeListener {
 
-        private val checkBox: CheckBox = itemView.findViewById(R.id.list_item_station_checkbox) as CheckBox
+        private val checkBox: CheckBox = itemView.findViewById(R.id.item_station_checkbox) as CheckBox
         private lateinit var station: Station
 
         init {

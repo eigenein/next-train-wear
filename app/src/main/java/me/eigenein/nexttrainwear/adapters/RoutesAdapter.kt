@@ -24,17 +24,16 @@ class RoutesAdapter(val routes: List<Route>)
 
     override fun getItemCount(): Int = routes.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_route, parent, false))
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false))
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
     override fun onViewRecycled(holder: ViewHolder) = holder.dispose()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val journeyOptionsRecyclerView: WearableRecyclerView =
-            itemView.findViewById(R.id.list_item_route_recycler_view) as WearableRecyclerView
-        val progressView: View = itemView.findViewById(R.id.list_item_route_progress_layout)
-        val departureTextView: TextView = itemView.findViewById(R.id.list_item_route_departure_text) as TextView
-        val destinationTextView: TextView = itemView.findViewById(R.id.list_item_route_destination_text) as TextView
+        val journeyOptionsRecyclerView: WearableRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
+        val progressView: View = itemView.findViewById(R.id.item_route_progress_layout)
+        val departureTextView: TextView = itemView.findViewById(R.id.item_route_departure_text) as TextView
+        val destinationTextView: TextView = itemView.findViewById(R.id.item_route_destination_text) as TextView
 
         var response: JourneyOptionsResponse? = null
         var trainPlannerDisposable: Disposable? = null

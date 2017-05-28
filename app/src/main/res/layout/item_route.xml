@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/list_item_route_progress_layout"
+        android:id="@+id/item_route_progress_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -14,14 +14,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/list_item_route_departure_text"
+            android:id="@+id/item_route_departure_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="@dimen/text_list_item_description"
             android:textColor="@color/accent"/>
         <TextView
-            android:id="@+id/list_item_route_destination_text"
+            android:id="@+id/item_route_destination_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -34,7 +34,7 @@
     </LinearLayout>
 
     <android.support.wearable.view.WearableRecyclerView
-        android:id="@+id/list_item_route_recycler_view"
+        android:id="@+id/item_route_recycler_view"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:clipToPadding="false"
