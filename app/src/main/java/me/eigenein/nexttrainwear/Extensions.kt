@@ -12,7 +12,7 @@ fun Long.toHmDurationString(): String {
 
 fun Long.toHmsDurationString(): String {
     val hours = this / 3600000
-    val minutes = this / 60000
+    val minutes = (this % 3600000) / 60000
     val seconds = (this % 60000) / 1000
     if (hours == 0L) {
         return String.format("%d:%02d", minutes, seconds)
