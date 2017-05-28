@@ -1,0 +1,2721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+
+<ReisMogelijkheden>
+	
+		<ReisMogelijkheid>	
+			
+					
+						<Melding>
+							<Id>2017_hfd_shl_lls_hvs</Id>
+							<Ernstig>false</Ernstig>
+							<Text>Let op, werk aan het spoor Amsterdam Centraal - Almere Centrum</Text>
+						</Melding>
+					
+						<Melding>
+							<Id></Id>
+							<Ernstig>true</Ernstig>
+							<Text>Let op, latere aankomst</Text>
+						</Melding>
+					
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>0:49</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:50</ActueleReisTijd>
+			
+			
+			
+				<AankomstVertraging>+1 min</AankomstVertraging>
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-28T22:40:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-28T22:40:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-28T23:29:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-28T23:30:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VERTRAAGD</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2283</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-28T22:40:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">3</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-28T22:49:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-28T22:55:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2a</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>785</RitNummer>
+             			
+                        
+                              <Status>VERTRAAGD</Status>
+                          
+						
+                         
+						
+							<GeplandeStoringId>2017_hfd_shl_lls_hvs</GeplandeStoringId>
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-28T23:09:00+0200</Tijd>
+							
+								<VertrekVertraging>+2 min</VertrekVertraging>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">10a</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-28T23:29:00+0200</Tijd>
+								
+									<VertrekVertraging>+1 min</VertrekVertraging>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">4</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>2</AantalOverstappen>
+			<GeplandeReisTijd>0:56</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:59</ActueleReisTijd>
+			
+			
+			
+				<AankomstVertraging>+3 min</AankomstVertraging>
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-28T22:47:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-28T22:47:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-28T23:43:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-28T23:46:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VERTRAAGD</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>5474</RitNummer>
+             			
+                        
+                              <Status>VERTRAAGD</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-28T22:47:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Haarlem Spaarnwoude</Naam>
+									<Tijd>2017-05-28T22:50:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Halfweg-Zwanenburg</Naam>
+									<Tijd>2017-05-28T22:54:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-28T23:00:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-28T23:05:00+0200</Tijd>
+								
+									<VertrekVertraging>+2 min</VertrekVertraging>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">1</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>15885</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-28T23:12:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">11a</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-28T23:17:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Science Park</Naam>
+									<Tijd>2017-05-28T23:20:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Diemen</Naam>
+									<Tijd>2017-05-28T23:22:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Weesp</Naam>
+								<Tijd>2017-05-28T23:28:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">5</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>4385</RitNummer>
+             			
+                        
+                              <Status>VERTRAAGD</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Weesp</Naam>
+							<Tijd>2017-05-28T23:30:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">6</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd>2017-05-28T23:36:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd>2017-05-28T23:40:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-28T23:43:00+0200</Tijd>
+								
+									<VertrekVertraging>+3 min</VertrekVertraging>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">3</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>0:59</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:59</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-28T22:55:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-28T22:55:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-28T23:54:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-28T23:54:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2174</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-28T22:55:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">3</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-28T23:04:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-28T23:10:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2b</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>14687</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-28T23:23:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">10b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-28T23:28:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Science Park</Naam>
+									<Tijd>2017-05-28T23:31:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Diemen</Naam>
+									<Tijd>2017-05-28T23:33:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Weesp</Naam>
+									<Tijd>2017-05-28T23:40:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd>2017-05-28T23:47:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd>2017-05-28T23:51:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-28T23:54:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">4</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+					
+						<Melding>
+							<Id>2017_hfd_shl_lls_hvs</Id>
+							<Ernstig>false</Ernstig>
+							<Text>Let op, werk aan het spoor Amsterdam Centraal - Almere Centrum</Text>
+						</Melding>
+					
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>0:49</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:49</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-28T23:10:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-28T23:10:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-28T23:59:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-28T23:59:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VERTRAAGD</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2285</RitNummer>
+             			
+                        
+                              <Status>VERTRAAGD</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-28T23:10:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">3</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-28T23:19:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-28T23:25:00+0200</Tijd>
+								
+									<VertrekVertraging>+3 min</VertrekVertraging>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2a</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>1887</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+							<GeplandeStoringId>2017_hfd_shl_lls_hvs</GeplandeStoringId>
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-28T23:39:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">11b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-28T23:59:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">4</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>2</AantalOverstappen>
+			<GeplandeReisTijd>0:56</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:56</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-28T23:17:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-28T23:17:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T00:13:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T00:13:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VERTRAAGD</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>5476</RitNummer>
+             			
+                        
+                              <Status>VERTRAAGD</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-28T23:17:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Haarlem Spaarnwoude</Naam>
+									<Tijd>2017-05-28T23:20:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Halfweg-Zwanenburg</Naam>
+									<Tijd>2017-05-28T23:24:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-28T23:30:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-28T23:35:00+0200</Tijd>
+								
+									<VertrekVertraging>+2 min</VertrekVertraging>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">1</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>15887</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-28T23:42:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">11a</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-28T23:47:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Science Park</Naam>
+									<Tijd>2017-05-28T23:50:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Diemen</Naam>
+									<Tijd>2017-05-28T23:52:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Weesp</Naam>
+								<Tijd>2017-05-28T23:58:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>204387</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Weesp</Naam>
+							<Tijd>2017-05-29T00:00:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd>2017-05-29T00:06:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd>2017-05-29T00:10:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T00:13:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">3</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>1:07</GeplandeReisTijd>
+			
+				<ActueleReisTijd>1:07</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-28T23:17:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-28T23:17:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T00:24:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T00:24:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VERTRAAGD</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>5476</RitNummer>
+             			
+                        
+                              <Status>VERTRAAGD</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-28T23:17:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Haarlem Spaarnwoude</Naam>
+									<Tijd>2017-05-28T23:20:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Halfweg-Zwanenburg</Naam>
+									<Tijd>2017-05-28T23:24:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-28T23:30:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-28T23:35:00+0200</Tijd>
+								
+									<VertrekVertraging>+2 min</VertrekVertraging>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">1</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>14689</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-28T23:53:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">10b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-28T23:58:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Science Park</Naam>
+									<Tijd>2017-05-29T00:01:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Diemen</Naam>
+									<Tijd>2017-05-29T00:03:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Weesp</Naam>
+									<Tijd>2017-05-29T00:10:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd>2017-05-29T00:17:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd>2017-05-29T00:21:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T00:24:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">4</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>1:07</GeplandeReisTijd>
+			
+				<ActueleReisTijd>1:07</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-28T23:47:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-28T23:47:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T00:54:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T00:54:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>5478</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-28T23:47:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Haarlem Spaarnwoude</Naam>
+									<Tijd>2017-05-28T23:50:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Halfweg-Zwanenburg</Naam>
+									<Tijd>2017-05-28T23:54:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-29T00:00:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-29T00:05:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">1</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>14691</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-29T00:23:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">10b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-30T00:28:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Science Park</Naam>
+									<Tijd>2017-05-30T00:31:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Diemen</Naam>
+									<Tijd>2017-05-30T00:33:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Weesp</Naam>
+									<Tijd>2017-05-30T00:41:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd>2017-05-30T00:47:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd>2017-05-30T00:51:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T00:54:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">4</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+					
+						<Melding>
+							<Id>2017_hfd_shl_lls_hvs</Id>
+							<Ernstig>false</Ernstig>
+							<Text>Let op, werk aan het spoor Duivendrecht - Almere Centrum</Text>
+						</Melding>
+					
+			
+			<AantalOverstappen>2</AantalOverstappen>
+			<GeplandeReisTijd>1:49</GeplandeReisTijd>
+			
+				<ActueleReisTijd>1:49</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>true</Optimaal>
+			<GeplandeVertrekTijd>2017-05-29T00:10:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-29T00:10:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T01:59:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T01:59:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2289</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-29T00:10:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-30T00:19:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-29T00:25:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2b</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>7493</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-29T00:35:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">4b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-29T00:40:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Amstel</Naam>
+									<Tijd>2017-05-29T00:43:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Duivendrecht</Naam>
+								<Tijd>2017-05-29T00:47:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">8</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Stopbus i.p.v. trein</VervoerType>
+						<RitNummer>900892</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+							<GeplandeStoringId>2017_hfd_shl_lls_hvs</GeplandeStoringId>
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Duivendrecht</Naam>
+							<Tijd>2017-05-29T01:08:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false"></Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Diemen Zuid</Naam>
+									<Tijd>2017-05-29T01:13:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Weesp</Naam>
+									<Tijd></Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd></Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd></Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T01:59:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false"></Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>0:45</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:45</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-29T05:43:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-29T05:43:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T06:28:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T06:28:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>4804</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-29T05:43:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Haarlem Spaarnwoude</Naam>
+									<Tijd>2017-05-29T05:46:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Halfweg-Zwanenburg</Naam>
+									<Tijd>2017-05-29T05:50:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-29T05:56:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-29T06:01:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">1</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2617</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-29T06:08:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">13b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T06:28:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">3</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>0:48</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:48</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-29T06:10:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-29T06:10:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T06:58:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T06:58:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2217</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-29T06:10:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">3</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-29T06:19:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-29T06:25:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2a</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2619</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-29T06:38:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">13b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T06:58:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">3</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>2</AantalOverstappen>
+			<GeplandeReisTijd>0:56</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:56</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-29T06:17:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-29T06:17:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T07:13:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T07:13:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>5408</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-29T06:17:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Haarlem Spaarnwoude</Naam>
+									<Tijd>2017-05-29T06:20:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Halfweg-Zwanenburg</Naam>
+									<Tijd>2017-05-29T06:24:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-29T06:30:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-29T06:35:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">1</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>15819</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-29T06:41:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">11a</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-29T06:46:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Science Park</Naam>
+									<Tijd>2017-05-29T06:49:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Diemen</Naam>
+									<Tijd>2017-05-29T06:51:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Weesp</Naam>
+								<Tijd>2017-05-29T06:57:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>4319</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Weesp</Naam>
+							<Tijd>2017-05-29T06:59:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd>2017-05-29T07:05:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd>2017-05-29T07:09:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T07:13:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">3</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>1:07</GeplandeReisTijd>
+			
+				<ActueleReisTijd>1:07</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-29T06:17:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-29T06:17:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T07:24:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T07:24:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>5408</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-29T06:17:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Haarlem Spaarnwoude</Naam>
+									<Tijd>2017-05-29T06:20:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Halfweg-Zwanenburg</Naam>
+									<Tijd>2017-05-29T06:24:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-29T06:30:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-29T06:35:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">1</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>14621</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-29T06:53:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">11b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-29T06:58:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Science Park</Naam>
+									<Tijd>2017-05-29T07:01:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Diemen</Naam>
+									<Tijd>2017-05-29T07:03:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Weesp</Naam>
+									<Tijd>2017-05-29T07:10:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd>2017-05-29T07:17:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd>2017-05-29T07:21:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T07:24:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">4</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>0:48</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:48</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-29T06:40:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-29T06:40:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T07:28:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T07:28:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2219</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-29T06:40:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">3</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-29T06:49:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-29T06:55:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2621</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-29T07:08:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">13b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T07:28:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">3</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>2</AantalOverstappen>
+			<GeplandeReisTijd>0:56</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:56</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-29T06:47:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-29T06:47:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T07:43:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T07:43:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>5410</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-29T06:47:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Haarlem Spaarnwoude</Naam>
+									<Tijd>2017-05-29T06:50:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Halfweg-Zwanenburg</Naam>
+									<Tijd>2017-05-29T06:54:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-29T07:00:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-29T07:05:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">1</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>15821</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-29T07:11:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">11a</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-29T07:16:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Science Park</Naam>
+									<Tijd>2017-05-29T07:19:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Diemen</Naam>
+									<Tijd>2017-05-29T07:21:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Weesp</Naam>
+								<Tijd>2017-05-29T07:27:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>4321</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Weesp</Naam>
+							<Tijd>2017-05-29T07:29:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">1</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd>2017-05-29T07:35:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd>2017-05-29T07:39:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T07:43:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">3</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+		<ReisMogelijkheid>	
+			
+			<AantalOverstappen>1</AantalOverstappen>
+			<GeplandeReisTijd>0:59</GeplandeReisTijd>
+			
+				<ActueleReisTijd>0:59</ActueleReisTijd>
+			
+			
+			
+			<Optimaal>false</Optimaal>
+			<GeplandeVertrekTijd>2017-05-29T06:55:00+0200</GeplandeVertrekTijd>
+			<ActueleVertrekTijd>2017-05-29T06:55:00+0200</ActueleVertrekTijd>
+			<GeplandeAankomstTijd>2017-05-29T07:54:00+0200</GeplandeAankomstTijd>
+			<ActueleAankomstTijd>2017-05-29T07:54:00+0200</ActueleAankomstTijd>
+ 			
+            
+ 			    <Status>VOLGENS-PLAN</Status>
+ 			
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Intercity</VervoerType>
+						<RitNummer>2110</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Haarlem</Naam>
+							<Tijd>2017-05-29T06:55:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">3</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Sloterdijk</Naam>
+									<Tijd>2017-05-29T07:04:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Amsterdam Centraal</Naam>
+								<Tijd>2017-05-29T07:10:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">2</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+ 				<ReisDeel reisSoort="TRAIN">
+					
+                        
+					    <Vervoerder>NS</Vervoerder>
+						<VervoerType>Sprinter</VervoerType>
+						<RitNummer>14623</RitNummer>
+             			
+                        
+                              <Status>VOLGENS-PLAN</Status>
+                          
+						
+                         
+						
+                        
+						
+					
+					
+					<ReisStop>
+					  
+						
+							<Naam>Amsterdam Centraal</Naam>
+							<Tijd>2017-05-29T07:23:00+0200</Tijd>
+							
+							  
+								  
+								
+									<Spoor wijziging="false">10b</Spoor>
+								 
+														
+						
+						
+					
+					</ReisStop>
+					  
+						
+							
+								<ReisStop>
+									<Naam>Amsterdam Muiderpoort</Naam>
+									<Tijd>2017-05-29T07:28:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Amsterdam Science Park</Naam>
+									<Tijd>2017-05-29T07:31:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Diemen</Naam>
+									<Tijd>2017-05-29T07:33:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Weesp</Naam>
+									<Tijd>2017-05-29T07:40:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Poort</Naam>
+									<Tijd>2017-05-29T07:47:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+								<ReisStop>
+									<Naam>Almere Muziekwijk</Naam>
+									<Tijd>2017-05-29T07:51:00+0200</Tijd>
+																		
+								</ReisStop>
+							
+							<ReisStop>
+								<Naam>Almere Centrum</Naam>
+								<Tijd>2017-05-29T07:54:00+0200</Tijd>
+								
+								  
+									  
+									
+										<Spoor wijziging="false">4</Spoor>
+									 
+								 
+							</ReisStop>
+						
+						
+					
+				</ReisDeel>
+			
+		</ReisMogelijkheid>
+	
+</ReisMogelijkheden>
+			
