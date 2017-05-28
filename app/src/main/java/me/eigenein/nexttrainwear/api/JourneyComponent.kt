@@ -3,8 +3,9 @@ package me.eigenein.nexttrainwear.api
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
-@Root(strict=false)
-class JourneyOptionsResponse {
+@Root(strict = false, name = "ReisDeel")
+class JourneyComponent {
+
     @field:ElementList(inline = true, empty = false, required = false)
-    lateinit var options: List<JourneyOption>
+    lateinit var stops: List<JourneyStop>
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="text_clock">36sp</dimen>
+
     <dimen name="text_headlines">22sp</dimen>
     <dimen name="text_page_heading">22sp</dimen>
     <dimen name="text_notification_title">20sp</dimen>

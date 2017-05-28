@@ -10,6 +10,7 @@ interface NsApiService {
     @GET("ns-api-treinplanner")
     fun trainPlanner(
         @Query("fromStation") fromStation: String,
-        @Query("toStation") toStation: String
+        @Query("toStation") toStation: String,
+        @Query("previousAdvices") previousAdvices: Int = 0
     ): Observable<JourneyOptionsResponse>
 }

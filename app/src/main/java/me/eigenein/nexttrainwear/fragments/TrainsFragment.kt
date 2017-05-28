@@ -24,9 +24,6 @@ class TrainsFragment : Fragment(), AmbientListener {
     private var apiClient: GoogleApiClient? = null
     private var ambientListenable: AmbientListenable? = null
 
-    /**
-     * Scrolls destinations horizontally.
-     */
     private lateinit var destinationsRecyclerView: WearableRecyclerView
 
     override fun onCreateView(
@@ -132,14 +129,14 @@ class TrainsFragment : Fragment(), AmbientListener {
         val allStations = Stations.allStations
             .filter { it.code !in stationCodes && it.code != departureStation.code }
             .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
-            .take(nearestStationCount)
+            .take(numberOfNearestStations)
 
         return favoriteStations + allStations
     }
 
     companion object {
 
-        private const val nearestStationCount = 10 // TODO
+        private const val numberOfNearestStations = 10 // TODO
         private val logTag = TrainsFragment::class.java.simpleName
     }
 }
