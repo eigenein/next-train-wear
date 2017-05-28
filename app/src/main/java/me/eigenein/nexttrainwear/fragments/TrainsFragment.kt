@@ -56,8 +56,8 @@ class TrainsFragment : Fragment(), AmbientListener {
         ambientListenable = activity as AmbientListenable
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
 
         // FIXME: show and hide "detecting location" progress.
         apiClient!!.connect()
