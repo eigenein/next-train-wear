@@ -111,7 +111,7 @@ class TrainsFragment : Fragment(), AmbientListener {
         val destinations = selectDestinations(departureStation)
         Log.d(TAG, "Found destinations: " + destinations.size)
 
-        destinationsRecyclerView.adapter = RoutesAdapter(destinations.map { Route(departureStation, it) })
+        destinationsRecyclerView.adapter = RoutesAdapter(destinations.map { departureStation.routeTo(it) })
     }
 
     /**

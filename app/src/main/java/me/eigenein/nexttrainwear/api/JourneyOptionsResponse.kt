@@ -5,6 +5,6 @@ import org.simpleframework.xml.Root
 
 @Root(strict=false)
 class JourneyOptionsResponse {
-    @field:ElementList(name = "ReisMogelijkheid", inline = true)
+    @field:ElementList(inline = true, empty = false, required = false)
     lateinit var journeyOptions: List<JourneyOption>
 }

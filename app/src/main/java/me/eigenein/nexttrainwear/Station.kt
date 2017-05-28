@@ -16,6 +16,8 @@ data class Station(
         return distance[0]
     }
 
+    fun routeTo(station: Station): Route = Route(this, station)
+
     companion object {
         fun findNearestStation(latitude: Double, longitude: Double): Station? =
             Stations.STATIONS.minBy { it.distanceTo(latitude, longitude) }
