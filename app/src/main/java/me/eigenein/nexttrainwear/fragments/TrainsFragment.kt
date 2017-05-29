@@ -103,14 +103,17 @@ class TrainsFragment : Fragment(), AmbientListener {
     /**
      * Updates the fragment based on the departure station.
      */
-    private fun updateDepartureStation(station: Station?) {
-        val departureStation = station ?: Stations.amsterdamCentraal // FIXME
+    private fun updateDepartureStation(nearestStation: Station?) {
+        val departureStation = nearestStation
+            ?: Stations.stationByCode[Preferences.getLastStationCode(activity)]
+            ?: Stations.amsterdamCentraal
         Log.d(tag, "Update departure station: " + departureStation)
 
         val destinations = selectDestinations(departureStation)
         Log.d(tag, "Found destinations: " + destinations.size)
 
-        destinationsRecyclerView.adapter = RoutesAdapter(destinations.map { departureStation.routeTo(it) })
+        destinationsRecyclerView.adapter = RoutesAdapter(
+            nearestStation != null, destinations.map { departureStation.routeTo(it) })
     }
 
     /**

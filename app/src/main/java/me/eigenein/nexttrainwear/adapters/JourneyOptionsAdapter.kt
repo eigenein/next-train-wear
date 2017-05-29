@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import me.eigenein.nexttrainwear.*
 import me.eigenein.nexttrainwear.api.JourneyOption
@@ -15,7 +16,7 @@ import java.util.*
 /**
  * Used to display possible journey options.
  */
-class JourneyOptionsAdapter(val route: Route, val journeyOptions: List<JourneyOption>)
+class JourneyOptionsAdapter(val usingLocation: Boolean, val route: Route, val journeyOptions: List<JourneyOption>)
     : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = journeyOptions.size
@@ -25,6 +26,7 @@ class JourneyOptionsAdapter(val route: Route, val journeyOptions: List<JourneyOp
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        val gpsStatusImageView = itemView.findViewById(R.id.item_journey_option_gps_status_image_view) as ImageView
         val departureStationTextView = itemView.findViewById(R.id.item_journey_option_departure_station_text) as TextView
         val destinationStationTextView = itemView.findViewById(R.id.item_journey_option_destination_station_text) as TextView
         val departureTimeTextView = itemView.findViewById(R.id.item_journey_option_departure_time_text) as TextView
@@ -37,6 +39,7 @@ class JourneyOptionsAdapter(val route: Route, val journeyOptions: List<JourneyOp
         private val hoursMinutesTimeFormat: DateFormat = SimpleDateFormat("H:mm", Locale.ENGLISH)
 
         fun bind(journeyOption: JourneyOption) {
+            gpsStatusImageView.visibility = if (usingLocation) View.GONE else View.VISIBLE
             departureStationTextView.text = route.departureStation.longName
             destinationStationTextView.text = route.destinationStation.longName
 

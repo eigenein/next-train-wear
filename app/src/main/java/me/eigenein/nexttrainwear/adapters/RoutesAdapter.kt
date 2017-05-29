@@ -7,6 +7,7 @@ import android.support.wearable.view.WearableRecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -19,7 +20,7 @@ import me.eigenein.nexttrainwear.api.NsApiInstance
 /**
  * Used to display possible routes.
  */
-class RoutesAdapter(val routes: List<Route>)
+class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
     : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = routes.size
@@ -30,6 +31,7 @@ class RoutesAdapter(val routes: List<Route>)
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        val gpsStatusImageView = itemView.findViewById(R.id.item_route_gps_status_image_view) as ImageView
         val journeyOptionsRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
         val progressView = itemView.findViewById(R.id.item_route_progress_layout)!!
         val departureTextView = itemView.findViewById(R.id.item_route_departure_text) as TextView
@@ -71,12 +73,14 @@ class RoutesAdapter(val routes: List<Route>)
 
         private fun onResponse(response: JourneyOptionsResponse) {
             this.response = response
-            journeyOptionsRecyclerView.adapter = JourneyOptionsAdapter(route, response.options)
+            journeyOptionsRecyclerView.adapter = JourneyOptionsAdapter(usingLocation, route, response.options)
             showJourneysLayout()
         }
 
         private fun showProgressLayout() {
             journeyOptionsRecyclerView.visibility = View.GONE
+
+            gpsStatusImageView.visibility = if (usingLocation) View.GONE else View.VISIBLE
             departureTextView.text = route.departureStation.longName
             destinationTextView.text = route.destinationStation.longName
             progressView.visibility = View.VISIBLE
