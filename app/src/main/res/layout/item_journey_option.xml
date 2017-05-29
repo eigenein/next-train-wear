@@ -4,10 +4,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20sp"
-    android:paddingStart="20sp"
-    android:paddingEnd="20sp"
-    android:paddingBottom="30sp"
+    android:paddingTop="@dimen/margin_xlarge"
+    android:paddingStart="@dimen/margin_large"
+    android:paddingEnd="@dimen/margin_large"
+    android:paddingBottom="@dimen/margin_xlarge"
     android:gravity="center">
 
     <LinearLayout
