@@ -5,11 +5,35 @@
     android:layout_height="match_parent"
     tools:context="me.eigenein.nexttrainwear.fragments.TrainsFragment">
 
+    <LinearLayout
+        android:id="@+id/fragment_trains_progress_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/text_list_item_title"
+            android:textColor="@color/white"
+            android:text="@string/fragment_trains_detecting_location"/>
+
+    </LinearLayout>
+
     <android.support.wearable.view.WearableRecyclerView
         android:id="@+id/fragment_trains_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="horizontal"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        android:visibility="gone"/>
 
 </android.support.wearable.view.BoxInsetLayout>

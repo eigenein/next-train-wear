@@ -28,6 +28,7 @@ class TrainsFragment : Fragment(), AmbientListener, LocationListener {
     private var apiClient: GoogleApiClient? = null
     private var ambientListenable: AmbientListenable? = null
 
+    private lateinit var progressLayout: View
     private lateinit var destinationsRecyclerView: WearableRecyclerView
 
     override fun onCreateView(
@@ -36,6 +37,8 @@ class TrainsFragment : Fragment(), AmbientListener, LocationListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_trains, container, false)
+
+        progressLayout = view.findViewById(R.id.fragment_trains_progress_layout)
 
         destinationsRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView
         destinationsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -130,6 +133,9 @@ class TrainsFragment : Fragment(), AmbientListener, LocationListener {
         val destinations = selectDestinations(departureStation)
         Log.d(logTag, "Found destinations: " + destinations.size)
 
+        // Show routes view.
+        progressLayout.visibility = View.GONE
+        destinationsRecyclerView.visibility = View.VISIBLE
         destinationsRecyclerView.adapter = RoutesAdapter(
             station != null, destinations.map { departureStation.routeTo(it) })
     }
