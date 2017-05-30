@@ -2,6 +2,7 @@ package me.eigenein.nexttrainwear.fragments
 
 import android.app.Fragment
 import android.content.Context
+import android.location.Location
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
@@ -11,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationListener
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import me.eigenein.nexttrainwear.Preferences
 import me.eigenein.nexttrainwear.R
@@ -20,7 +23,7 @@ import me.eigenein.nexttrainwear.data.Stations
 import me.eigenein.nexttrainwear.interfaces.AmbientListenable
 import me.eigenein.nexttrainwear.interfaces.AmbientListener
 
-class TrainsFragment : Fragment(), AmbientListener {
+class TrainsFragment : Fragment(), AmbientListener, LocationListener {
 
     private var apiClient: GoogleApiClient? = null
     private var ambientListenable: AmbientListenable? = null
@@ -82,19 +85,31 @@ class TrainsFragment : Fragment(), AmbientListener {
         // TODO: try to go with app theme changes.
     }
 
+    override fun onLocationChanged(location: Location?) {
+        if (location != null) {
+            Log.d(logTag, "Location changed: " + location)
+            onDepartureStationChanged(Station.findNearestStation(location))
+        } else {
+            Log.e(logTag, "No location detected")
+            onDepartureStationChanged(null)
+        }
+    }
+
     private fun onApiClientConnected() {
         // FIXME: show and hide "detecting location" progress.
+        val request = LocationRequest.create().setNumUpdates(1)
         try {
-            val location = LocationServices.FusedLocationApi.getLastLocation(apiClient)
-            if (location != null) {
-                Log.d(logTag, "Last location: " + location)
-                onDepartureStationChanged(Station.findNearestStation(location))
-            } else {
-                Log.e(logTag, "Missing last known location")
-                onDepartureStationChanged(null)
-            }
+            LocationServices.FusedLocationApi
+                .requestLocationUpdates(apiClient, request, this)
+                .setResultCallback {
+                    if (it.status.isSuccess) {
+                        Log.d(logTag, "Location request succeeded")
+                    } else {
+                        Log.e(logTag, "Location request failed: " + it.status)
+                        onDepartureStationChanged(null)
+                    }
+                }
         } catch (e: SecurityException) {
-            // Show default departure station.
             Log.e(logTag, "Forbidden to obtain last known location", e)
             onDepartureStationChanged(null)
         }
