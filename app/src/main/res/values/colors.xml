@@ -3,7 +3,6 @@
 
     <color name="ripple">#42FFFFFF</color>
 
-    <color name="yellow_app">#FFEB3B</color>
     <color name="yellow_accent">#FFF280</color>
     <color name="yellow_active_element">#A69926</color>
     <color name="yellow_lighter_element">#8C8120</color>
@@ -11,15 +10,15 @@
     <color name="yellow_lighter_background">#4D2C18</color>
     <color name="yellow_dark_background">#26160C</color>
 
-    <color name="blue_app">#2196F3</color>
     <color name="blue_accent">#80C6FF</color>
     <color name="blue_active_element">#1766A6</color>
     <color name="blue_lighter_element">#14568C</color>
     <color name="blue_darker_element">#0E3F66</color>
     <color name="blue_lighter_background">#002A4D</color>
     <color name="blue_dark_background">#001C33</color>
+    
+    <color name="pink_accent">#FF80AA</color>
 
-    <color name="app">@color/blue_app</color>
     <color name="accent">@color/blue_accent</color>
     <color name="active_element">@color/blue_active_element</color>
     <color name="lighter_element">@color/blue_lighter_element</color>

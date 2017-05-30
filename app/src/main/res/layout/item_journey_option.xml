@@ -45,13 +45,13 @@
             android:id="@+id/item_journey_option_departure_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_metadata"
+            android:textSize="@dimen/text_list_item_description"
             android:textColor="@color/white"
             android:text="xx:xx"/>
 
         <ImageView
-            android:layout_width="@dimen/text_metadata"
-            android:layout_height="@dimen/text_metadata"
+            android:layout_width="@dimen/text_list_item_description"
+            android:layout_height="@dimen/text_list_item_description"
             android:layout_margin="1sp"
             android:src="@drawable/ic_arrow_forward_black_24dp"
             android:tint="@color/accent"/>
@@ -60,13 +60,13 @@
             android:id="@+id/item_journey_option_arrival_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_metadata"
+            android:textSize="@dimen/text_list_item_description"
             android:textColor="@color/white"
             android:text="xx:xx"/>
 
         <ImageView
-            android:layout_width="@dimen/text_metadata"
-            android:layout_height="@dimen/text_metadata"
+            android:layout_width="@dimen/text_list_item_description"
+            android:layout_height="@dimen/text_list_item_description"
             android:layout_margin="5sp"
             android:src="@drawable/ic_access_time_black_24dp"
             android:tint="@color/accent"/>
@@ -75,7 +75,7 @@
             android:id="@+id/item_journey_option_duration_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_metadata"
+            android:textSize="@dimen/text_list_item_description"
             android:textColor="@color/white"
             android:text="x:xx"/>
 

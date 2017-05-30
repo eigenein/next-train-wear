@@ -53,13 +53,11 @@ class JourneyOptionsAdapter(val usingLocation: Boolean, val route: Route, val jo
                 platformTextView.visibility = View.GONE
             }
 
-            // TODO: switch planned/actual in settings.
-            departureTimeTextView.text =
-                hoursMinutesTimeFormat.format(journeyOption.plannedDepartureTime)
-            arrivalTimeTextView.text =
-                hoursMinutesTimeFormat.format(journeyOption.plannedArrivalTime)
+            // TODO: display delay flag.
+            departureTimeTextView.text = hoursMinutesTimeFormat.format(journeyOption.actualDepartureTime)
+            arrivalTimeTextView.text = hoursMinutesTimeFormat.format(journeyOption.actualArrivalTime)
             durationTimeTextView.text =
-                (journeyOption.plannedArrivalTime - journeyOption.plannedDepartureTime).toHmDurationString()
+                (journeyOption.actualArrivalTime - journeyOption.actualDepartureTime).toHmDurationString()
             clockTimeTextView.text =
                 (journeyOption.actualDepartureTime - Date()).toHmsDurationString()
         }
