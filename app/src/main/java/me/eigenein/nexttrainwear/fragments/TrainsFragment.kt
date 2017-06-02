@@ -26,7 +26,6 @@ import me.eigenein.nexttrainwear.interfaces.AmbientListener
 class TrainsFragment : Fragment(), AmbientListener, LocationListener {
 
     private var apiClient: GoogleApiClient? = null
-    private var ambientListenable: AmbientListenable? = null
 
     private lateinit var progressLayout: View
     private lateinit var destinationsRecyclerView: WearableRecyclerView
@@ -60,28 +59,31 @@ class TrainsFragment : Fragment(), AmbientListener, LocationListener {
                 onDepartureStationChanged(null)
             }
             .build()
-        ambientListenable = activity as AmbientListenable
+        (activity as AmbientListenable).ambientListener = this
     }
 
     override fun onStart() {
         super.onStart()
-        // FIXME: show and hide "detecting location" progress.
         apiClient!!.connect()
-        ambientListenable?.ambientListener = this
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         apiClient!!.disconnect()
-        ambientListenable?.ambientListener = null
+    }
+
+    override fun onDetach() {
+        (activity as AmbientListenable).ambientListener = null
+        super.onDetach()
     }
 
     override fun onEnterAmbient() {
         // TODO: try to go with app theme changes.
     }
 
-    override fun onUpdateAmbient() {
-        // TODO: try to go with app theme changes.
+    override fun onUpdateDisplay() {
+        // TODO: invalidate response each minute.
+        // TODO: (destinationsRecyclerView.adapter as RoutesAdapter?)?.notifyDataSetChanged()
     }
 
     override fun onExitAmbient() {
@@ -99,7 +101,6 @@ class TrainsFragment : Fragment(), AmbientListener, LocationListener {
     }
 
     private fun onApiClientConnected() {
-        // FIXME: show and hide "detecting location" progress.
         val request = LocationRequest.create().setNumUpdates(1)
         try {
             LocationServices.FusedLocationApi
@@ -163,7 +164,7 @@ class TrainsFragment : Fragment(), AmbientListener, LocationListener {
 
     companion object {
 
-        private const val numberOfNearestStations = 10 // TODO
+        private const val numberOfNearestStations = 10 // TODO: make configurable
 
         private val logTag = TrainsFragment::class.java.simpleName
     }

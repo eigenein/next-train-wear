@@ -13,9 +13,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import me.eigenein.nexttrainwear.R
-import me.eigenein.nexttrainwear.data.Route
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
 import me.eigenein.nexttrainwear.api.NsApiInstance
+import me.eigenein.nexttrainwear.data.Route
+import java.util.concurrent.TimeUnit
 
 /**
  * Used to display possible routes.
@@ -66,6 +67,7 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
         private fun planJourney() {
             dispose()
             trainPlannerDisposable = NsApiInstance.trainPlanner(route.departureStation.code, route.destinationStation.code)
+                .retryWhen { it.delay(retryIntervalMs, TimeUnit.SECONDS) }
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { onResponse(it) }
@@ -90,5 +92,9 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
             progressView.visibility = View.GONE
             journeyOptionsRecyclerView.visibility = View.VISIBLE
         }
+    }
+
+    companion object {
+        private const val retryIntervalMs = 5L
     }
 }
