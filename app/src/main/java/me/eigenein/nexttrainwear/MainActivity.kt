@@ -83,6 +83,7 @@ class MainActivity :
     override fun onEnterAmbient(ambientDetails: Bundle?) {
         super.onEnterAmbient(ambientDetails)
         ambientListener?.onEnterAmbient()
+        // TODO
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -93,6 +94,7 @@ class MainActivity :
     override fun onExitAmbient() {
         super.onExitAmbient()
         ambientListener?.onExitAmbient()
+        // TODO
     }
 
     override fun onItemSelected(index: Int) {

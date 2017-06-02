@@ -62,13 +62,13 @@ class TrainsFragment : Fragment(), AmbientListener, LocationListener {
         (activity as AmbientListenable).ambientListener = this
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         apiClient!!.connect()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         apiClient!!.disconnect()
     }
 
