@@ -12,10 +12,9 @@ import android.support.wearable.activity.WearableActivity
 import android.support.wearable.view.drawer.WearableNavigationDrawer
 import android.util.Log
 import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter
-import me.eigenein.nexttrainwear.fragments.StationsFragment
 import me.eigenein.nexttrainwear.fragments.SettingsFragment
+import me.eigenein.nexttrainwear.fragments.StationsFragment
 import me.eigenein.nexttrainwear.fragments.TrainsFragment
-import java.util.concurrent.TimeUnit
 
 class MainActivity :
     WearableActivity(),

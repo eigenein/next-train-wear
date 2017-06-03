@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import me.eigenein.nexttrainwear.R
@@ -28,20 +29,21 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false))
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
-    override fun onViewRecycled(holder: ViewHolder) = holder.dispose()
+    override fun onViewRecycled(holder: ViewHolder) = holder.recycle()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val gpsStatusImageView = itemView.findViewById(R.id.item_route_gps_status_image_view) as ImageView
-        val journeyOptionsRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
-        val progressView = itemView.findViewById(R.id.item_route_progress_layout)!!
-        val departureTextView = itemView.findViewById(R.id.item_route_departure_text) as TextView
-        val destinationTextView = itemView.findViewById(R.id.item_route_destination_text) as TextView
+        private val disposable = CompositeDisposable()
 
-        lateinit var route: Route
+        private val gpsStatusImageView = itemView.findViewById(R.id.item_route_gps_status_image_view) as ImageView
+        private val journeyOptionsRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
+        private val progressView = itemView.findViewById(R.id.item_route_progress_layout)!!
+        private val departureTextView = itemView.findViewById(R.id.item_route_departure_text) as TextView
+        private val destinationTextView = itemView.findViewById(R.id.item_route_destination_text) as TextView
 
-        var response: JourneyOptionsResponse? = null
-        var trainPlannerDisposable: Disposable? = null
+        private lateinit var route: Route
+
+        private var response: JourneyOptionsResponse? = null
 
         init {
             journeyOptionsRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
@@ -50,7 +52,6 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
 
         fun bind(route: Route) {
             this.route = route
-            // TODO: should be invalidated by timer.
             val response = this.response
             if (response != null) {
                 onResponse(response)
@@ -60,17 +61,18 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
             }
         }
 
-        fun dispose() {
-            trainPlannerDisposable?.dispose()
+        fun recycle() {
+            disposable.clear()
         }
 
         private fun planJourney() {
-            dispose()
-            trainPlannerDisposable = NsApiInstance.trainPlanner(route.departureStation.code, route.destinationStation.code)
-                .retryWhen { it.delay(retryIntervalMs, TimeUnit.SECONDS) }
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { onResponse(it) }
+            disposable.add(
+                NsApiInstance.trainPlanner(route.departureStation.code, route.destinationStation.code)
+                    .retryWhen { it.delay(retryIntervalMs, TimeUnit.SECONDS) }
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { onResponse(it) }
+            )
         }
 
         private fun onResponse(response: JourneyOptionsResponse) {

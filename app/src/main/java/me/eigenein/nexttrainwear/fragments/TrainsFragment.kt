@@ -54,25 +54,27 @@ class TrainsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        GoogleApiClient.Builder(activity)
-            .addApi(LocationServices.API)
-            .asFlowable()
-            .flatMap {
-                LocationRequest.create()
-                    .setNumUpdates(1)
-                    .asFlowable(it)
-                    .take(1) // otherwise we'll get timeout error anyway
-                    .timeout(locationTimeoutSeconds, TimeUnit.SECONDS)
-            }
-            .map { DetectedStation(true, Station.findNearestStation(it)) }
-            .doOnError { Log.e(logTag, "Failed to detect station: " + it) }
-            .onErrorReturn {
-                val lastStation = Stations.stationByCode[Preferences.getLastStationCode(activity)]
-                DetectedStation(false, lastStation ?: Stations.amsterdamCentraal)
-            }
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { onStationDetected(it) }
+        disposable.add(
+            GoogleApiClient.Builder(activity)
+                .addApi(LocationServices.API)
+                .asFlowable()
+                .flatMap {
+                    LocationRequest.create()
+                        .setNumUpdates(1)
+                        .asFlowable(it)
+                        .take(1) // otherwise we'll get timeout error anyway
+                        .timeout(locationTimeoutSeconds, TimeUnit.SECONDS)
+                }
+                .map { DetectedStation(true, Station.findNearestStation(it)) }
+                .doOnError { Log.e(logTag, "Failed to detect station: " + it) }
+                .onErrorReturn {
+                    val lastStation = Stations.stationByCode[Preferences.getLastStationCode(activity)]
+                    DetectedStation(false, lastStation ?: Stations.amsterdamCentraal)
+                }
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { onStationDetected(it) }
+        )
     }
 
     override fun onPause() {
