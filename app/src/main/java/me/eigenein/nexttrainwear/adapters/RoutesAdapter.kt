@@ -4,18 +4,22 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
 import android.support.wearable.view.WearableRecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import me.eigenein.nexttrainwear.R
+import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
-import me.eigenein.nexttrainwear.api.NsApiInstance
+import me.eigenein.nexttrainwear.api.nsApiInstance
 import me.eigenein.nexttrainwear.data.Route
+import retrofit2.HttpException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -71,8 +75,12 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
 
         private fun planJourney() {
             disposable.add(
-                NsApiInstance.trainPlanner(route.departureStation.code, route.destinationStation.code)
-                    .retryWhen { it.delay(retryIntervalMs, TimeUnit.SECONDS) }
+                nsApiInstance.trainPlanner(route.departureStation.code, route.destinationStation.code)
+                    .retryWhen { it.flatMap {
+                        // TODO: exponential back-off.
+                        if (it is HttpException) Observable.timer(RETRY_INTERVAL_SECONDS, TimeUnit.SECONDS)
+                        else Observable.error(it)
+                    } }
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { onResponse(it) }
@@ -81,8 +89,14 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
 
         private fun onResponse(response: JourneyOptionsResponse) {
             this.response = response
+
+            // Exclude cancelled options.
+            val journeyOptions = response.options.filter { it.status !in JourneyOptionStatus.HIDDEN }
+            Log.d(LOG_TAG, "Possible options: " + journeyOptions.size)
+
+            // Display journey options.
             progressView.visibility = View.GONE
-            journeyOptionsRecyclerView.adapter = JourneyOptionsAdapter(usingLocation, route, response.options)
+            journeyOptionsRecyclerView.adapter = JourneyOptionsAdapter(usingLocation, route, journeyOptions)
             journeyOptionsRecyclerView.visibility = View.VISIBLE
         }
 
@@ -97,6 +111,7 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
     }
 
     companion object {
-        private const val retryIntervalMs = 5L // TODO: exponential back-off
+        private val LOG_TAG = RoutesAdapter::class.java.simpleName
+        private const val RETRY_INTERVAL_SECONDS = 5L
     }
 }

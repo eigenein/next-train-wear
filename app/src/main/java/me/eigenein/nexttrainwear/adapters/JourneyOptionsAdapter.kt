@@ -1,5 +1,6 @@
 package me.eigenein.nexttrainwear.adapters
 
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import me.eigenein.nexttrainwear.*
 import me.eigenein.nexttrainwear.api.JourneyOption
+import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.data.Route
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -36,7 +38,7 @@ class JourneyOptionsAdapter(val usingLocation: Boolean, val route: Route, val jo
         val platformTitleTextView = itemView.findViewById(R.id.item_journey_option_platform_title)!!
         val platformTextView = itemView.findViewById(R.id.item_journey_option_platform_text) as TextView
 
-        private val hoursMinutesTimeFormat: DateFormat = SimpleDateFormat("H:mm", Locale.ENGLISH)
+        private val CLOCK_TIME_FORMAT: DateFormat = SimpleDateFormat("H:mm", Locale.ENGLISH)
 
         fun bind(journeyOption: JourneyOption) {
             gpsStatusImageView.visibility = if (usingLocation) View.GONE else View.VISIBLE
@@ -53,13 +55,26 @@ class JourneyOptionsAdapter(val usingLocation: Boolean, val route: Route, val jo
                 platformTextView.visibility = View.GONE
             }
 
-            // TODO: display delay flag.
-            departureTimeTextView.text = hoursMinutesTimeFormat.format(journeyOption.actualDepartureTime)
-            arrivalTimeTextView.text = hoursMinutesTimeFormat.format(journeyOption.actualArrivalTime)
-            durationTimeTextView.text =
-                (journeyOption.actualArrivalTime - journeyOption.actualDepartureTime).toHmDurationString()
-            clockTimeTextView.text =
-                (journeyOption.actualDepartureTime - Date()).toHmsDurationString()
+            departureTimeTextView.text = CLOCK_TIME_FORMAT.format(journeyOption.actualDepartureTime)
+            arrivalTimeTextView.text = CLOCK_TIME_FORMAT.format(journeyOption.actualArrivalTime)
+            durationTimeTextView.text = journeyOption.actualDuration
+            clockTimeTextView.text = toClockString(journeyOption.actualDepartureTime - Date())
+            clockTimeTextView.setTextColor(if (journeyOption.status != JourneyOptionStatus.DELAYED) WHITE else RED_ACCENT)
         }
+    }
+
+    private fun toClockString(millis: Long): String {
+        val hours = millis / 3600000
+        val minutes = (millis % 3600000) / 60000
+        val seconds = Math.abs((millis % 60000) / 1000)
+        if (hours == 0L) {
+            return String.format("%d:%02d", minutes, seconds)
+        }
+        return String.format("%d:%02d:%02d", hours, Math.abs(minutes), seconds)
+    }
+
+    companion object {
+        private const val WHITE: Int = 0xFFFFFFFF.toInt()
+        private const val RED_ACCENT: Int = 0xFFFF8880.toInt()
     }
 }

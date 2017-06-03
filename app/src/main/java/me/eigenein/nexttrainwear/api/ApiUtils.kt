@@ -4,9 +4,10 @@ import org.simpleframework.xml.transform.RegistryMatcher
 import java.util.*
 
 object ApiUtils {
-    val matcher = RegistryMatcher()
+    val MATCHER = RegistryMatcher()
 
     init {
-        matcher.bind(Date::class.java, DateFormatTransformer::class.java)
+        MATCHER.bind(Date::class.java, DateFormatTransformer::class.java)
+        MATCHER.bind(JourneyOptionStatus::class.java, JourneyOptionStatusTransformer::class.java)
     }
 }

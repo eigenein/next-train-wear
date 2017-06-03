@@ -8,4 +8,10 @@ enum class JourneyOptionStatus {
     NOT_OPTIMAL,
     NOT_POSSIBLE,
     PLAN_CHANGED,
+    CANCELLED,
+    UNKNOWN;
+
+    companion object {
+        val HIDDEN = setOf(NOT_POSSIBLE, CANCELLED)
+    }
 }

@@ -7,13 +7,13 @@ import java.util.*
 
 @Root(strict = false, name = "ReisMogelijkheid")
 class JourneyOption {
+
     @field:Element(name = "AantalOverstappen", required = false)
     var numberOfTransfers: Int = 0
 
     @field:Element(name = "GeplandeReisTijd")
     lateinit var plannedDuration: String
 
-    // TODO: switch planned/actual in settings.
     @field:Element(name = "ActueleReisTijd")
     lateinit var actualDuration: String
 
@@ -39,8 +39,8 @@ class JourneyOption {
     lateinit var actualArrivalTime: Date
 
     // TODO: hide cancelled options in settings.
-    // @field:Element(name = "Status", required = false)
-    // var status: JourneyOptionStatus = JourneyOptionStatus.ON_SCHEDULE
+    @field:Element(name = "Status", required = false)
+    lateinit var status: JourneyOptionStatus
 
     @field:ElementList(inline = true, empty = false, required = false)
     lateinit var components: List<JourneyComponent>

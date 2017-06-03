@@ -63,10 +63,10 @@ class TrainsFragment : Fragment() {
                         .setNumUpdates(1)
                         .asFlowable(it)
                         .take(1) // otherwise we'll get timeout error anyway
-                        .timeout(locationTimeoutSeconds, TimeUnit.SECONDS)
+                        .timeout(LOCATION_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 }
                 .map { DetectedStation(true, Station.findNearestStation(it)) }
-                .doOnError { Log.e(logTag, "Failed to detect station: " + it) }
+                .doOnError { Log.e(LOG_TAG, "Failed to detect station: " + it) }
                 .onErrorReturn {
                     val lastStation = Stations.stationByCode[Preferences.getLastStationCode(activity)]
                     DetectedStation(false, lastStation ?: Stations.amsterdamCentraal)
@@ -90,17 +90,19 @@ class TrainsFragment : Fragment() {
      * Updates the fragment based on the detected station.
      */
     private fun onStationDetected(detectedStation: DetectedStation) {
-        Log.d(logTag, "Departure station: " + detectedStation)
+        Log.d(LOG_TAG, "Departure station: " + detectedStation)
         Preferences.setLastStationCode(activity, detectedStation.station.code)
 
         val destinations = selectDestinations(detectedStation.station)
-        Log.d(logTag, "Found destinations: " + destinations.size)
+        Log.d(LOG_TAG, "Selected destinations: " + destinations.size)
 
         // Show routes view.
         progressLayout.visibility = View.GONE
         destinationsRecyclerView.visibility = View.VISIBLE
         destinationsRecyclerView.adapter = RoutesAdapter(
-            detectedStation.usingLocation, destinations.map { detectedStation.station.routeTo(it) })
+            detectedStation.usingLocation,
+            destinations.map { detectedStation.station.routeTo(it) }
+        )
     }
 
     /**
@@ -119,16 +121,16 @@ class TrainsFragment : Fragment() {
         val allStations = Stations.allStations
             .filter { it.code !in stationCodes && it.code != departureStation.code }
             .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
-            .take(numberOfNearestStations)
+            .take(NUMBER_OF_NEAREST_STATIONS)
 
         return favoriteStations + allStations
     }
 
     companion object {
 
-        private const val numberOfNearestStations = 10 // TODO: make configurable
-        private const val locationTimeoutSeconds = 5L
+        private const val NUMBER_OF_NEAREST_STATIONS = 10 // TODO: make configurable
+        private const val LOCATION_TIMEOUT_SECONDS = 5L
 
-        private val logTag = TrainsFragment::class.java.simpleName
+        private val LOG_TAG = TrainsFragment::class.java.simpleName
     }
 }

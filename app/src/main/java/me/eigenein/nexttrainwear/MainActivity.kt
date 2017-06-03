@@ -51,7 +51,7 @@ class MainActivity :
         super.onStart()
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), requestCodePermissions)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSIONS_REQUEST_CODE)
         }
     }
 
@@ -83,7 +83,7 @@ class MainActivity :
     }
 
     override fun onItemSelected(index: Int) {
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragments[index]()).commit()
+        fragmentManager.beginTransaction().replace(R.id.content_frame, FRAGMENTS[index]()).commit()
     }
 
     override fun onRequestPermissionsResult(
@@ -92,16 +92,16 @@ class MainActivity :
         grantResults: IntArray
     ) {
         if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-            Log.w(logTag, "Permission is not granted")
+            Log.w(LOG_TAG, "Permission is not granted")
         }
     }
 
     companion object {
 
-        private const val requestCodePermissions = 1
+        private const val PERMISSIONS_REQUEST_CODE = 1
 
-        private val logTag = MainActivity::class.java.simpleName
-        private val fragments = arrayOf(
+        private val LOG_TAG = MainActivity::class.java.simpleName
+        private val FRAGMENTS = arrayOf(
             { TrainsFragment() },
             { StationsFragment() },
             { SettingsFragment() }

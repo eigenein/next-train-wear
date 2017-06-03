@@ -23,7 +23,7 @@ class NavigationDrawerAdapter(
     )
 
     init {
-        icons.forEach { it.setTint(white) }
+        icons.forEach { it.setTint(WHITE) }
     }
 
     override fun getItemText(index: Int): String = texts[index]
@@ -38,6 +38,6 @@ class NavigationDrawerAdapter(
     companion object {
 
         @ColorInt
-        private val white = 0xFFFFFFFF.toInt()
+        private val WHITE = 0xFFFFFFFF.toInt()
     }
 }
