@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
@@ -29,7 +28,8 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false))
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
-    override fun onViewRecycled(holder: ViewHolder) = holder.recycle()
+    override fun onViewAttachedToWindow(holder: ViewHolder) = holder.onAttached()
+    override fun onViewDetachedFromWindow(holder: ViewHolder) = holder.onDetached()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -52,6 +52,10 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
 
         fun bind(route: Route) {
             this.route = route
+            this.response = null
+        }
+
+        fun onAttached() {
             val response = this.response
             if (response != null) {
                 onResponse(response)
@@ -61,7 +65,7 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
             }
         }
 
-        fun recycle() {
+        fun onDetached() {
             disposable.clear()
         }
 
@@ -77,8 +81,9 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
 
         private fun onResponse(response: JourneyOptionsResponse) {
             this.response = response
+            progressView.visibility = View.GONE
             journeyOptionsRecyclerView.adapter = JourneyOptionsAdapter(usingLocation, route, response.options)
-            showJourneysLayout()
+            journeyOptionsRecyclerView.visibility = View.VISIBLE
         }
 
         private fun showProgressLayout() {
@@ -88,11 +93,6 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
             departureTextView.text = route.departureStation.longName
             destinationTextView.text = route.destinationStation.longName
             progressView.visibility = View.VISIBLE
-        }
-
-        private fun showJourneysLayout() {
-            progressView.visibility = View.GONE
-            journeyOptionsRecyclerView.visibility = View.VISIBLE
         }
     }
 
