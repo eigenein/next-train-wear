@@ -15,16 +15,11 @@ import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter
 import me.eigenein.nexttrainwear.fragments.StationsFragment
 import me.eigenein.nexttrainwear.fragments.SettingsFragment
 import me.eigenein.nexttrainwear.fragments.TrainsFragment
-import me.eigenein.nexttrainwear.interfaces.AmbientListenable
-import me.eigenein.nexttrainwear.interfaces.AmbientListener
 import java.util.concurrent.TimeUnit
 
 class MainActivity :
     WearableActivity(),
-    NavigationDrawerAdapter.OnItemSelectedListener,
-    AmbientListenable {
-
-    override var ambientListener: AmbientListener? = null
+    NavigationDrawerAdapter.OnItemSelectedListener {
 
     private lateinit var alarmManager: AlarmManager
     private lateinit var alarmPendingIntent: PendingIntent
@@ -82,19 +77,10 @@ class MainActivity :
 
     override fun onEnterAmbient(ambientDetails: Bundle?) {
         super.onEnterAmbient(ambientDetails)
-        ambientListener?.onEnterAmbient()
-        // TODO
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        ambientListener?.onUpdateDisplay()
     }
 
     override fun onExitAmbient() {
         super.onExitAmbient()
-        ambientListener?.onExitAmbient()
-        // TODO
     }
 
     override fun onItemSelected(index: Int) {
@@ -115,7 +101,6 @@ class MainActivity :
 
         private const val requestCodePermissions = 1
 
-        private val displayUpdateIntervalMillis = TimeUnit.SECONDS.toMillis(1)
         private val logTag = MainActivity::class.java.simpleName
         private val fragments = arrayOf(
             { TrainsFragment() },

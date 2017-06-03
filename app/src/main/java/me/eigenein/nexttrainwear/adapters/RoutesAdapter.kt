@@ -95,6 +95,6 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
     }
 
     companion object {
-        private const val retryIntervalMs = 5L
+        private const val retryIntervalMs = 5L // TODO: exponential back-off
     }
 }
