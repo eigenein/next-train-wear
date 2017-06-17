@@ -1,4 +1,6 @@
-# Next Train
+# Next Train Wear
+
+![icon.png](Next Train)
 
 ## Issue Tracker
 
