@@ -1,7 +1,5 @@
 # Next Train Wear
 
-![Next Train](icon.png)
-
 ## Issue Tracker
 
 1. [ ] Приложение падает в режиме полета.
