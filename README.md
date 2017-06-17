@@ -15,8 +15,11 @@
 11. [ ] :thought_balloon: Выводить тип поезда.
 12. [ ] :thought_balloon: Выводить длину поезда и удобства.
 13. [ ] :thought_balloon: Отображать число пересадок.
-14. [ ] :thought_balloon: Выключать фильтрацию отмененных рейсов в настройках и выделять их.
+14. [ ] :thought_balloon: Выключать фильтрацию отмененных рейсов в настройках и выделять их цветом фона. Помнить про фон в ambient mode.
 15. [ ] :thought_balloon: Ручной выбор станции отправления.
 16. [ ] :thought_balloon: Подумать над редизайном экрана с обратным отсчетом.
 17. [ ] :thought_balloon: Обучающие подсказки.
 18. [ ] :warning: Не пересоздавать JourneyOptionsAdapter, если данные не изменились.
+19. [x] :thought_balloon: Затенять экран в ambient mode.
+20. [ ] :thought_balloon: Отключать сглаживание в ambient mode.
+21. [ ] :thought_balloon: Отключать анимацию в ambient mode.

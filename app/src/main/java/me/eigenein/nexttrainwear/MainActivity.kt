@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.wearable.activity.WearableActivity
@@ -76,10 +77,12 @@ class MainActivity :
 
     override fun onEnterAmbient(ambientDetails: Bundle?) {
         super.onEnterAmbient(ambientDetails)
+        window.decorView.setBackgroundColor(Color.BLACK)
     }
 
     override fun onExitAmbient() {
         super.onExitAmbient()
+        window.decorView.setBackgroundResource(R.color.lighter_background)
     }
 
     override fun onItemSelected(index: Int) {
