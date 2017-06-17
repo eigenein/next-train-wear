@@ -23,3 +23,4 @@
 19. [x] :thought_balloon: Затенять экран в ambient mode.
 20. [ ] :thought_balloon: Отключать сглаживание в ambient mode.
 21. [ ] :thought_balloon: Отключать анимацию в ambient mode.
+22. [ ] :thought_balloon: Выводить текущее время.
