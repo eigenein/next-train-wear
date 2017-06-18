@@ -21,22 +21,11 @@ class MainActivity :
     WearableActivity(),
     NavigationDrawerAdapter.OnItemSelectedListener {
 
-    private lateinit var alarmManager: AlarmManager
-    private lateinit var alarmPendingIntent: PendingIntent
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
         setAmbientEnabled()
-
-        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmPendingIntent = PendingIntent.getActivity(
-            applicationContext,
-            0,
-            Intent(applicationContext, MainActivity::class.java),
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
 
         val navigationDrawer = findViewById(R.id.navigation_drawer) as WearableNavigationDrawer
         navigationDrawer.setAdapter(NavigationDrawerAdapter(this, this))
@@ -54,25 +43,6 @@ class MainActivity :
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSIONS_REQUEST_CODE)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        /* TODO:
-        val timeMillis = System.currentTimeMillis()
-        val triggerTimeMillis = timeMillis + displayUpdateIntervalMillis - (timeMillis % displayUpdateIntervalMillis)
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            triggerTimeMillis,
-            displayUpdateIntervalMillis,
-            alarmPendingIntent)
-        */
-    }
-
-    override fun onPause() {
-        super.onPause()
-        alarmManager.cancel(alarmPendingIntent)
     }
 
     override fun onEnterAmbient(ambientDetails: Bundle?) {
