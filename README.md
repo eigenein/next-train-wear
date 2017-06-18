@@ -35,4 +35,5 @@
 25. [ ] :thought_balloon: Добавить стабильные ID в адаптеры.
 26. [ ] :thought_balloon: Exponential backoff на вызове `trainPlanner`.
 28. [ ] :thought_balloon: Включать/выключать текущее местоположение в настройках.
-29. [ ] :through_balloon: Режим "В пути".
+29. [ ] :thought_balloon: Режим "В пути".
+30. [ ] :thought_balloon: Отправлять запрос только когда прокрутка завершена (debouncing).
