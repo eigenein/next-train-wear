@@ -24,3 +24,5 @@
 20. [ ] :thought_balloon: Отключать сглаживание в ambient mode.
 21. [ ] :thought_balloon: Отключать анимацию в ambient mode.
 22. [ ] :thought_balloon: Выводить текущее время.
+23. [ ] :thought_balloon: Обновление статуса рейса.
+24. [ ] :thought_balloon: Уведомления об изменении статуса рейса.
