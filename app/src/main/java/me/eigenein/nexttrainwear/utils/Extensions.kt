@@ -10,6 +10,7 @@ import io.reactivex.Flowable
 import me.eigenein.nexttrainwear.exceptions.GoogleApiClientConnectionFailedException
 import me.eigenein.nexttrainwear.exceptions.LocationRequestFailedException
 import me.eigenein.nexttrainwear.exceptions.NoLocationException
+import org.simpleframework.xml.transform.RegistryMatcher
 import java.util.*
 
 operator fun Date.minus(other: Date): Long {
@@ -66,4 +67,13 @@ fun bundle(init: Bundle.() -> Unit): Bundle {
     val bundle = Bundle()
     bundle.init()
     return bundle
+}
+
+/**
+ * Matcher builder.
+ */
+fun registryMatcher(init: RegistryMatcher.() -> Unit): RegistryMatcher {
+    val matcher = RegistryMatcher()
+    matcher.init()
+    return matcher
 }
