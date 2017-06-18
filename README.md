@@ -9,12 +9,13 @@
 3. [x] :thought_balloon: Обратный отсчет.
 5. [x] :thought_balloon: Логгировать запросы к API в Google Analytics.
 6. [ ] :thought_balloon: Голландский язык.
-10. [ ] :thought_balloon: Отображать отсутствие рейсов.
+10. [x] :thought_balloon: Отображать отсутствие рейсов.
 17. [ ] :thought_balloon: Обучающие подсказки.
 19. [x] :thought_balloon: Затенять экран в ambient mode.
 22. [ ] :thought_balloon: Выводить текущее время.
 23. [ ] :thought_balloon: Обновление статуса рейса.
 27. [ ] :thought_balloon: Прокручивать список рейсов, когда поезд уходит.
+31. [ ] :thought_balloon: Улучшить отображение отсутствия рейсов.
 
 # Future Versions
 

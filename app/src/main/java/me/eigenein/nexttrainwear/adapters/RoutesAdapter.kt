@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
 import android.support.wearable.view.WearableRecyclerView
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -62,6 +63,8 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         private val progressView: View = itemView.findViewById(R.id.item_route_progress_layout)
         private val departureTextView: TextView = itemView.findViewById(R.id.item_route_departure_text)
         private val destinationTextView: TextView = itemView.findViewById(R.id.item_route_destination_text)
+        private val noTrainsView: View = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
+        private val noTrainsTextView: TextView = itemView.findViewById(R.id.fragment_trains_no_trains_text)
 
         private lateinit var route: Route
 
@@ -120,12 +123,22 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
             // Display journey options.
             progressView.visibility = View.GONE
-            adapter.swap(usingLocation, route, journeyOptions)
-            journeyOptionsRecyclerView.visibility = View.VISIBLE
+            if (journeyOptions.isNotEmpty()) {
+                adapter.swap(usingLocation, route, journeyOptions)
+                journeyOptionsRecyclerView.visibility = View.VISIBLE
+            } else {
+                @Suppress("DEPRECATION")
+                noTrainsTextView.text = Html.fromHtml(itemView.resources.getString(
+                    R.string.fragment_trains_no_trains,
+                    route.destinationStation.longName
+                ))
+                noTrainsView.visibility = View.VISIBLE
+            }
         }
 
         private fun showProgressLayout() {
             journeyOptionsRecyclerView.visibility = View.GONE
+            noTrainsView.visibility = View.GONE
 
             gpsStatusImageView.visibility = if (usingLocation) View.GONE else View.VISIBLE
             departureTextView.text = route.departureStation.longName
