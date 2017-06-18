@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "153102674870",
+    "firebase_url": "https://next-train-80cd9.firebaseio.com",
+    "project_id": "next-train-80cd9",
+    "storage_bucket": "next-train-80cd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153102674870:android:a7fe65748e8139f9",
+        "android_client_info": {
+          "package_name": "me.eigenein.nexttrainwear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153102674870-n6ekag2r37he3qephre1pdmqei60mdb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTvpld3yEg4loQwqJErSzGuLENPPel_is"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

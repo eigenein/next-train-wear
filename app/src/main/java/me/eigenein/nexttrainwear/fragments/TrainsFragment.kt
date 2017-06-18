@@ -41,7 +41,7 @@ class TrainsFragment : Fragment() {
 
         progressLayout = view.findViewById(R.id.fragment_trains_progress_layout)
 
-        destinationsRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView
+        destinationsRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view)
         destinationsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         destinationsRecyclerView.adapter = adapter
         LinearSnapHelper().attachToRecyclerView(destinationsRecyclerView)

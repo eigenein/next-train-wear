@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.wearable.activity.WearableActivity
 import android.support.wearable.view.drawer.WearableNavigationDrawer
 import android.util.Log
+import com.google.firebase.analytics.FirebaseAnalytics
 import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter
 import me.eigenein.nexttrainwear.fragments.SettingsFragment
 import me.eigenein.nexttrainwear.fragments.StationsFragment
@@ -17,13 +18,17 @@ class MainActivity :
     WearableActivity(),
     NavigationDrawerAdapter.OnItemSelectedListener {
 
+    private lateinit var analytics: FirebaseAnalytics
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        analytics = FirebaseAnalytics.getInstance(this)
 
         setContentView(R.layout.activity_main)
         setAmbientEnabled()
 
-        val navigationDrawer = findViewById(R.id.navigation_drawer) as WearableNavigationDrawer
+        val navigationDrawer: WearableNavigationDrawer = findViewById(R.id.navigation_drawer)
         navigationDrawer.setAdapter(NavigationDrawerAdapter(this, this))
         navigationDrawer.setShouldOnlyOpenWhenAtTop(false)
 
