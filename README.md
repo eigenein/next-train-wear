@@ -29,3 +29,4 @@
 25. [ ] :thought_balloon: Добавить стабильные ID в адаптеры.
 26. [ ] :thought_balloon: Exponential backoff на вызове `trainPlanner`.
 27. [ ] :thought_balloon: Прокручивать список рейсов, когда поезд уходит.
+28. [ ] :thought_balloon: Включать/выключать текущее местоположение в настройках.
