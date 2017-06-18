@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import me.eigenein.nexttrainwear.Preferences
+import me.eigenein.nexttrainwear.utils.Preferences
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.adapters.StationsAdapter
 
@@ -21,11 +21,7 @@ class StationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         recyclerView = inflater.inflate(R.layout.fragment_stations, container, false) as WearableRecyclerView
-        return recyclerView
-    }
-
-    override fun onResume() {
-        super.onResume()
         recyclerView.adapter = StationsAdapter(Preferences.getStations(activity).toMutableSet())
+        return recyclerView
     }
 }

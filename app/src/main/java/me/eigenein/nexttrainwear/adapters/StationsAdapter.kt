@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.CompoundButton
+import com.google.firebase.analytics.FirebaseAnalytics
 
-import me.eigenein.nexttrainwear.Preferences
+import me.eigenein.nexttrainwear.utils.Preferences
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.data.Station
 import me.eigenein.nexttrainwear.data.Stations
+import me.eigenein.nexttrainwear.utils.bundle
 
 class StationsAdapter(private val checkedStations: MutableSet<String>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -35,6 +37,7 @@ class StationsAdapter(private val checkedStations: MutableSet<String>)
 
     private inner class StationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), CompoundButton.OnCheckedChangeListener {
 
+        private val analytics = FirebaseAnalytics.getInstance(itemView.context)
         private val checkBox: CheckBox = itemView.findViewById(R.id.item_station_checkbox)
         private lateinit var station: Station
 
@@ -55,6 +58,10 @@ class StationsAdapter(private val checkedStations: MutableSet<String>)
                 checkedStations.remove(station.code)
             }
             Preferences.setStations(checkBox.context, checkedStations)
+            analytics.logEvent("on_checked_changed", bundle {
+                putString("station_code", station.code)
+                putBoolean("is_checked", isChecked)
+            })
         }
     }
 }

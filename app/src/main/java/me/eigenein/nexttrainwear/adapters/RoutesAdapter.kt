@@ -10,16 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import me.eigenein.nexttrainwear.Cache
+import me.eigenein.nexttrainwear.utils.Cache
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
 import me.eigenein.nexttrainwear.api.nsApiInstance
 import me.eigenein.nexttrainwear.data.Route
+import me.eigenein.nexttrainwear.utils.bundle
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -53,6 +55,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
         private val disposable = CompositeDisposable()
         private val adapter = JourneyOptionsAdapter()
+        private val analytics = FirebaseAnalytics.getInstance(itemView.context)
 
         private val gpsStatusImageView: ImageView = itemView.findViewById(R.id.item_route_gps_status_image_view)
         private val journeyOptionsRecyclerView: WearableRecyclerView = itemView.findViewById(R.id.item_route_recycler_view)
@@ -92,7 +95,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             disposable.add(
                 nsApiInstance.trainPlanner(route.departureStation.code, route.destinationStation.code)
                     .retryWhen { it.flatMap {
-                        // TODO: exponential back-off.
                         Log.w(LOG_TAG, "Train planner call failed", it)
                         if (it is HttpException || it is SocketTimeoutException || it is UnknownHostException)
                             Observable.timer(RETRY_INTERVAL_SECONDS, TimeUnit.SECONDS)
@@ -103,6 +105,10 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { onResponse(it) }
             )
+            analytics.logEvent("call_train_planner", bundle {
+                putString("departure_code", route.departureStation.code)
+                putString("destination_code", route.destinationStation.code)
+            })
         }
 
         private fun onResponse(response: JourneyOptionsResponse) {

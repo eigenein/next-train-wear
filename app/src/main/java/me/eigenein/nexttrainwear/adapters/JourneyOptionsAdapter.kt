@@ -11,7 +11,7 @@ import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOption
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.data.Route
-import me.eigenein.nexttrainwear.minus
+import me.eigenein.nexttrainwear.utils.minus
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList

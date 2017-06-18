@@ -1,4 +1,4 @@
-package me.eigenein.nexttrainwear
+package me.eigenein.nexttrainwear.utils
 
 import android.location.Location
 import android.os.Bundle
@@ -14,10 +14,6 @@ import java.util.*
 
 operator fun Date.minus(other: Date): Long {
     return this.time - other.time
-}
-
-fun Long.toHmDurationString(): String {
-    return String.format("%d:%02d", this / 3600000, Math.abs((this % 3600000) / 60000))
 }
 
 /**
@@ -61,4 +57,13 @@ fun LocationRequest.asFlowable(googleApiClient: GoogleApiClient): Flowable<Locat
             }
         emitter.setCancellable { LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, listener) }
     }, BackpressureStrategy.BUFFER)
+}
+
+/**
+ * Bundle builder.
+ */
+fun bundle(init: Bundle.() -> Unit): Bundle {
+    val bundle = Bundle()
+    bundle.init()
+    return bundle
 }

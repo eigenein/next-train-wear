@@ -15,10 +15,10 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import me.eigenein.nexttrainwear.Preferences
+import me.eigenein.nexttrainwear.utils.Preferences
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.adapters.RoutesAdapter
-import me.eigenein.nexttrainwear.asFlowable
+import me.eigenein.nexttrainwear.utils.asFlowable
 import me.eigenein.nexttrainwear.data.DetectedStation
 import me.eigenein.nexttrainwear.data.Station
 import me.eigenein.nexttrainwear.data.Stations
