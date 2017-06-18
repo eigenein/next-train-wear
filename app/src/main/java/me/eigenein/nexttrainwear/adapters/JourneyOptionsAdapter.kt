@@ -1,25 +1,39 @@
 package me.eigenein.nexttrainwear.adapters
 
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import me.eigenein.nexttrainwear.*
+import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOption
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.data.Route
+import me.eigenein.nexttrainwear.minus
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Used to display possible journey options.
  */
-class JourneyOptionsAdapter(val usingLocation: Boolean, val route: Route, val journeyOptions: List<JourneyOption>)
-    : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHolder>() {
+class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHolder>() {
+
+    private val journeyOptions = ArrayList<JourneyOption>()
+
+    private var usingLocation = false
+
+    private lateinit var route: Route
+
+    fun swap(usingLocation: Boolean, route: Route, journeyOptions: Iterable<JourneyOption>) {
+        this.usingLocation = usingLocation
+        this.route = route
+        this.journeyOptions.clear()
+        this.journeyOptions.addAll(journeyOptions)
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = journeyOptions.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -47,7 +61,7 @@ class JourneyOptionsAdapter(val usingLocation: Boolean, val route: Route, val jo
 
             val platform = journeyOption.components.getOrNull(0)?.stops?.getOrNull(0)?.platform
             if (platform != null) {
-                platformTextView.text = platform.toString()
+                platformTextView.text = platform
                 platformTitleTextView.visibility = View.VISIBLE
                 platformTextView.visibility = View.VISIBLE
             } else {

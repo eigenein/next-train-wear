@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit
 class TrainsFragment : Fragment() {
 
     private val disposable = CompositeDisposable()
+    private val adapter = RoutesAdapter()
 
     private lateinit var progressLayout: View
     private lateinit var destinationsRecyclerView: WearableRecyclerView
@@ -35,13 +36,14 @@ class TrainsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_trains, container, false)
 
         progressLayout = view.findViewById(R.id.fragment_trains_progress_layout)
 
         destinationsRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView
         destinationsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        destinationsRecyclerView.adapter = adapter
         LinearSnapHelper().attachToRecyclerView(destinationsRecyclerView)
 
         return view
@@ -99,7 +101,7 @@ class TrainsFragment : Fragment() {
         // Show routes view.
         progressLayout.visibility = View.GONE
         destinationsRecyclerView.visibility = View.VISIBLE
-        destinationsRecyclerView.adapter = RoutesAdapter(
+        adapter.swap(
             detectedStation.usingLocation,
             destinations.map { detectedStation.station.routeTo(it) }
         )

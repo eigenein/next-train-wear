@@ -25,8 +25,10 @@ import java.util.concurrent.TimeUnit
 /**
  * Used to display possible routes.
  */
-class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
-    : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
+class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
+
+    private var usingLocation = false
+    private val routes = ArrayList<Route>()
 
     override fun getItemCount(): Int = routes.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -35,9 +37,17 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
     override fun onViewAttachedToWindow(holder: ViewHolder) = holder.onAttached()
     override fun onViewDetachedFromWindow(holder: ViewHolder) = holder.onDetached()
 
+    fun swap(usingLocation: Boolean, routes: Iterable<Route>) {
+        this.usingLocation = usingLocation
+        this.routes.clear()
+        this.routes.addAll(routes)
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val disposable = CompositeDisposable()
+        private val adapter = JourneyOptionsAdapter()
 
         private val gpsStatusImageView = itemView.findViewById(R.id.item_route_gps_status_image_view) as ImageView
         private val journeyOptionsRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
@@ -51,6 +61,7 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
 
         init {
             journeyOptionsRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
+            journeyOptionsRecyclerView.adapter = adapter
             LinearSnapHelper().attachToRecyclerView(journeyOptionsRecyclerView)
         }
 
@@ -96,7 +107,7 @@ class RoutesAdapter(val usingLocation: Boolean, val routes: List<Route>)
 
             // Display journey options.
             progressView.visibility = View.GONE
-            journeyOptionsRecyclerView.adapter = JourneyOptionsAdapter(usingLocation, route, journeyOptions)
+            adapter.swap(usingLocation, route, journeyOptions)
             journeyOptionsRecyclerView.visibility = View.VISIBLE
         }
 
