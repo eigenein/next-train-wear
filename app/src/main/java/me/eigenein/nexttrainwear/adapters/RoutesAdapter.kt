@@ -20,6 +20,8 @@ import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
 import me.eigenein.nexttrainwear.api.nsApiInstance
 import me.eigenein.nexttrainwear.data.Route
 import retrofit2.HttpException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -89,8 +91,11 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 nsApiInstance.trainPlanner(route.departureStation.code, route.destinationStation.code)
                     .retryWhen { it.flatMap {
                         // TODO: exponential back-off.
-                        if (it is HttpException) Observable.timer(RETRY_INTERVAL_SECONDS, TimeUnit.SECONDS)
-                        else Observable.error(it)
+                        Log.w(LOG_TAG, "Train planner call failed", it)
+                        if (it is HttpException || it is SocketTimeoutException || it is UnknownHostException)
+                            Observable.timer(RETRY_INTERVAL_SECONDS, TimeUnit.SECONDS)
+                        else
+                            Observable.error(it)
                     } }
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())

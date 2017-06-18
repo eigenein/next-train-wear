@@ -2,7 +2,7 @@
 
 ## Issue Tracker
 
-1. [ ] :bangbang: Приложение падает в режиме полета.
+1. [x] :bangbang: Приложение падает в режиме полета.
 2. [ ] :thought_balloon: Кэшировать ответы API.
 3. [ ] :thought_balloon: Обратный отсчет.
 4. [ ] :thought_balloon: Экран настроек.
@@ -27,3 +27,4 @@
 23. [ ] :thought_balloon: Обновление статуса рейса.
 24. [ ] :thought_balloon: Уведомления об изменении статуса рейса.
 25. [ ] :thought_balloon: Добавить стабильные ID в адаптеры.
+26. [ ] :thought_balloon: Exponential backoff на вызове `trainPlanner`.
