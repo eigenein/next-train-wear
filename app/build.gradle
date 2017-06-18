@@ -7,9 +7,9 @@ android {
     defaultConfig {
         applicationId "me.eigenein.nexttrainwear"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
-        versionName "17.03"
+        versionName "1"
     }
     buildTypes {
         release {
