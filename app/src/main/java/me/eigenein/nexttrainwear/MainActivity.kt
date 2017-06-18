@@ -1,7 +1,6 @@
 package me.eigenein.nexttrainwear
 
 import android.Manifest
-import android.app.PendingIntent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle

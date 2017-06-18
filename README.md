@@ -4,7 +4,7 @@
 
 1. [x] :bangbang: Приложение падает в режиме полета.
 2. [ ] :thought_balloon: Кэшировать ответы API.
-3. [ ] :thought_balloon: Обратный отсчет.
+3. [x] :thought_balloon: Обратный отсчет.
 4. [ ] :thought_balloon: Экран настроек.
 5. [ ] :thought_balloon: Логгировать запросы к API в Google Analytics.
 6. [ ] :thought_balloon: Голландский язык.
@@ -28,3 +28,4 @@
 24. [ ] :thought_balloon: Уведомления об изменении статуса рейса.
 25. [ ] :thought_balloon: Добавить стабильные ID в адаптеры.
 26. [ ] :thought_balloon: Exponential backoff на вызове `trainPlanner`.
+27. [ ] :thought_balloon: Прокручивать список рейсов, когда поезд уходит.
