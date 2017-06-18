@@ -5,7 +5,7 @@
 # Version 1
 
 1. [x] :bangbang: Приложение падает в режиме полета.
-2. [ ] :thought_balloon: Кэшировать ответы API.
+2. [x] :thought_balloon: Кэшировать ответы API.
 3. [x] :thought_balloon: Обратный отсчет.
 5. [ ] :thought_balloon: Логгировать запросы к API в Google Analytics.
 6. [ ] :thought_balloon: Голландский язык.

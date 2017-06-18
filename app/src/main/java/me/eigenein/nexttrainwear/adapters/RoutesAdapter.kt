@@ -14,6 +14,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import me.eigenein.nexttrainwear.Cache
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
@@ -29,8 +30,10 @@ import java.util.concurrent.TimeUnit
  */
 class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
-    private var usingLocation = false
     private val routes = ArrayList<Route>()
+    private val cache = Cache<String, JourneyOptionsResponse>()
+
+    private var usingLocation = false
 
     override fun getItemCount(): Int = routes.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -59,8 +62,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
         private lateinit var route: Route
 
-        private var response: JourneyOptionsResponse? = null
-
         init {
             journeyOptionsRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
             journeyOptionsRecyclerView.adapter = adapter
@@ -69,14 +70,15 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
         fun bind(route: Route) {
             this.route = route
-            this.response = null
         }
 
         fun onAttached() {
-            val response = this.response
+            val response = cache[route.key]
             if (response != null) {
+                Log.d(LOG_TAG, "Cache hit!")
                 onResponse(response)
             } else {
+                Log.d(LOG_TAG, "Cache miss :(")
                 showProgressLayout()
                 planJourney()
             }
@@ -104,7 +106,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         private fun onResponse(response: JourneyOptionsResponse) {
-            this.response = response
+            cache.put(route.key, response, RESPONSE_TTL_MILLIS)
 
             // Exclude cancelled options.
             val journeyOptions = response.options.filter { it.status !in JourneyOptionStatus.HIDDEN }
@@ -128,6 +130,8 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
     companion object {
         private val LOG_TAG = RoutesAdapter::class.java.simpleName
+
         private const val RETRY_INTERVAL_SECONDS = 5L
+        private const val RESPONSE_TTL_MILLIS = 60000L
     }
 }
