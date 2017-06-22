@@ -20,6 +20,7 @@
 34. [ ] :warning: Не отображаются опаздывающие рейсы, если planned departure time прошло.
 36. [ ] :warning: Добавить маршрут в аналитику события `call_train_planner` и проверить, почему не видны значения параметров `departure_code` и `destination_code`.
 37. [ ] :thought_balloon: Проверить, что `onAttached` и `onDetached` работают как ожидается.
+40. [ ] :warning: Кэш не должен зависеть от UI.
 
 # Future Versions
 
