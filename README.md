@@ -2,7 +2,7 @@
 
 ## Issue Tracker
 
-# Version 1
+### Version 1
 
 1. [x] :bangbang: Приложение падает в режиме полета.
 2. [x] :thought_balloon: Кэшировать ответы API.
@@ -22,7 +22,7 @@
 37. [ ] :thought_balloon: Проверить, что `onAttached` и `onDetached` работают как ожидается.
 40. [ ] :warning: Кэш не должен зависеть от UI.
 
-# Future Versions
+### Future Versions
 
 4. [ ] :thought_balloon: Экран настроек.
 7. [ ] :thought_balloon: Уведомлять про изменение или отмену рейса.
