@@ -1,6 +1,6 @@
 package me.eigenein.nexttrainwear.api
 
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -13,5 +13,5 @@ interface NsApiService {
         @Query("toStation") toStation: String,
         @Query("previousAdvices") previousAdvices: Int = 5,
         @Query("nextAdvices") nextAdvices: Int = 5
-    ): Observable<JourneyOptionsResponse>
+    ): Flowable<JourneyOptionsResponse>
 }

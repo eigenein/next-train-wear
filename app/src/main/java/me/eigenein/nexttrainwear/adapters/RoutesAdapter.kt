@@ -1,5 +1,6 @@
 package me.eigenein.nexttrainwear.adapters
 
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
@@ -12,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.firebase.analytics.FirebaseAnalytics
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -21,6 +22,7 @@ import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
 import me.eigenein.nexttrainwear.data.Route
+import me.eigenein.nexttrainwear.utils.asFlowable
 import me.eigenein.nexttrainwear.utils.bundle
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
@@ -41,6 +43,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false))
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
     override fun onViewRecycled(holder: ViewHolder) = holder.unbind()
+    override fun getItemViewType(position: Int) = VIEW_TYPE
 
     fun swap(usingLocation: Boolean, routes: Iterable<Route>) {
         this.usingLocation = usingLocation
@@ -51,8 +54,9 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val disposable = CompositeDisposable()
         private val adapter = JourneyOptionsAdapter()
+        private val handler = Handler()
+        private val disposable = CompositeDisposable()
         private val analytics = FirebaseAnalytics.getInstance(itemView.context)
 
         private val gpsStatusImageView: ImageView = itemView.findViewById(R.id.item_route_gps_status_image_view)
@@ -71,6 +75,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         fun bind(route: Route) {
+            Log.d(LOG_TAG, "bind " + route.key)
             val response = Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key]
             if (response != null) {
                 onResponse(route, response)
@@ -82,20 +87,28 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         fun unbind() {
+            Log.d(LOG_TAG, "unbind")
             disposable.clear()
         }
 
-        private fun scheduleTrainPlanner(route: Route, fireFirst: Boolean) {
+        private fun scheduleTrainPlanner(route: Route, instantly: Boolean) {
             disposable.add(
-                Globals.NS_API.trainPlanner(route.departureStation.code, route.destinationStation.code)
-                    .retryWhen { it.flatMap {
-                        Log.w(LOG_TAG, "Train planner call failed", it)
-                        if (it is HttpException || it is SocketTimeoutException || it is UnknownHostException)
-                            Observable.timer(RETRY_INTERVAL_SECONDS, TimeUnit.SECONDS)
-                        else
-                            Observable.error(it)
-                    } }
-                    .subscribeOn(Schedulers.newThread())
+                handler
+                    .asFlowable(REFRESH_INTERVAL_MILLIS, instantly)
+                    .flatMap {
+                        Log.d(LOG_TAG, "Planning journey: " + route.key)
+                        Globals.NS_API
+                            .trainPlanner(route.departureStation.code, route.destinationStation.code)
+                            .retryWhen { it.flatMap {
+                                Log.w(LOG_TAG, "Train planner call failed", it)
+                                if (it is HttpException || it is SocketTimeoutException || it is UnknownHostException)
+                                    Flowable.timer(RETRY_INTERVAL_SECONDS, TimeUnit.SECONDS)
+                                else
+                                    Flowable.error(it)
+                            } }
+                            .subscribeOn(Schedulers.newThread())
+                    }
+                    .subscribeOn(AndroidSchedulers.mainThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { onResponse(route, it) }
             )
@@ -143,9 +156,12 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     }
 
     companion object {
+        public const val VIEW_TYPE = 0
+
         private val LOG_TAG = RoutesAdapter::class.java.simpleName
 
         private const val RETRY_INTERVAL_SECONDS = 5L
         private const val RESPONSE_TTL_MILLIS = 60000L
+        private const val REFRESH_INTERVAL_MILLIS = 60000L
     }
 }
