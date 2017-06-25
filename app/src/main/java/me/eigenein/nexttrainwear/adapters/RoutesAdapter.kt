@@ -73,12 +73,11 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         fun bind(route: Route) {
             val response = Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key]
             if (response != null) {
-                Log.d(LOG_TAG, "Cache hit!")
                 onResponse(route, response)
+                scheduleTrainPlanner(route, false)
             } else {
-                Log.d(LOG_TAG, "Cache miss :(")
                 showProgressLayout(route)
-                planJourney(route)
+                scheduleTrainPlanner(route, true)
             }
         }
 
@@ -86,7 +85,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             disposable.clear()
         }
 
-        private fun planJourney(route: Route) {
+        private fun scheduleTrainPlanner(route: Route, fireFirst: Boolean) {
             disposable.add(
                 Globals.NS_API.trainPlanner(route.departureStation.code, route.destinationStation.code)
                     .retryWhen { it.flatMap {

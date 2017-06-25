@@ -78,7 +78,7 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
             durationTimeTextView.text = journeyOption.actualDuration
             clockTextView.setTextColor(if (journeyOption.status != JourneyOptionStatus.DELAYED) WHITE else RED_ACCENT)
 
-            disposable.add(handler.asFlowable(CLOCK_UPDATE_INTERVAL_MILLIS).subscribe {
+            disposable.add(handler.asFlowable(CLOCK_UPDATE_INTERVAL_MILLIS, true).subscribe {
                 clockTextView.text = toClockString(journeyOption.actualDepartureTime - Date())
             })
         }
