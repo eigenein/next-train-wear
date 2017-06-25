@@ -124,6 +124,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 @Suppress("DEPRECATION")
                 noTrainsTextView.text = Html.fromHtml(itemView.resources.getString(
                     R.string.fragment_trains_no_trains,
+                    route.departureStation.longName,
                     route.destinationStation.longName
                 ))
                 journeyOptionsRecyclerView.visibility = View.GONE
