@@ -81,6 +81,7 @@ class TrainsFragment : Fragment() {
         disposable.clear()
         // Important: remove all items so that all delayed callbacks are removed.
         // Otherwise onViewRecycled is not called and the app continues to send the requests.
+        Log.i(LOG_TAG, "On pause")
         adapter.swap(false, listOf<Route>())
     }
 
