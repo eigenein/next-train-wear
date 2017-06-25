@@ -103,6 +103,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             analytics.logEvent("call_train_planner", bundle {
                 putString("departure_code", route.departureStation.code)
                 putString("destination_code", route.destinationStation.code)
+                putString("route_key", route.key)
             })
         }
 
