@@ -1,14 +1,15 @@
 package me.eigenein.nexttrainwear
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.os.PowerManager
 import android.support.v4.app.ActivityCompat
 import android.support.wearable.activity.WearableActivity
 import android.support.wearable.view.drawer.WearableNavigationDrawer
 import android.util.Log
-import com.google.firebase.analytics.FirebaseAnalytics
 import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter
 import me.eigenein.nexttrainwear.fragments.SettingsFragment
 import me.eigenein.nexttrainwear.fragments.StationsFragment
@@ -18,12 +19,12 @@ class MainActivity :
     WearableActivity(),
     NavigationDrawerAdapter.OnItemSelectedListener {
 
-    private lateinit var analytics: FirebaseAnalytics
+    private lateinit var wakeLock: PowerManager.WakeLock
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        analytics = FirebaseAnalytics.getInstance(this)
+        wakeLock = (getSystemService(Context.POWER_SERVICE) as PowerManager)
+            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, LOG_TAG)
 
         setContentView(R.layout.activity_main)
         setAmbientEnabled()
@@ -49,11 +50,13 @@ class MainActivity :
     override fun onEnterAmbient(ambientDetails: Bundle?) {
         super.onEnterAmbient(ambientDetails)
         window.decorView.setBackgroundColor(Color.BLACK)
+        wakeLock.acquire()
     }
 
     override fun onExitAmbient() {
         super.onExitAmbient()
         window.decorView.setBackgroundResource(R.color.lighter_background)
+        wakeLock.release()
     }
 
     override fun onItemSelected(index: Int) {

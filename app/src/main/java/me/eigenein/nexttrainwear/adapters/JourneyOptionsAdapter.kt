@@ -114,7 +114,7 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
         private const val WHITE = 0xFFFFFFFF.toInt()
         private const val RED_ACCENT = 0xFFFF8880.toInt()
 
-        private const val CLOCK_UPDATE_INTERVAL_MILLIS = 1000L
+        private const val CLOCK_UPDATE_INTERVAL_MILLIS = 500L
 
         private val CLOCK_TIME_FORMAT = SimpleDateFormat("H:mm", Locale.ENGLISH)
     }
