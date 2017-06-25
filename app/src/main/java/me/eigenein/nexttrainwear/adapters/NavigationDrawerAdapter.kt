@@ -11,25 +11,20 @@ class NavigationDrawerAdapter(
     private val listener: NavigationDrawerAdapter.OnItemSelectedListener
 ) : WearableNavigationDrawerAdapter() {
 
-    private val texts = arrayOf(
-        context.getString(R.string.navigation_drawer_trains),
-        context.getString(R.string.navigation_drawer_stations)
-        // context.getString(R.string.navigation_drawer_settings)
-    )
-    private val icons = arrayOf(
-        context.getDrawable(R.drawable.ic_train_black_24dp),
-        context.getDrawable(R.drawable.ic_list_black_24dp)
-        // context.getDrawable(R.drawable.ic_settings_black_24dp)
+    private val items = arrayOf(
+        Pair(context.getString(R.string.navigation_drawer_trains), context.getDrawable(R.drawable.ic_train_black_24dp)),
+        Pair(context.getString(R.string.navigation_drawer_stations), context.getDrawable(R.drawable.ic_list_black_24dp))
+        // Pair(context.getString(R.string.navigation_drawer_settings), context.getDrawable(R.drawable.ic_settings_black_24dp))
     )
 
     init {
-        icons.forEach { it.setTint(WHITE) }
+        items.forEach { it.second.setTint(WHITE) }
     }
 
-    override fun getItemText(index: Int): String = texts[index]
-    override fun getItemDrawable(index: Int): Drawable = icons[index]
+    override fun getItemText(index: Int): String = items[index].first
+    override fun getItemDrawable(index: Int): Drawable = items[index].second
     override fun onItemSelected(index: Int) = listener.onItemSelected(index)
-    override fun getCount(): Int = texts.size
+    override fun getCount(): Int = items.size
 
     interface OnItemSelectedListener {
         fun onItemSelected(index: Int)
