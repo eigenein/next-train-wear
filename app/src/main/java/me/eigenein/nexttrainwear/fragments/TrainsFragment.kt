@@ -1,7 +1,6 @@
 package me.eigenein.nexttrainwear.fragments
 
 import android.app.Fragment
-import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
@@ -15,13 +14,14 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import me.eigenein.nexttrainwear.utils.Preferences
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.adapters.RoutesAdapter
-import me.eigenein.nexttrainwear.utils.asFlowable
 import me.eigenein.nexttrainwear.data.DetectedStation
+import me.eigenein.nexttrainwear.data.Route
 import me.eigenein.nexttrainwear.data.Station
 import me.eigenein.nexttrainwear.data.Stations
+import me.eigenein.nexttrainwear.utils.Preferences
+import me.eigenein.nexttrainwear.utils.asFlowable
 import java.util.concurrent.TimeUnit
 
 class TrainsFragment : Fragment() {
@@ -48,10 +48,6 @@ class TrainsFragment : Fragment() {
         LinearSnapHelper().attachToRecyclerView(destinationsRecyclerView)
 
         return view
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
     }
 
     override fun onResume() {
@@ -83,6 +79,9 @@ class TrainsFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         disposable.clear()
+        // Important: remove all items so that all delayed callbacks are removed.
+        // Otherwise onViewRecycled is not called and the app continues to send the requests.
+        adapter.swap(false, listOf<Route>())
     }
 
     override fun onDetach() {

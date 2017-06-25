@@ -3,7 +3,6 @@ package me.eigenein.nexttrainwear.utils
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
