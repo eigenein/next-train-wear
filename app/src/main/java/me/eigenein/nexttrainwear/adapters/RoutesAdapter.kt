@@ -95,7 +95,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 handler
                     .asFlowable(REFRESH_INTERVAL_MILLIS, instantly)
                     .flatMap {
-                        Log.d(LOG_TAG, "Planning journey: " + route.key)
+                        Log.i(LOG_TAG, "Planning journey: " + route.key)
                         Globals.NS_API
                             .trainPlanner(route.departureStation.code, route.destinationStation.code)
                             .retryWhen { it.flatMap {
