@@ -75,7 +75,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         fun bind(route: Route) {
-            Log.d(LOG_TAG, "bind " + route.key)
             val response = Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key]
             if (response != null) {
                 onResponse(route, response)
@@ -87,7 +86,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         fun unbind() {
-            Log.d(LOG_TAG, "unbind")
             disposable.clear()
         }
 
