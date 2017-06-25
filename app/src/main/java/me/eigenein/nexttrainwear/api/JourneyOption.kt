@@ -38,7 +38,6 @@ class JourneyOption {
     @field:Element(name = "ActueleAankomstTijd")
     lateinit var actualArrivalTime: Date
 
-    // TODO: hide cancelled options in settings.
     @field:Element(name = "Status", required = false)
     lateinit var status: JourneyOptionStatus
 

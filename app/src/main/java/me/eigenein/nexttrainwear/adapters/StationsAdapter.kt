@@ -27,11 +27,11 @@ class StationsAdapter(private val checkedStations: MutableSet<String>)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (position != 0) {
-            (holder as StationViewHolder).bind(Stations.allStations[position - 1])
+            (holder as StationViewHolder).bind(Stations.ALL_STATIONS[position - 1])
         }
     }
 
-    override fun getItemCount() = Stations.allStations.size + 1
+    override fun getItemCount() = Stations.ALL_STATIONS.size + 1
 
     private class DummyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

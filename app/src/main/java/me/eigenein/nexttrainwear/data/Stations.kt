@@ -2,13 +2,13 @@ package me.eigenein.nexttrainwear.data
 
 /**
  * Station catalogue.
- * Auto-generated on 2017-05-28 18:41:16.
+ * Auto-generated on 2017-06-26 00:05:24.
  */
 object Stations {
 
-    val amsterdamCentraal = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137, 4.90027761459351)
-    val allStations = arrayOf(
-        amsterdamCentraal,
+    val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137, 4.90027761459351)
+    val ALL_STATIONS = arrayOf(
+        AMSTERDAM_CENTRAAL,
         Station("HT", "'s-Hertogenbosch", "NL", 51.69048, 5.29362),
         Station("HTO", "'s-Hertogenbosch Oost", "NL", 51.700553894043, 5.3183331489563),
         Station("HDE", "'t Harde", "NL", 52.4091682, 5.893611),
@@ -409,5 +409,6 @@ object Stations {
         Station("ZWD", "Zwijndrecht", "NL", 51.814998626709, 4.64166688919067),
         Station("ZL", "Zwolle", "NL", 52.5047225952148, 6.09194421768188)
     )
-    val stationByCode = allStations.map { Pair(it.code, it) }.toMap()
+    val STATION_BY_CODE = ALL_STATIONS.map { Pair(it.code, it) }.toMap()
+    val STATION_CODE_TO_ID = ALL_STATIONS.mapIndexed { index, (code) -> Pair(code, index.toLong()) }.toMap()
 }

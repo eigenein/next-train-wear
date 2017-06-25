@@ -67,8 +67,8 @@ class TrainsFragment : Fragment() {
                 .map { DetectedStation(true, Station.findNearestStation(it)) }
                 .doOnError { Log.e(LOG_TAG, "Failed to detect station: " + it) }
                 .onErrorReturn {
-                    val lastStation = Stations.stationByCode[Preferences.getLastStationCode(activity)]
-                    DetectedStation(false, lastStation ?: Stations.amsterdamCentraal)
+                    val lastStation = Stations.STATION_BY_CODE[Preferences.getLastStationCode(activity)]
+                    DetectedStation(false, lastStation ?: Stations.AMSTERDAM_CENTRAAL)
                 }
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -116,11 +116,11 @@ class TrainsFragment : Fragment() {
         // Select favorite stations sorted by distance.
         val favoriteStations = stationCodes
             .filter { it != departureStation.code }
-            .mapNotNull { Stations.stationByCode[it] }
+            .mapNotNull { Stations.STATION_BY_CODE[it] }
             .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
 
         // Select some other stations sorted by distance from current.
-        val allStations = Stations.allStations
+        val allStations = Stations.ALL_STATIONS
             .filter { it.code !in stationCodes && it.code != departureStation.code }
             .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
             .take(NUMBER_OF_NEAREST_STATIONS)

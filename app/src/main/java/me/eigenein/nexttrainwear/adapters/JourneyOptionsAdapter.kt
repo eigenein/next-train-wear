@@ -29,6 +29,10 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
 
     private lateinit var route: Route
 
+    init {
+        setHasStableIds(true)
+    }
+
     fun swap(usingLocation: Boolean, route: Route, journeyOptions: Iterable<JourneyOption>) {
         this.usingLocation = usingLocation
         this.route = route
@@ -42,6 +46,10 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_journey_option, parent, false))
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(journeyOptions[position])
     override fun onViewRecycled(holder: ViewHolder) = holder.unbind()
+    override fun getItemId(position: Int): Long =
+        journeyOptions[position].components.getOrNull(0)?.rideNumber?.toLong() ?:
+        // For an unexpected case there is no ride number.
+        journeyOptions[position].plannedDepartureTime.time
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -59,6 +67,8 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
         private val disposable = CompositeDisposable()
 
         fun bind(journeyOption: JourneyOption) {
+            unbind()
+
             gpsStatusImageView.visibility = if (usingLocation) View.GONE else View.VISIBLE
             departureStationTextView.text = route.departureStation.longName
             destinationStationTextView.text = route.destinationStation.longName

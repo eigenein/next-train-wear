@@ -19,19 +19,20 @@ package me.eigenein.nexttrainwear.data
  */
 object Stations {{
 
-    val amsterdamCentraal = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137, 4.90027761459351)
-    val allStations = arrayOf(
-        amsterdamCentraal
+    val AMSTERDAM_CENTRAAL = Station("ASD", "Amsterdam Centraal", "NL", 52.3788871765137, 4.90027761459351)
+    val ALL_STATIONS = arrayOf(
+        AMSTERDAM_CENTRAAL
 '''.strip('\r\n')
 
 FOOTER = '''
     )
-    val stationByCode = allStations.map { Pair(it.code, it) }.toMap()
+    val STATION_BY_CODE = ALL_STATIONS.map { Pair(it.code, it) }.toMap()
+    val STATION_CODE_TO_ID = ALL_STATIONS.mapIndexed { index, (code) -> Pair(code, index.toLong()) }.toMap()
 }'''
 
 
 @click.command()
-@click.option('-n', '--user', required=True, help='NS API username')
+@click.option('-u', '--user', required=True, help='NS API username')
 @click.option('-p', '--password', required=True, prompt=True, hide_input=True, help='NS API password')
 def main(user, password):
     """Update station catalogue from NS API."""

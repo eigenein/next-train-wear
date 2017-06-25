@@ -20,7 +20,7 @@ data class Station(
 
     companion object {
         fun findNearestStation(latitude: Double, longitude: Double) =
-            Stations.allStations.minBy { it.distanceTo(latitude, longitude) }!!
+            Stations.ALL_STATIONS.minBy { it.distanceTo(latitude, longitude) }!!
         fun findNearestStation(location: Location) = findNearestStation(location.latitude, location.longitude)
     }
 }

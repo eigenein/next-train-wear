@@ -22,6 +22,7 @@ import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
 import me.eigenein.nexttrainwear.data.Route
+import me.eigenein.nexttrainwear.data.Stations
 import me.eigenein.nexttrainwear.utils.asFlowable
 import me.eigenein.nexttrainwear.utils.bundle
 import retrofit2.HttpException
@@ -45,6 +46,12 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
     override fun onViewRecycled(holder: ViewHolder) = holder.unbind()
     override fun getItemViewType(position: Int) = VIEW_TYPE
+    override fun getItemId(position: Int): Long =
+        Stations.STATION_CODE_TO_ID[routes[position].destinationStation.code]!!
+
+    init {
+        setHasStableIds(true)
+    }
 
     fun swap(usingLocation: Boolean, routes: Iterable<Route>) {
         this.usingLocation = usingLocation
@@ -68,7 +75,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         private val noTrainsView: View = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
         private val noTrainsTextView: TextView = itemView.findViewById(R.id.fragment_trains_no_trains_text)
 
-
         init {
             journeyOptionsRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
             journeyOptionsRecyclerView.adapter = adapter
@@ -76,6 +82,8 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         fun bind(route: Route) {
+            unbind()
+
             val response = Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key]
             if (response != null) {
                 onResponse(route, response)
