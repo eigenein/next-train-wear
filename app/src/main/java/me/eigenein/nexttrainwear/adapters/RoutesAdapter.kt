@@ -67,13 +67,13 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         private val disposable = CompositeDisposable()
         private val analytics = FirebaseAnalytics.getInstance(itemView.context)
 
-        private val gpsStatusImageView: ImageView = itemView.findViewById(R.id.item_route_gps_status_image_view)
-        private val journeyOptionsRecyclerView: WearableRecyclerView = itemView.findViewById(R.id.item_route_recycler_view)
-        private val progressView: View = itemView.findViewById(R.id.item_route_progress_layout)
-        private val departureTextView: TextView = itemView.findViewById(R.id.item_route_departure_text)
-        private val destinationTextView: TextView = itemView.findViewById(R.id.item_route_destination_text)
-        private val noTrainsView: View = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
-        private val noTrainsTextView: TextView = itemView.findViewById(R.id.fragment_trains_no_trains_text)
+        private val gpsStatusImageView = itemView.findViewById(R.id.item_route_gps_status_image_view) as ImageView
+        private val journeyOptionsRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
+        private val progressView = itemView.findViewById(R.id.item_route_progress_layout)
+        private val departureTextView = itemView.findViewById(R.id.item_route_departure_text) as TextView
+        private val destinationTextView = itemView.findViewById(R.id.item_route_destination_text) as TextView
+        private val noTrainsView = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
+        private val noTrainsTextView = itemView.findViewById(R.id.fragment_trains_no_trains_text) as TextView
 
         init {
             journeyOptionsRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)

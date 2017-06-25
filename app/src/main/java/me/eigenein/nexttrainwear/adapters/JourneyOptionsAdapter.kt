@@ -53,15 +53,15 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val gpsStatusImageView: ImageView = itemView.findViewById(R.id.item_journey_option_gps_status_image_view)
-        private val departureStationTextView: TextView = itemView.findViewById(R.id.item_journey_option_departure_station_text)
-        private val destinationStationTextView: TextView = itemView.findViewById(R.id.item_journey_option_destination_station_text)
-        private val departureTimeTextView: TextView = itemView.findViewById(R.id.item_journey_option_departure_time_text)
-        private val arrivalTimeTextView: TextView = itemView.findViewById(R.id.item_journey_option_arrival_time_text)
-        private val durationTimeTextView: TextView = itemView.findViewById(R.id.item_journey_option_duration_text)
-        private val clockTextView: TextView = itemView.findViewById(R.id.item_journey_option_clock_text)
-        private val platformTitleTextView: View = itemView.findViewById(R.id.item_journey_option_platform_title)
-        private val platformTextView: TextView = itemView.findViewById(R.id.item_journey_option_platform_text)
+        private val gpsStatusImageView = itemView.findViewById(R.id.item_journey_option_gps_status_image_view) as ImageView
+        private val departureStationTextView = itemView.findViewById(R.id.item_journey_option_departure_station_text) as TextView
+        private val destinationStationTextView = itemView.findViewById(R.id.item_journey_option_destination_station_text) as TextView
+        private val departureTimeTextView = itemView.findViewById(R.id.item_journey_option_departure_time_text) as TextView
+        private val arrivalTimeTextView = itemView.findViewById(R.id.item_journey_option_arrival_time_text) as TextView
+        private val durationTimeTextView = itemView.findViewById(R.id.item_journey_option_duration_text) as TextView
+        private val clockTextView = itemView.findViewById(R.id.item_journey_option_clock_text) as TextView
+        private val platformTitleTextView = itemView.findViewById(R.id.item_journey_option_platform_title)
+        private val platformTextView = itemView.findViewById(R.id.item_journey_option_platform_text) as TextView
 
         private val handler = Handler()
         private val disposable = CompositeDisposable()
