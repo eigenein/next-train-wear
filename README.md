@@ -2,6 +2,8 @@
 
 ## Issue Tracker
 
+Next issue number: **43**.
+
 ### Version 1
 
 1. [x] :bangbang: Приложение падает в режиме полета.
@@ -21,6 +23,7 @@
 36. [x] :warning: Добавить маршрут в аналитику события `call_train_planner` и проверить, почему не видны значения параметров `departure_code` и `destination_code`.
 37. [x] :thought_balloon: Проверить, что `onAttached` и `onDetached` работают как ожидается.
 40. [x] :warning: Кэш не должен зависеть от UI.
+42. [ ] :bangbang: Приложение продолжает отправлять запросы в закрытом состоянии.
 
 ## Version 2
 
