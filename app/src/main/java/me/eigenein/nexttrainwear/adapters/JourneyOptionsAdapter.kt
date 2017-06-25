@@ -39,13 +39,9 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_journey_option, parent, false))
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(journeyOptions[position])
-    override fun onViewAttachedToWindow(holder: ViewHolder) = holder.onAttached()
-    override fun onViewDetachedFromWindow(holder: ViewHolder) = holder.onDetached()
+    override fun onViewRecycled(holder: ViewHolder) = holder.unbind()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private val handler = Handler()
-        private val clockRunnable = ClockRunnable()
 
         private val gpsStatusImageView: ImageView = itemView.findViewById(R.id.item_journey_option_gps_status_image_view)
         private val departureStationTextView: TextView = itemView.findViewById(R.id.item_journey_option_departure_station_text)
@@ -57,14 +53,10 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
         private val platformTitleTextView: View = itemView.findViewById(R.id.item_journey_option_platform_title)
         private val platformTextView: TextView = itemView.findViewById(R.id.item_journey_option_platform_text)
 
-        private lateinit var journeyOption: JourneyOption
-
-        fun onAttached() = clockRunnable.run()
-        fun onDetached() = handler.removeCallbacks(clockRunnable)
+        private val handler = Handler()
+        private var clockRunnable: ClockRunnable? = null
 
         fun bind(journeyOption: JourneyOption) {
-            this.journeyOption = journeyOption
-
             gpsStatusImageView.visibility = if (usingLocation) View.GONE else View.VISIBLE
             departureStationTextView.text = route.departureStation.longName
             destinationStationTextView.text = route.destinationStation.longName
@@ -83,11 +75,17 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
             arrivalTimeTextView.text = CLOCK_TIME_FORMAT.format(journeyOption.actualArrivalTime)
             durationTimeTextView.text = journeyOption.actualDuration
             clockTextView.setTextColor(if (journeyOption.status != JourneyOptionStatus.DELAYED) WHITE else RED_ACCENT)
-            updateClockText()
+
+            val clockRunnable = ClockRunnable(journeyOption)
+            clockRunnable.run()
+            this.clockRunnable = clockRunnable
         }
 
-        private fun updateClockText() {
-            clockTextView.text = toClockString(journeyOption.actualDepartureTime - Date())
+        fun unbind() {
+            if (clockRunnable != null) {
+                handler.removeCallbacks(clockRunnable)
+                clockRunnable = null
+            }
         }
 
         private fun toClockString(millis: Long): String {
@@ -101,12 +99,12 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
                 String.format("%s%d:%02d:%02d", sign, hours, minutes, seconds)
         }
 
-        inner class ClockRunnable : Runnable {
+        inner class ClockRunnable(val journeyOption: JourneyOption) : Runnable {
             override fun run() {
                 try {
-                    updateClockText()
+                    clockTextView.text = toClockString(journeyOption.actualDepartureTime - Date())
                 } finally {
-                    handler.postDelayed(clockRunnable, CLOCK_UPDATE_INTERVAL_MILLIS)
+                    handler.postDelayed(this, CLOCK_UPDATE_INTERVAL_MILLIS)
                 }
             }
         }

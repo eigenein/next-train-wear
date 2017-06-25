@@ -26,7 +26,7 @@ fun GoogleApiClient.Builder.asFlowable(): Flowable<GoogleApiClient> {
         client = this
             .addConnectionCallbacks(object : GoogleApiClient.ConnectionCallbacks {
                 override fun onConnected(bundle: Bundle?) {
-                    emitter.onNext(client)
+                    emitter.onNext(client!!)
                     emitter.onComplete()
                 }
                 override fun onConnectionSuspended(i: Int) = Unit

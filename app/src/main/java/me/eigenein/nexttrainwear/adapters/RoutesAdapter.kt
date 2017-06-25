@@ -16,11 +16,10 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import me.eigenein.nexttrainwear.utils.Cache
+import me.eigenein.nexttrainwear.Globals
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
-import me.eigenein.nexttrainwear.api.nsApiInstance
 import me.eigenein.nexttrainwear.data.Route
 import me.eigenein.nexttrainwear.utils.bundle
 import retrofit2.HttpException
@@ -34,7 +33,6 @@ import java.util.concurrent.TimeUnit
 class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
     private val routes = ArrayList<Route>()
-    private val cache = Cache<String, JourneyOptionsResponse>()
 
     private var usingLocation = false
 
@@ -42,8 +40,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false))
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
-    override fun onViewAttachedToWindow(holder: ViewHolder) = holder.onAttached()
-    override fun onViewDetachedFromWindow(holder: ViewHolder) = holder.onDetached()
+    override fun onViewRecycled(holder: ViewHolder) = holder.unbind()
 
     fun swap(usingLocation: Boolean, routes: Iterable<Route>) {
         this.usingLocation = usingLocation
@@ -66,7 +63,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         private val noTrainsView: View = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
         private val noTrainsTextView: TextView = itemView.findViewById(R.id.fragment_trains_no_trains_text)
 
-        private lateinit var route: Route
 
         init {
             journeyOptionsRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
@@ -75,28 +71,24 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         fun bind(route: Route) {
-            this.route = route
-        }
-
-        fun onAttached() {
-            val response = cache[route.key]
+            val response = Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key]
             if (response != null) {
                 Log.d(LOG_TAG, "Cache hit!")
-                onResponse(response)
+                onResponse(route, response)
             } else {
                 Log.d(LOG_TAG, "Cache miss :(")
-                showProgressLayout()
-                planJourney()
+                showProgressLayout(route)
+                planJourney(route)
             }
         }
 
-        fun onDetached() {
+        fun unbind() {
             disposable.clear()
         }
 
-        private fun planJourney() {
+        private fun planJourney(route: Route) {
             disposable.add(
-                nsApiInstance.trainPlanner(route.departureStation.code, route.destinationStation.code)
+                Globals.NS_API.trainPlanner(route.departureStation.code, route.destinationStation.code)
                     .retryWhen { it.flatMap {
                         Log.w(LOG_TAG, "Train planner call failed", it)
                         if (it is HttpException || it is SocketTimeoutException || it is UnknownHostException)
@@ -106,7 +98,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                     } }
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { onResponse(it) }
+                    .subscribe { onResponse(route, it) }
             )
             analytics.logEvent("call_train_planner", bundle {
                 putString("departure_code", route.departureStation.code)
@@ -114,8 +106,8 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             })
         }
 
-        private fun onResponse(response: JourneyOptionsResponse) {
-            cache.put(route.key, response, RESPONSE_TTL_MILLIS)
+        private fun onResponse(route: Route, response: JourneyOptionsResponse) {
+            Globals.JOURNEY_OPTIONS_RESPONSE_CACHE.put(route.key, response, RESPONSE_TTL_MILLIS)
 
             // Exclude cancelled options.
             val journeyOptions = response.options.filter { it.status !in JourneyOptionStatus.HIDDEN }
@@ -125,6 +117,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             progressView.visibility = View.GONE
             if (journeyOptions.isNotEmpty()) {
                 adapter.swap(usingLocation, route, journeyOptions)
+                noTrainsView.visibility = View.GONE
                 journeyOptionsRecyclerView.visibility = View.VISIBLE
             } else {
                 @Suppress("DEPRECATION")
@@ -132,11 +125,12 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                     R.string.fragment_trains_no_trains,
                     route.destinationStation.longName
                 ))
+                journeyOptionsRecyclerView.visibility = View.GONE
                 noTrainsView.visibility = View.VISIBLE
             }
         }
 
-        private fun showProgressLayout() {
+        private fun showProgressLayout(route: Route) {
             journeyOptionsRecyclerView.visibility = View.GONE
             noTrainsView.visibility = View.GONE
 
