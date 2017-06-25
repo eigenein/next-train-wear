@@ -8,7 +8,6 @@
 2. [x] :thought_balloon: Кэшировать ответы API.
 3. [x] :thought_balloon: Обратный отсчет.
 5. [x] :thought_balloon: Логгировать запросы к API в Google Analytics.
-6. [ ] :thought_balloon: Голландский язык.
 10. [x] :thought_balloon: Отображать отсутствие рейсов.
 19. [x] :thought_balloon: Затенять экран в ambient mode.
 23. [ ] :thought_balloon: Обновление статуса рейса.
@@ -25,6 +24,7 @@
 ### Future Versions
 
 4. [ ] :thought_balloon: Экран настроек.
+6. [ ] :thought_balloon: Голландский язык.
 7. [ ] :thought_balloon: Уведомлять про изменение или отмену рейса.
 8. [ ] :thought_balloon: Выделять изменение платформы.
 9. [ ] :thought_balloon: Показывать отмеченные станции вверху списка.
