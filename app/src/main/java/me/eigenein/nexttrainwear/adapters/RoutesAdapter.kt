@@ -118,7 +118,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         private fun onResponse(route: Route, response: JourneyOptionsResponse) {
-            Globals.JOURNEY_OPTIONS_RESPONSE_CACHE.put(route.key, response, RESPONSE_TTL_MILLIS)
+            Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key] = response
 
             // Exclude cancelled options.
             val journeyOptions = response.options.filter { it.status !in JourneyOptionStatus.HIDDEN }
@@ -157,12 +157,11 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     }
 
     companion object {
-        public const val VIEW_TYPE = 0
+        const val VIEW_TYPE = 0
 
         private val LOG_TAG = RoutesAdapter::class.java.simpleName
 
         private const val RETRY_INTERVAL_SECONDS = 5L
-        private const val RESPONSE_TTL_MILLIS = 60000L
         private const val REFRESH_INTERVAL_MILLIS = 60000L
     }
 }
