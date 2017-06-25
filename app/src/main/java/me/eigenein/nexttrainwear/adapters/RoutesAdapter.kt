@@ -27,6 +27,7 @@ import me.eigenein.nexttrainwear.utils.bundle
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -121,17 +122,21 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key] = response
 
             // Exclude cancelled options.
-            val journeyOptions = response.options.filter { it.status !in JourneyOptionStatus.HIDDEN }
-            // TODO: sort by actual departure time.
-            // TODO: find the soonest option.
+            val journeyOptions = response.options
+                .filter { it.status !in JourneyOptionStatus.HIDDEN }
+                .sortedBy { it.actualDepartureTime }
             Log.d(LOG_TAG, "Journey options: " + journeyOptions.size)
 
             // Display journey options.
             progressView.visibility = View.GONE
             if (journeyOptions.isNotEmpty()) {
+                // Find out the next journey option.
+                val now = Date()
+                val nextOptionIndex = journeyOptions.indexOfFirst { it.actualDepartureTime > now }
+
                 adapter.swap(usingLocation, route, journeyOptions)
-                // TODO: scroll to the soonest option.
                 noTrainsView.visibility = View.GONE
+                journeyOptionsRecyclerView.scrollToPosition(nextOptionIndex)
                 journeyOptionsRecyclerView.visibility = View.VISIBLE
             } else {
                 @Suppress("DEPRECATION")
