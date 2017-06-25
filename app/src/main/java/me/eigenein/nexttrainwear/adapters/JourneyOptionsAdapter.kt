@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import io.reactivex.disposables.CompositeDisposable
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOption
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.data.Route
+import me.eigenein.nexttrainwear.utils.asFlowable
 import me.eigenein.nexttrainwear.utils.minus
 import java.text.SimpleDateFormat
 import java.util.*
@@ -54,7 +56,7 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
         private val platformTextView: TextView = itemView.findViewById(R.id.item_journey_option_platform_text)
 
         private val handler = Handler()
-        private var clockRunnable: ClockRunnable? = null
+        private val disposable = CompositeDisposable()
 
         fun bind(journeyOption: JourneyOption) {
             gpsStatusImageView.visibility = if (usingLocation) View.GONE else View.VISIBLE
@@ -76,16 +78,13 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
             durationTimeTextView.text = journeyOption.actualDuration
             clockTextView.setTextColor(if (journeyOption.status != JourneyOptionStatus.DELAYED) WHITE else RED_ACCENT)
 
-            val clockRunnable = ClockRunnable(journeyOption)
-            clockRunnable.run()
-            this.clockRunnable = clockRunnable
+            disposable.add(handler.asFlowable(CLOCK_UPDATE_INTERVAL_MILLIS).subscribe {
+                clockTextView.text = toClockString(journeyOption.actualDepartureTime - Date())
+            })
         }
 
         fun unbind() {
-            if (clockRunnable != null) {
-                handler.removeCallbacks(clockRunnable)
-                clockRunnable = null
-            }
+            disposable.clear()
         }
 
         private fun toClockString(millis: Long): String {
@@ -97,16 +96,6 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
                 String.format("%s%d:%02d", sign, minutes, seconds)
             else
                 String.format("%s%d:%02d:%02d", sign, hours, minutes, seconds)
-        }
-
-        inner class ClockRunnable(val journeyOption: JourneyOption) : Runnable {
-            override fun run() {
-                try {
-                    clockTextView.text = toClockString(journeyOption.actualDepartureTime - Date())
-                } finally {
-                    handler.postDelayed(this, CLOCK_UPDATE_INTERVAL_MILLIS)
-                }
-            }
         }
     }
 

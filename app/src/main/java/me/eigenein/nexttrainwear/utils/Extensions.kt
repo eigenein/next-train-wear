@@ -2,6 +2,7 @@ package me.eigenein.nexttrainwear.utils
 
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -58,6 +59,20 @@ fun LocationRequest.asFlowable(googleApiClient: GoogleApiClient): Flowable<Locat
             }
         emitter.setCancellable { LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, listener) }
     }, BackpressureStrategy.BUFFER)
+}
+
+fun Handler.asFlowable(delayMillis: Long): Flowable<Unit> {
+    return Flowable.create({
+        val runnable = object : Runnable {
+            override fun run() = try {
+                it.onNext(Unit)
+            } finally {
+                this@asFlowable.postDelayed(this, delayMillis)
+            }
+        }
+        it.setCancellable { this.removeCallbacks(runnable) }
+        runnable.run()
+    }, BackpressureStrategy.DROP)
 }
 
 /**
