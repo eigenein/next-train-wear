@@ -13,13 +13,13 @@ class NavigationDrawerAdapter(
 
     private val texts = arrayOf(
         context.getString(R.string.navigation_drawer_trains),
-        context.getString(R.string.navigation_drawer_stations),
-        context.getString(R.string.navigation_drawer_settings)
+        context.getString(R.string.navigation_drawer_stations)
+        // context.getString(R.string.navigation_drawer_settings)
     )
     private val icons = arrayOf(
         context.getDrawable(R.drawable.ic_train_black_24dp),
-        context.getDrawable(R.drawable.ic_list_black_24dp),
-        context.getDrawable(R.drawable.ic_settings_black_24dp)
+        context.getDrawable(R.drawable.ic_list_black_24dp)
+        // context.getDrawable(R.drawable.ic_settings_black_24dp)
     )
 
     init {
