@@ -124,12 +124,15 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
             // Exclude cancelled options.
             val journeyOptions = response.options.filter { it.status !in JourneyOptionStatus.HIDDEN }
-            Log.d(LOG_TAG, "Possible options: " + journeyOptions.size)
+            // TODO: sort by actual departure time.
+            // TODO: find the soonest option.
+            Log.d(LOG_TAG, "Journey options: " + journeyOptions.size)
 
             // Display journey options.
             progressView.visibility = View.GONE
             if (journeyOptions.isNotEmpty()) {
                 adapter.swap(usingLocation, route, journeyOptions)
+                // TODO: scroll to the soonest option.
                 noTrainsView.visibility = View.GONE
                 journeyOptionsRecyclerView.visibility = View.VISIBLE
             } else {
