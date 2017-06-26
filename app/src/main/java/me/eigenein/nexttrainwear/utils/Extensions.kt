@@ -3,6 +3,8 @@ package me.eigenein.nexttrainwear.utils
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -83,6 +85,29 @@ fun Handler.asFlowable(delayMillis: Long, emitInstantly: Boolean): Flowable<Unit
             runnable.scheduleNext()
         }
     }, BackpressureStrategy.DROP)
+}
+
+fun <TViewHolder : RecyclerView.ViewHolder> RecyclerView.findFirstVisibleViewHolder() : TViewHolder? {
+    val position = (this.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+    if (position != RecyclerView.NO_POSITION) {
+        @Suppress("UNCHECKED_CAST")
+        return this.findViewHolderForAdapterPosition(position) as TViewHolder
+    } else {
+        return null
+    }
+}
+
+fun <TViewHolder : RecyclerView.ViewHolder> RecyclerView.findVisibleViewHolders() : List<TViewHolder> {
+    val firstPosition = (this.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+    val lastPosition = (this.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+    if (firstPosition != RecyclerView.NO_POSITION && lastPosition != RecyclerView.NO_POSITION) {
+        return (firstPosition..lastPosition).map {
+            @Suppress("UNCHECKED_CAST")
+            this.findViewHolderForAdapterPosition(it) as TViewHolder
+        }
+    } else {
+        return emptyList()
+    }
 }
 
 /**

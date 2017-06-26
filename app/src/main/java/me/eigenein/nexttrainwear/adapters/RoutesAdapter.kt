@@ -1,6 +1,5 @@
 package me.eigenein.nexttrainwear.adapters
 
-import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
@@ -23,8 +22,9 @@ import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
 import me.eigenein.nexttrainwear.data.Route
 import me.eigenein.nexttrainwear.data.Stations
-import me.eigenein.nexttrainwear.utils.asFlowable
 import me.eigenein.nexttrainwear.utils.bundle
+import me.eigenein.nexttrainwear.utils.findFirstVisibleViewHolder
+import me.eigenein.nexttrainwear.utils.findVisibleViewHolders
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -40,18 +40,23 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
     private var usingLocation = false
 
-    override fun getItemCount(): Int = routes.size
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false))
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
-    override fun onViewRecycled(holder: ViewHolder) = holder.dispose()
-    override fun getItemViewType(position: Int) = VIEW_TYPE
-    override fun getItemId(position: Int): Long =
-        Stations.STATION_CODE_TO_ID[routes[position].destinationStation.code]!!
-
     init {
         setHasStableIds(true)
     }
+
+    override fun getItemCount(): Int = routes.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false))
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
+
+    override fun onViewRecycled(holder: ViewHolder) = holder.dispose()
+
+    override fun getItemViewType(position: Int) = VIEW_TYPE
+
+    override fun getItemId(position: Int): Long =
+        Stations.STATION_CODE_TO_ID[routes[position].destinationStation.code]!!
 
     fun swap(usingLocation: Boolean, routes: Iterable<Route>) {
         this.usingLocation = usingLocation
@@ -63,7 +68,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val adapter = JourneyOptionsAdapter()
-        private val handler = Handler()
         private val disposable = CompositeDisposable()
         private val analytics = FirebaseAnalytics.getInstance(itemView.context)
 
@@ -75,49 +79,45 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         private val noTrainsView = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
         private val noTrainsTextView = itemView.findViewById(R.id.fragment_trains_no_trains_text) as TextView
 
+        private lateinit var route: Route
+
         init {
             journeyOptionsRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
             journeyOptionsRecyclerView.adapter = adapter
             LinearSnapHelper().attachToRecyclerView(journeyOptionsRecyclerView)
         }
 
+        fun findVisibleJourneyOptionViewHolders() : List<JourneyOptionsAdapter.ViewHolder> =
+            journeyOptionsRecyclerView.findVisibleViewHolders<JourneyOptionsAdapter.ViewHolder>()
+
         fun bind(route: Route) {
             dispose()
+            this.route = route
 
             val response = Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key]
             if (response != null) {
-                onResponse(route, response)
-                scheduleTrainPlanner(route, false)
+                onResponse(response)
             } else {
-                showProgressLayout(route)
-                scheduleTrainPlanner(route, true)
+                showProgressLayout()
+                refreshJourneyOptions()
             }
         }
 
-        fun dispose() {
-            disposable.clear()
-        }
-
-        private fun scheduleTrainPlanner(route: Route, instantly: Boolean) {
+        fun refreshJourneyOptions() {
+            Log.i(LOG_TAG, "Planning journey: " + route.key)
             disposable.add(
-                handler
-                    .asFlowable(REFRESH_INTERVAL_MILLIS, instantly)
-                    .flatMap {
-                        Log.i(LOG_TAG, "Planning journey: " + route.key)
-                        Globals.NS_API
-                            .trainPlanner(route.departureStation.code, route.destinationStation.code)
-                            .retryWhen { it.flatMap {
-                                Log.w(LOG_TAG, "Train planner call failed", it)
-                                if (it is HttpException || it is SocketTimeoutException || it is UnknownHostException)
-                                    Flowable.timer(RETRY_INTERVAL_SECONDS, TimeUnit.SECONDS)
-                                else
-                                    Flowable.error(it)
-                            } }
-                            .subscribeOn(Schedulers.newThread())
-                    }
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                Globals.NS_API
+                    .trainPlanner(route.departureStation.code, route.destinationStation.code)
+                    .retryWhen { it.flatMap {
+                        Log.w(LOG_TAG, "Train planner call failed", it)
+                        if (it is HttpException || it is SocketTimeoutException || it is UnknownHostException)
+                            Flowable.timer(RETRY_INTERVAL_SECONDS, TimeUnit.SECONDS)
+                        else
+                            Flowable.error(it)
+                    } }
+                    .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { onResponse(route, it) }
+                    .subscribe { onResponse(it) }
             )
             analytics.logEvent("call_train_planner", bundle {
                 putString("departure_name", route.departureStation.longName)
@@ -126,7 +126,11 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             })
         }
 
-        private fun onResponse(route: Route, response: JourneyOptionsResponse) {
+        fun dispose() {
+            disposable.clear()
+        }
+
+        private fun onResponse(response: JourneyOptionsResponse) {
             Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key] = response
 
             // Exclude cancelled options.
@@ -158,7 +162,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             }
         }
 
-        private fun showProgressLayout(route: Route) {
+        private fun showProgressLayout() {
             journeyOptionsRecyclerView.visibility = View.GONE
             noTrainsView.visibility = View.GONE
 
@@ -175,6 +179,5 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         private val LOG_TAG = RoutesAdapter::class.java.simpleName
 
         private const val RETRY_INTERVAL_SECONDS = 5L
-        private const val REFRESH_INTERVAL_MILLIS = 60000L
     }
 }

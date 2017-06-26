@@ -2,8 +2,10 @@ package me.eigenein.nexttrainwear.fragments
 
 import android.app.Fragment
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
+import android.support.v7.widget.RecyclerView
 import android.support.wearable.view.WearableRecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,15 +23,17 @@ import me.eigenein.nexttrainwear.data.Station
 import me.eigenein.nexttrainwear.data.Stations
 import me.eigenein.nexttrainwear.utils.Preferences
 import me.eigenein.nexttrainwear.utils.asFlowable
+import me.eigenein.nexttrainwear.utils.findFirstVisibleViewHolder
 import java.util.concurrent.TimeUnit
 
 class TrainsFragment : Fragment() {
 
+    private val handler = Handler()
     private val disposable = CompositeDisposable()
     private val adapter = RoutesAdapter()
 
     private lateinit var progressLayout: View
-    private lateinit var destinationsRecyclerView: WearableRecyclerView
+    private lateinit var routesRecyclerView: WearableRecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,11 +44,12 @@ class TrainsFragment : Fragment() {
 
         progressLayout = view.findViewById(R.id.fragment_trains_progress_layout)
 
-        destinationsRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView
-        destinationsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        destinationsRecyclerView.adapter = adapter
-        destinationsRecyclerView.recycledViewPool.setMaxRecycledViews(RoutesAdapter.VIEW_TYPE, MAX_RECYCLED_VIEW_NUMBER)
-        LinearSnapHelper().attachToRecyclerView(destinationsRecyclerView)
+        routesRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView
+        routesRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        routesRecyclerView.adapter = adapter
+        routesRecyclerView.recycledViewPool.setMaxRecycledViews(RoutesAdapter.VIEW_TYPE, MAX_RECYCLED_VIEW_NUMBER)
+        routesRecyclerView.addOnScrollListener(OnScrollListener())
+        LinearSnapHelper().attachToRecyclerView(routesRecyclerView)
 
         return view
     }
@@ -52,6 +57,7 @@ class TrainsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        // Obtain current location and build possible routes list.
         disposable.add(
             GoogleApiClient.Builder(activity)
                 .addApi(LocationServices.API)
@@ -73,6 +79,17 @@ class TrainsFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { onStationDetected(it) }
         )
+
+        // Refresh countdown.
+        disposable.add(
+            handler.asFlowable(COUNTDOWN_UPDATE_INTERVAL_MILLIS, false).subscribe {
+                routesRecyclerView.findFirstVisibleViewHolder<RoutesAdapter.ViewHolder>()
+                    ?.findVisibleJourneyOptionViewHolders()
+                    ?.forEach { it.refreshCountDown() }
+            }
+        )
+        // Refresh journey options.
+        // routesRecyclerView.findFirstVisibleViewHolder<RoutesAdapter.ViewHolder>()?.refreshJourneyOptions()
     }
 
     override fun onPause() {
@@ -96,7 +113,7 @@ class TrainsFragment : Fragment() {
 
         // Show routes view.
         progressLayout.visibility = View.GONE
-        destinationsRecyclerView.visibility = View.VISIBLE
+        routesRecyclerView.visibility = View.VISIBLE
         adapter.swap(
             detectedStation.usingLocation,
             destinations.map { detectedStation.station.routeTo(it) }
@@ -124,11 +141,18 @@ class TrainsFragment : Fragment() {
         return favoriteStations + allStations
     }
 
+    inner class OnScrollListener : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+        }
+    }
+
     companion object {
 
-        private const val NUMBER_OF_NEAREST_STATIONS = 10 // TODO: make configurable
+        private const val NUMBER_OF_NEAREST_STATIONS = 10
         private const val LOCATION_TIMEOUT_SECONDS = 5L
         private const val MAX_RECYCLED_VIEW_NUMBER = 0
+        private const val COUNTDOWN_UPDATE_INTERVAL_MILLIS = 500L
 
         private val LOG_TAG = TrainsFragment::class.java.simpleName
     }
