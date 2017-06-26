@@ -78,6 +78,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         private val noTrainsView = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
         private val noTrainsTextView = itemView.findViewById(R.id.fragment_trains_no_trains_text) as TextView
 
+        private var shouldScrollToNextOption = true
         private lateinit var route: Route
 
         init {
@@ -91,7 +92,9 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
         fun bind(route: Route) {
             dispose()
+
             this.route = route
+            shouldScrollToNextOption = true
 
             val response = Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key]
             if (response != null) {
@@ -141,14 +144,16 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             // Display journey options.
             progressView.visibility = View.GONE
             if (journeyOptions.isNotEmpty()) {
-                // Find out the next journey option.
-                val now = Date()
-                val nextOptionIndex = journeyOptions.indexOfFirst { it.actualDepartureTime > now }
-
                 adapter.swap(usingLocation, route, journeyOptions)
                 noTrainsView.visibility = View.GONE
-                journeyOptionsRecyclerView.scrollToPosition(nextOptionIndex)
                 journeyOptionsRecyclerView.visibility = View.VISIBLE
+
+                // Scroll to the next available option if needed.
+                if (shouldScrollToNextOption) {
+                    shouldScrollToNextOption = false
+                    val index = journeyOptions.indexOfFirst { it.actualDepartureTime > Date() }
+                    journeyOptionsRecyclerView.scrollToPosition(index)
+                }
             } else {
                 @Suppress("DEPRECATION")
                 noTrainsTextView.text = Html.fromHtml(itemView.resources.getString(

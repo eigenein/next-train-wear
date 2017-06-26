@@ -47,7 +47,6 @@ class TrainsFragment : Fragment() {
         routesRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView
         routesRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         routesRecyclerView.adapter = adapter
-        routesRecyclerView.recycledViewPool.setMaxRecycledViews(RoutesAdapter.VIEW_TYPE, MAX_RECYCLED_VIEW_NUMBER)
         routesRecyclerView.addOnScrollListener(OnScrollListener())
         LinearSnapHelper().attachToRecyclerView(routesRecyclerView)
 
@@ -158,9 +157,8 @@ class TrainsFragment : Fragment() {
 
         private const val NUMBER_OF_NEAREST_STATIONS = 10
         private const val LOCATION_TIMEOUT_SECONDS = 5L
-        private const val MAX_RECYCLED_VIEW_NUMBER = 0
         private const val COUNTDOWN_UPDATE_INTERVAL_MILLIS = 500L
-        private const val JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS = 60000L
+        private const val JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS = 10000L
 
         private val LOG_TAG = TrainsFragment::class.java.simpleName
     }
