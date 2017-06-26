@@ -23,7 +23,6 @@ import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
 import me.eigenein.nexttrainwear.data.Route
 import me.eigenein.nexttrainwear.data.Stations
 import me.eigenein.nexttrainwear.utils.bundle
-import me.eigenein.nexttrainwear.utils.findFirstVisibleViewHolder
 import me.eigenein.nexttrainwear.utils.findVisibleViewHolders
 import retrofit2.HttpException
 import java.net.SocketTimeoutException

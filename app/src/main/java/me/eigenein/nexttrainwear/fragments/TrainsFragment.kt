@@ -82,14 +82,21 @@ class TrainsFragment : Fragment() {
 
         // Refresh countdown.
         disposable.add(
-            handler.asFlowable(COUNTDOWN_UPDATE_INTERVAL_MILLIS, false).subscribe {
-                routesRecyclerView.findFirstVisibleViewHolder<RoutesAdapter.ViewHolder>()
+            handler.asFlowable(COUNTDOWN_UPDATE_INTERVAL_MILLIS).subscribe {
+                routesRecyclerView
+                    .findFirstVisibleViewHolder<RoutesAdapter.ViewHolder>()
                     ?.findVisibleJourneyOptionViewHolders()
                     ?.forEach { it.refreshCountDown() }
             }
         )
+
         // Refresh journey options.
-        // routesRecyclerView.findFirstVisibleViewHolder<RoutesAdapter.ViewHolder>()?.refreshJourneyOptions()
+        disposable.add(
+            handler.asFlowable(JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS).subscribe {
+                // FIXME: this can lead to a pair of concurrent requests.
+                routesRecyclerView.findFirstVisibleViewHolder<RoutesAdapter.ViewHolder>()?.refreshJourneyOptions()
+            }
+        )
     }
 
     override fun onPause() {
@@ -153,6 +160,7 @@ class TrainsFragment : Fragment() {
         private const val LOCATION_TIMEOUT_SECONDS = 5L
         private const val MAX_RECYCLED_VIEW_NUMBER = 0
         private const val COUNTDOWN_UPDATE_INTERVAL_MILLIS = 500L
+        private const val JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS = 60000L
 
         private val LOG_TAG = TrainsFragment::class.java.simpleName
     }

@@ -63,7 +63,7 @@ fun LocationRequest.asFlowable(googleApiClient: GoogleApiClient): Flowable<Locat
     }, BackpressureStrategy.BUFFER)
 }
 
-fun Handler.asFlowable(delayMillis: Long, emitInstantly: Boolean): Flowable<Unit> {
+fun Handler.asFlowable(delayMillis: Long): Flowable<Unit> {
     return Flowable.create({
         val runnable = object : Runnable {
             override fun run() {
@@ -78,12 +78,7 @@ fun Handler.asFlowable(delayMillis: Long, emitInstantly: Boolean): Flowable<Unit
         }
 
         it.setCancellable { this.removeCallbacks(runnable) }
-
-        if (emitInstantly) {
-            runnable.run()
-        } else {
-            runnable.scheduleNext()
-        }
+        runnable.scheduleNext()
     }, BackpressureStrategy.DROP)
 }
 
