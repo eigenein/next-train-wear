@@ -17,7 +17,6 @@ import io.reactivex.disposables.CompositeDisposable
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.adapters.RoutesAdapter
 import me.eigenein.nexttrainwear.data.DetectedStation
-import me.eigenein.nexttrainwear.data.Route
 import me.eigenein.nexttrainwear.data.Station
 import me.eigenein.nexttrainwear.data.Stations
 import me.eigenein.nexttrainwear.utils.Preferences
@@ -79,10 +78,6 @@ class TrainsFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         disposable.clear()
-        // Important: remove all items so that all delayed callbacks are removed.
-        // Otherwise onViewRecycled is not called and the app continues to send the requests.
-        Log.i(LOG_TAG, "On pause")
-        adapter.swap(false, listOf<Route>())
     }
 
     override fun onDetach() {

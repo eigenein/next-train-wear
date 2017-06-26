@@ -44,7 +44,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false))
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(routes[position])
-    override fun onViewDetachedFromWindow(holder: ViewHolder) = holder.dispose()
+    override fun onViewRecycled(holder: ViewHolder) = holder.dispose()
     override fun getItemViewType(position: Int) = VIEW_TYPE
     override fun getItemId(position: Int): Long =
         Stations.STATION_CODE_TO_ID[routes[position].destinationStation.code]!!

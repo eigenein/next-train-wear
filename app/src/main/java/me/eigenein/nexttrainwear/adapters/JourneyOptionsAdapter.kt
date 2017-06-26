@@ -45,7 +45,7 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_journey_option, parent, false))
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(journeyOptions[position])
-    override fun onViewDetachedFromWindow(holder: ViewHolder) = holder.dispose()
+    override fun onViewRecycled(holder: ViewHolder) = holder.dispose()
     override fun getItemId(position: Int): Long =
         journeyOptions[position].components.getOrNull(0)?.rideNumber?.toLong() ?:
         // For an unexpected case there is no ride number.
