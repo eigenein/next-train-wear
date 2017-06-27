@@ -50,13 +50,13 @@ class MainActivity :
     override fun onEnterAmbient(ambientDetails: Bundle?) {
         super.onEnterAmbient(ambientDetails)
         window.decorView.setBackgroundColor(Color.BLACK)
-        wakeLock.acquire()
+        wakeLock.acquire() // FIXME: better ideas?
     }
 
     override fun onExitAmbient() {
         super.onExitAmbient()
         window.decorView.setBackgroundResource(R.color.lighter_background)
-        wakeLock.release()
+        wakeLock.release() // FIXME: better ideas?
     }
 
     override fun onItemSelected(index: Int) {
