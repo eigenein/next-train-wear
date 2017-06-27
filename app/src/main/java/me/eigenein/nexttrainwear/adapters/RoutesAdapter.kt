@@ -23,7 +23,6 @@ import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
 import me.eigenein.nexttrainwear.data.Route
 import me.eigenein.nexttrainwear.data.Stations
 import me.eigenein.nexttrainwear.utils.bundle
-import me.eigenein.nexttrainwear.utils.findVisibleViewHolders
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -66,12 +65,14 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        val journeyOptionsRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
+
         private val adapter = JourneyOptionsAdapter()
         private val disposable = CompositeDisposable()
         private val analytics = FirebaseAnalytics.getInstance(itemView.context)
 
         private val gpsStatusImageView = itemView.findViewById(R.id.item_route_gps_status_image_view) as ImageView
-        private val journeyOptionsRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
+
         private val progressView = itemView.findViewById(R.id.item_route_progress_layout)
         private val departureTextView = itemView.findViewById(R.id.item_route_departure_text) as TextView
         private val destinationTextView = itemView.findViewById(R.id.item_route_destination_text) as TextView
@@ -86,9 +87,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             journeyOptionsRecyclerView.adapter = adapter
             LinearSnapHelper().attachToRecyclerView(journeyOptionsRecyclerView)
         }
-
-        fun findVisibleJourneyOptionViewHolders() : List<JourneyOptionsAdapter.ViewHolder> =
-            journeyOptionsRecyclerView.findVisibleViewHolders<JourneyOptionsAdapter.ViewHolder>()
 
         fun bind(route: Route) {
             dispose()

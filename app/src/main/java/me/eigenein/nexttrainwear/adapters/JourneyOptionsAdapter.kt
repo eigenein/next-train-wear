@@ -37,7 +37,9 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(journeyOptions[position])
 
-    override fun onViewAttachedToWindow(holder: ViewHolder) = holder.refreshCountDown()
+    override fun onViewAttachedToWindow(holder: ViewHolder) {
+        holder.refreshCountDown()
+    }
 
     override fun getItemId(position: Int): Long =
         journeyOptions[position].components.getOrNull(0)?.rideNumber?.toLong() ?:
@@ -89,8 +91,10 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
             countdownTextView.setTextColor(if (journeyOption.status != JourneyOptionStatus.DELAYED) WHITE else RED_ACCENT)
         }
 
-        fun refreshCountDown() {
-            countdownTextView.text = toClockString(journeyOption.actualDepartureTime - Date())
+        fun refreshCountDown(): Long {
+            val millis = journeyOption.actualDepartureTime - Date()
+            countdownTextView.text = toClockString(millis)
+            return millis
         }
 
         private fun toClockString(millis: Long): String {

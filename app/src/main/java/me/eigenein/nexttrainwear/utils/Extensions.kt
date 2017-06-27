@@ -1,8 +1,10 @@
 package me.eigenein.nexttrainwear.utils
 
+import android.content.Context
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
+import android.os.Vibrator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.google.android.gms.common.api.GoogleApiClient
@@ -104,6 +106,10 @@ fun <TViewHolder : RecyclerView.ViewHolder> RecyclerView.findVisibleViewHolders(
         return emptyList()
     }
 }
+
+fun RecyclerView.isScrollIdle() = this.scrollState == RecyclerView.SCROLL_STATE_IDLE
+
+fun Context.getVibrator() = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
 /**
  * Bundle builder.

@@ -17,13 +17,12 @@ import com.google.android.gms.location.LocationServices
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import me.eigenein.nexttrainwear.R
+import me.eigenein.nexttrainwear.adapters.JourneyOptionsAdapter
 import me.eigenein.nexttrainwear.adapters.RoutesAdapter
 import me.eigenein.nexttrainwear.data.DetectedStation
 import me.eigenein.nexttrainwear.data.Station
 import me.eigenein.nexttrainwear.data.Stations
-import me.eigenein.nexttrainwear.utils.Preferences
-import me.eigenein.nexttrainwear.utils.asFlowable
-import me.eigenein.nexttrainwear.utils.findFirstVisibleViewHolder
+import me.eigenein.nexttrainwear.utils.*
 import java.util.concurrent.TimeUnit
 
 class TrainsFragment : Fragment() {
@@ -56,7 +55,7 @@ class TrainsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        // Obtain current location and build possible routes list.
+        // Obtain current location and build possible route list.
         disposable.add(
             GoogleApiClient.Builder(activity)
                 .addApi(LocationServices.API)
@@ -79,13 +78,21 @@ class TrainsFragment : Fragment() {
                 .subscribe { onStationDetected(it) }
         )
 
-        // Refresh countdown.
+        // Refresh countdown and auto-scroll journey options when train departs.
         disposable.add(
             handler.asFlowable(COUNTDOWN_UPDATE_INTERVAL_MILLIS).subscribe {
-                routesRecyclerView
+                val journeyOptionsRecyclerView = routesRecyclerView
                     .findFirstVisibleViewHolder<RoutesAdapter.ViewHolder>()
-                    ?.findVisibleJourneyOptionViewHolders()
-                    ?.forEach { it.refreshCountDown() }
+                    ?.journeyOptionsRecyclerView
+                journeyOptionsRecyclerView
+                    ?.findVisibleViewHolders<JourneyOptionsAdapter.ViewHolder>()
+                    ?.forEach {
+                        if (it.refreshCountDown() in AUTO_SCROLL_THRESHOLD_MILLIS..0 && journeyOptionsRecyclerView.isScrollIdle()) {
+                            // Departed. Scroll to the next one.
+                            journeyOptionsRecyclerView.scrollToPosition(it.adapterPosition + 1)
+                            activity.getVibrator().vibrate(AUTO_SCROLL_VIBRATE_PATTERN, -1)
+                        }
+                    }
             }
         )
 
@@ -155,11 +162,13 @@ class TrainsFragment : Fragment() {
 
     companion object {
 
-        private const val NUMBER_OF_NEAREST_STATIONS = 10
-        private const val LOCATION_TIMEOUT_SECONDS = 5L
+        private const val NUMBER_OF_NEAREST_STATIONS = 5 // FIXME: better ideas?
+        private const val LOCATION_TIMEOUT_SECONDS = 5L // FIXME: exponetial backoff.
         private const val COUNTDOWN_UPDATE_INTERVAL_MILLIS = 500L
-        private const val JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS = 10000L
+        private const val JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS = 60000L
+        private const val AUTO_SCROLL_THRESHOLD_MILLIS = -1500L // FIXME: better ideas?
 
+        private val AUTO_SCROLL_VIBRATE_PATTERN = longArrayOf(0L, 200L, 200L, 200L)
         private val LOG_TAG = TrainsFragment::class.java.simpleName
     }
 }
