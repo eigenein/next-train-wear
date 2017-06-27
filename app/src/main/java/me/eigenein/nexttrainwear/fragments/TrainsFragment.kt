@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
-import android.support.v7.widget.RecyclerView
 import android.support.wearable.view.WearableRecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -89,7 +88,7 @@ class TrainsFragment : Fragment() {
                     ?.forEach {
                         if (it.refreshCountDown() in AUTO_SCROLL_THRESHOLD_MILLIS..0 && journeyOptionsRecyclerView.isScrollIdle()) {
                             // Departed. Scroll to the next one.
-                            journeyOptionsRecyclerView.scrollToPosition(it.adapterPosition + 1)
+                            journeyOptionsRecyclerView.smoothScrollToPosition(it.adapterPosition + 1)
                             activity.getVibrator().vibrate(AUTO_SCROLL_VIBRATE_PATTERN, -1)
                         }
                     }
