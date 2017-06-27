@@ -1,6 +1,7 @@
 package me.eigenein.nexttrainwear
 
 import me.eigenein.nexttrainwear.api.*
+import me.eigenein.nexttrainwear.utils.Cache
 import me.eigenein.nexttrainwear.utils.registryMatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,7 +28,7 @@ class Globals {
             .build()
             .create(NsApiService::class.java)!!
 
-        val JOURNEY_OPTIONS_RESPONSE_CACHE = hashMapOf<String, JourneyOptionsResponse>()
+        val JOURNEY_OPTIONS_RESPONSE_CACHE = Cache<String, JourneyOptionsResponse>(30 * 60 * 1000)
     }
 }
 

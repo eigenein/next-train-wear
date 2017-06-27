@@ -111,7 +111,10 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                     } }
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { onResponse(it) }
+                    .subscribe {
+                        Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key] = it
+                        onResponse(it)
+                    }
             )
             analytics.logEvent("call_train_planner", bundle {
                 putString("departure_name", route.departureStation.longName)
@@ -125,8 +128,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         private fun onResponse(response: JourneyOptionsResponse) {
-            Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key] = response
-
             // Exclude cancelled options.
             val journeyOptions = response.options
                 .filter { it.status !in JourneyOptionStatus.HIDDEN }
