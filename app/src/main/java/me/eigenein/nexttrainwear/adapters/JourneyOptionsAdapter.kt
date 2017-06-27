@@ -1,6 +1,7 @@
 package me.eigenein.nexttrainwear.adapters
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,7 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
         journeyOptions[position].plannedDepartureTime.time
 
     fun swap(usingLocation: Boolean, route: Route, journeyOptions: Iterable<JourneyOption>) {
+        Log.i(LOG_TAG, "Swap")
         this.usingLocation = usingLocation
         this.route = route
         this.journeyOptions.clear()
@@ -113,6 +115,7 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
         private const val WHITE = 0xFFFFFFFF.toInt()
         private const val RED_ACCENT = 0xFFFF8880.toInt()
 
+        private val LOG_TAG = JourneyOptionsAdapter::class.java.simpleName
         private val CLOCK_TIME_FORMAT = SimpleDateFormat("H:mm", Locale.ENGLISH)
     }
 }

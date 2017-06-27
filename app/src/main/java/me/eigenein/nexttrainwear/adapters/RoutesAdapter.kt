@@ -85,6 +85,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         init {
             journeyOptionsRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
             journeyOptionsRecyclerView.adapter = adapter
+            journeyOptionsRecyclerView.setHasFixedSize(true)
             LinearSnapHelper().attachToRecyclerView(journeyOptionsRecyclerView)
         }
 

@@ -46,7 +46,7 @@ class TrainsFragment : Fragment() {
         routesRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView
         routesRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         routesRecyclerView.adapter = adapter
-        routesRecyclerView.addOnScrollListener(OnScrollListener())
+        routesRecyclerView.setHasFixedSize(true)
         LinearSnapHelper().attachToRecyclerView(routesRecyclerView)
 
         return view
@@ -110,10 +110,6 @@ class TrainsFragment : Fragment() {
         disposable.clear()
     }
 
-    override fun onDetach() {
-        super.onDetach()
-    }
-
     /**
      * Updates the fragment based on the detected station.
      */
@@ -152,12 +148,6 @@ class TrainsFragment : Fragment() {
             .take(NUMBER_OF_NEAREST_STATIONS)
 
         return favoriteStations + allStations
-    }
-
-    inner class OnScrollListener : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-        }
     }
 
     companion object {
