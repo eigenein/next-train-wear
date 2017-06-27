@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Vibrator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -82,6 +83,16 @@ fun Handler.asFlowable(delayMillis: Long): Flowable<Unit> {
         it.setCancellable { this.removeCallbacks(runnable) }
         runnable.scheduleNext()
     }, BackpressureStrategy.DROP)
+}
+
+fun <T : View> T.show(): T {
+    this.visibility = View.VISIBLE
+    return this
+}
+
+fun <T : View> T.hide(): T {
+    this.visibility = View.GONE
+    return this
 }
 
 fun <TViewHolder : RecyclerView.ViewHolder> RecyclerView.findFirstVisibleViewHolder() : TViewHolder? {

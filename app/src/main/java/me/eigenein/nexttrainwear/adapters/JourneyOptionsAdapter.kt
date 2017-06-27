@@ -27,10 +27,6 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
 
     private lateinit var route: Route
 
-    init {
-        setHasStableIds(true)
-    }
-
     override fun getItemCount(): Int = journeyOptions.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -42,10 +38,7 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
         holder.refreshCountDown()
     }
 
-    override fun getItemId(position: Int): Long =
-        journeyOptions[position].components.getOrNull(0)?.rideNumber?.toLong() ?:
-        // For an unexpected case there is no ride number.
-        journeyOptions[position].plannedDepartureTime.time
+    operator fun get(position: Int) = journeyOptions[position]
 
     fun swap(usingLocation: Boolean, route: Route, journeyOptions: Iterable<JourneyOption>) {
         Log.i(LOG_TAG, "Swap")

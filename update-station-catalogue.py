@@ -27,7 +27,6 @@ object Stations {{
 FOOTER = '''
     )
     val STATION_BY_CODE = ALL_STATIONS.map { Pair(it.code, it) }.toMap()
-    val STATION_CODE_TO_ID = ALL_STATIONS.mapIndexed { index, (code) -> Pair(code, index.toLong()) }.toMap()
 }'''
 
 

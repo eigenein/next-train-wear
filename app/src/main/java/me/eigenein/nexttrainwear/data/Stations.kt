@@ -2,7 +2,7 @@ package me.eigenein.nexttrainwear.data
 
 /**
  * Station catalogue.
- * Auto-generated on 2017-06-26 00:05:24.
+ * Auto-generated on 2017-06-27 21:14:28.
  */
 object Stations {
 
@@ -410,5 +410,4 @@ object Stations {
         Station("ZL", "Zwolle", "NL", 52.5047225952148, 6.09194421768188)
     )
     val STATION_BY_CODE = ALL_STATIONS.map { Pair(it.code, it) }.toMap()
-    val STATION_CODE_TO_ID = ALL_STATIONS.mapIndexed { index, (code) -> Pair(code, index.toLong()) }.toMap()
 }

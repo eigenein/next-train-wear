@@ -21,8 +21,9 @@ import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.api.JourneyOptionsResponse
 import me.eigenein.nexttrainwear.data.Route
-import me.eigenein.nexttrainwear.data.Stations
 import me.eigenein.nexttrainwear.utils.bundle
+import me.eigenein.nexttrainwear.utils.hide
+import me.eigenein.nexttrainwear.utils.show
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -38,10 +39,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
     private var usingLocation = false
 
-    init {
-        setHasStableIds(true)
-    }
-
     override fun getItemCount(): Int = routes.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -52,9 +49,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     override fun onViewRecycled(holder: ViewHolder) = holder.dispose()
 
     override fun getItemViewType(position: Int) = VIEW_TYPE
-
-    override fun getItemId(position: Int): Long =
-        Stations.STATION_CODE_TO_ID[routes[position].destinationStation.code]!!
 
     fun swap(usingLocation: Boolean, routes: Iterable<Route>) {
         this.usingLocation = usingLocation
@@ -67,6 +61,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
         val journeyOptionsRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
 
+        private val layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
         private val adapter = JourneyOptionsAdapter()
         private val disposable = CompositeDisposable()
         private val analytics = FirebaseAnalytics.getInstance(itemView.context)
@@ -79,11 +74,10 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         private val noTrainsView = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
         private val noTrainsTextView = itemView.findViewById(R.id.fragment_trains_no_trains_text) as TextView
 
-        private var shouldScrollToNextOption = true
         private lateinit var route: Route
 
         init {
-            journeyOptionsRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
+            journeyOptionsRecyclerView.layoutManager = layoutManager
             journeyOptionsRecyclerView.adapter = adapter
             journeyOptionsRecyclerView.setHasFixedSize(true)
             LinearSnapHelper().attachToRecyclerView(journeyOptionsRecyclerView)
@@ -93,7 +87,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             dispose()
 
             this.route = route
-            shouldScrollToNextOption = true
 
             val response = Globals.JOURNEY_OPTIONS_RESPONSE_CACHE[route.key]
             if (response != null) {
@@ -141,18 +134,17 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             Log.d(LOG_TAG, "Journey options: " + journeyOptions.size)
 
             // Display journey options.
-            progressView.visibility = View.GONE
+            progressView.hide()
             if (journeyOptions.isNotEmpty()) {
+                val position = layoutManager.findFirstVisibleItemPosition()
+                val scrollToDate =
+                    if (position != RecyclerView.NO_POSITION) adapter[position].plannedDepartureTime
+                    else Date()
                 adapter.swap(usingLocation, route, journeyOptions)
-                noTrainsView.visibility = View.GONE
-                journeyOptionsRecyclerView.visibility = View.VISIBLE
-
-                // Scroll to the next available option if needed.
-                if (shouldScrollToNextOption) {
-                    shouldScrollToNextOption = false
-                    val index = journeyOptions.indexOfFirst { it.actualDepartureTime > Date() }
-                    journeyOptionsRecyclerView.scrollToPosition(index)
-                }
+                noTrainsView.hide()
+                journeyOptionsRecyclerView
+                    .show()
+                    .scrollToPosition(journeyOptions.indexOfFirst { it.actualDepartureTime >= scrollToDate })
             } else {
                 @Suppress("DEPRECATION")
                 noTrainsTextView.text = Html.fromHtml(itemView.resources.getString(
@@ -160,8 +152,8 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                     route.departureStation.longName,
                     route.destinationStation.longName
                 ))
-                journeyOptionsRecyclerView.visibility = View.GONE
-                noTrainsView.visibility = View.VISIBLE
+                journeyOptionsRecyclerView.hide()
+                noTrainsView.show()
             }
         }
 
