@@ -99,7 +99,7 @@ fun <TViewHolder : RecyclerView.ViewHolder> RecyclerView.findFirstVisibleViewHol
     val position = (this.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
     if (position != RecyclerView.NO_POSITION) {
         @Suppress("UNCHECKED_CAST")
-        return this.findViewHolderForAdapterPosition(position) as TViewHolder
+        return this.findViewHolderForAdapterPosition(position) as TViewHolder?
     } else {
         return null
     }
@@ -109,9 +109,9 @@ fun <TViewHolder : RecyclerView.ViewHolder> RecyclerView.findVisibleViewHolders(
     val firstPosition = (this.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
     val lastPosition = (this.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
     if (firstPosition != RecyclerView.NO_POSITION && lastPosition != RecyclerView.NO_POSITION) {
-        return (firstPosition..lastPosition).map {
+        return (firstPosition..lastPosition).mapNotNull {
             @Suppress("UNCHECKED_CAST")
-            this.findViewHolderForAdapterPosition(it) as TViewHolder
+            this.findViewHolderForAdapterPosition(it) as TViewHolder?
         }
     } else {
         return emptyList()
