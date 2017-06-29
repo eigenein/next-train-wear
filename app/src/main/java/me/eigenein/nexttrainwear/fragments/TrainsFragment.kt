@@ -61,6 +61,7 @@ class TrainsFragment : Fragment() {
                 .asFlowable()
                 .flatMap {
                     LocationRequest.create()
+                        .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                         .setNumUpdates(1)
                         .asFlowable(it)
                         .take(1) // otherwise we'll get timeout error anyway

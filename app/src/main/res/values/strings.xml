@@ -6,5 +6,5 @@
     <string name="item_stations_hint">Tick your favourite stations</string>
     <string name="fragment_trains_detecting_location">Detecting location</string>
     <string name="item_journey_option_platform">platform</string>
-    <string name="fragment_trains_no_trains">Unfortunately, there is no trains from &lt;b>%1$s&lt;/b> to &lt;b>%2$s&lt;/b></string>
+    <string name="fragment_trains_no_trains">Unfortunately, there are no trains from &lt;b>%1$s&lt;/b> to &lt;b>%2$s&lt;/b></string>
 </resources>

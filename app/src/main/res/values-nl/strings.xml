@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Volgende trein</string>
+    <string name="navigation_drawer_trains">Treinen</string>
+    <string name="navigation_drawer_stations">Favoriete stations</string>
+    <string name="navigation_drawer_settings">Instellingen</string>
+    <string name="item_stations_hint">Tik op je favoriete stations</string>
+    <string name="fragment_trains_detecting_location">Lokatie detecteren</string>
+    <string name="item_journey_option_platform">spoor</string>
+    <string name="fragment_trains_no_trains">Helaas zijn er geen treinen van &lt;b>%1$s&lt;/b> naar &lt;b>%2$s&lt;/b></string>
+</resources>

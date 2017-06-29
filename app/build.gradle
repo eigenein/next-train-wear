@@ -8,8 +8,8 @@ android {
         applicationId "me.eigenein.nexttrainwear"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 2
-        versionName "2"
+        versionCode 3
+        versionName "3"
     }
     buildTypes {
         release {
