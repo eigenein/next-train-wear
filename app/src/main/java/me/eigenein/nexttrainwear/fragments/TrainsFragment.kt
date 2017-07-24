@@ -147,14 +147,12 @@ class TrainsFragment : Fragment() {
         val allStations = Stations.ALL_STATIONS
             .filter { it.code !in stationCodes && it.code != departureStation.code }
             .sortedBy { departureStation.distanceTo(it.latitude, it.longitude) }
-            .take(NUMBER_OF_NEAREST_STATIONS)
 
         return favoriteStations + allStations
     }
 
     companion object {
 
-        private const val NUMBER_OF_NEAREST_STATIONS = 5 // FIXME: better ideas?
         private const val LOCATION_TIMEOUT_SECONDS = 5L // FIXME: exponetial backoff.
         private const val COUNTDOWN_UPDATE_INTERVAL_MILLIS = 1000L
         private const val JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS = 60000L
