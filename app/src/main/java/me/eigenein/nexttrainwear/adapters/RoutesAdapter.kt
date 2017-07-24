@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit
  */
 class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
-    private val routes = ArrayList<Route>()
+    private val routes = arrayListOf<Route>()
 
     private var usingLocation = false
 
@@ -158,13 +158,13 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
 
         private fun showProgressLayout() {
-            journeyOptionsRecyclerView.visibility = View.GONE
-            noTrainsView.visibility = View.GONE
+            journeyOptionsRecyclerView.hide()
+            noTrainsView.hide()
 
             gpsStatusImageView.visibility = if (usingLocation) View.GONE else View.VISIBLE
             departureTextView.text = route.departureStation.longName
             destinationTextView.text = route.destinationStation.longName
-            progressView.visibility = View.VISIBLE
+            progressView.show()
         }
     }
 

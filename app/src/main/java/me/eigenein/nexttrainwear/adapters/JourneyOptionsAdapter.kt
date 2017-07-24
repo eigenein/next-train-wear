@@ -11,17 +11,18 @@ import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.api.JourneyOption
 import me.eigenein.nexttrainwear.api.JourneyOptionStatus
 import me.eigenein.nexttrainwear.data.Route
+import me.eigenein.nexttrainwear.utils.hide
 import me.eigenein.nexttrainwear.utils.minus
+import me.eigenein.nexttrainwear.utils.show
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Used to display possible journey options.
  */
 class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHolder>() {
 
-    private val journeyOptions = ArrayList<JourneyOption>()
+    private val journeyOptions = arrayListOf<JourneyOption>()
 
     private var usingLocation = false
 
@@ -73,11 +74,11 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
             val platform = journeyOption.components.getOrNull(0)?.stops?.getOrNull(0)?.platform
             if (platform != null) {
                 platformTextView.text = platform
-                platformTitleTextView.visibility = View.VISIBLE
-                platformTextView.visibility = View.VISIBLE
+                platformTitleTextView.show()
+                platformTextView.show()
             } else {
-                platformTitleTextView.visibility = View.GONE
-                platformTextView.visibility = View.GONE
+                platformTitleTextView.hide()
+                platformTextView.hide()
             }
 
             departureTimeTextView.text = CLOCK_TIME_FORMAT.format(journeyOption.actualDepartureTime)
