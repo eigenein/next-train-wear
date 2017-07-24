@@ -94,9 +94,9 @@ class JourneyOptionsAdapter : RecyclerView.Adapter<JourneyOptionsAdapter.ViewHol
 
         private fun toClockString(millis: Long): String {
             val (absMillis, sign) = if (millis >= 0) Pair(millis, "") else Pair(-millis, "-")
-            val hours = absMillis / 3600000
-            val minutes = (absMillis % 3600000) / 60000
-            val seconds = (absMillis % 60000) / 1000
+            val hours = absMillis / 3_600_000
+            val minutes = (absMillis % 3_600_000) / 60_000
+            val seconds = (absMillis % 60_000) / 1_000
             return if (hours == 0L)
                 String.format("%s%d:%02d", sign, minutes, seconds)
             else
