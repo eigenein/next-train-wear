@@ -2,7 +2,7 @@ package me.eigenein.nexttrainwear.data
 
 /**
  * Station catalogue.
- * Auto-generated on 2017-06-27 21:14:28.
+ * Auto-generated on 2017-07-24 23:54:04.
  */
 object Stations {
 
@@ -175,6 +175,7 @@ object Stations {
         Station("HBZM", "Hardinxveld Blauwe Zoom", "NL", 51.82944, 4.81556),
         Station("GND", "Hardinxveld-Giessendam", "NL", 51.8305549621582, 4.83583354949951),
         Station("HRN", "Haren", "NL", 53.1761093139648, 6.61722230911255),
+        Station("HRNOVT", "Haren OV Transferium", "NL", 53.170071, 6.592202),
         Station("HLG", "Harlingen", "NL", 53.1704205, 5.4251932),
         Station("HLGH", "Harlingen Haven", "NL", 53.174917, 5.4112885),
         Station("HK", "Heemskerk", "NL", 52.4952774047852, 4.68694448471069),
@@ -266,7 +267,7 @@ object Stations {
         Station("NMGO", "Nijmegen Goffert", "NL", 51.8273, 5.822722),
         Station("NMH", "Nijmegen Heyendaal", "NL", 51.8269462585449, 5.86749982833862),
         Station("NML", "Nijmegen Lent", "NL", 51.861811, 5.859686),
-        Station("NVD", "Nijverdal", "NL", 52.36555, 6.471111),
+        Station("NVD", "Nijverdal", "NL", 52.366111, 6.462),
         Station("NS", "Nunspeet", "NL", 52.3708343505859, 5.78527784347534),
         Station("NH", "Nuth", "NL", 50.9194450378418, 5.89277791976929),
         Station("OBD", "Obdam", "NL", 52.6780548095703, 4.90722227096558),
