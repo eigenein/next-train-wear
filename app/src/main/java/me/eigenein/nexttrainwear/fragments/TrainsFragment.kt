@@ -153,7 +153,7 @@ class TrainsFragment : Fragment() {
 
     companion object {
 
-        private const val LOCATION_TIMEOUT_SECONDS = 5L // FIXME: exponetial backoff.
+        private const val LOCATION_TIMEOUT_SECONDS = 5L // FIXME: exponential backoff.
         private const val COUNTDOWN_UPDATE_INTERVAL_MILLIS = 1000L
         private const val JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS = 60000L
         private const val AUTO_SCROLL_THRESHOLD_MILLIS = -1500L // FIXME: better ideas?
