@@ -29,7 +29,7 @@ class MainActivity :
         setContentView(R.layout.activity_main)
         setAmbientEnabled()
 
-        val navigationDrawer = findViewById(R.id.navigation_drawer) as WearableNavigationDrawer
+        val navigationDrawer: WearableNavigationDrawer = findViewById(R.id.navigation_drawer)
         navigationDrawer.setAdapter(NavigationDrawerAdapter(this, this))
         navigationDrawer.setShouldOnlyOpenWhenAtTop(false)
 

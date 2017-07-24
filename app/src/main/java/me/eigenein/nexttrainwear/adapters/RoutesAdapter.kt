@@ -25,8 +25,7 @@ import me.eigenein.nexttrainwear.utils.bundle
 import me.eigenein.nexttrainwear.utils.hide
 import me.eigenein.nexttrainwear.utils.show
 import retrofit2.HttpException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
+import java.io.IOException
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -59,20 +58,20 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val journeyOptionsRecyclerView = itemView.findViewById(R.id.item_route_recycler_view) as WearableRecyclerView
+        val journeyOptionsRecyclerView: WearableRecyclerView = itemView.findViewById(R.id.item_route_recycler_view)
 
         private val layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.VERTICAL, false)
         private val adapter = JourneyOptionsAdapter()
         private val disposable = CompositeDisposable()
         private val analytics = FirebaseAnalytics.getInstance(itemView.context)
 
-        private val gpsStatusImageView = itemView.findViewById(R.id.item_route_gps_status_image_view) as ImageView
+        private val gpsStatusImageView: ImageView = itemView.findViewById(R.id.item_route_gps_status_image_view)
 
-        private val progressView = itemView.findViewById(R.id.item_route_progress_layout)
-        private val departureTextView = itemView.findViewById(R.id.item_route_departure_text) as TextView
-        private val destinationTextView = itemView.findViewById(R.id.item_route_destination_text) as TextView
-        private val noTrainsView = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
-        private val noTrainsTextView = itemView.findViewById(R.id.fragment_trains_no_trains_text) as TextView
+        private val progressView: View = itemView.findViewById(R.id.item_route_progress_layout)
+        private val departureTextView: TextView = itemView.findViewById(R.id.item_route_departure_text)
+        private val destinationTextView: TextView = itemView.findViewById(R.id.item_route_destination_text)
+        private val noTrainsView: View = itemView.findViewById(R.id.fragment_trains_no_trains_layout)
+        private val noTrainsTextView: TextView = itemView.findViewById(R.id.fragment_trains_no_trains_text)
 
         private lateinit var route: Route
 
@@ -104,7 +103,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                     .trainPlanner(route.departureStation.code, route.destinationStation.code)
                     .retryWhen { it.flatMap {
                         Log.w(LOG_TAG, "Train planner call failed", it)
-                        if (it is HttpException || it is SocketTimeoutException || it is UnknownHostException)
+                        if (it is HttpException || it is IOException)
                             Flowable.timer(RETRY_INTERVAL_SECONDS, TimeUnit.SECONDS)
                         else
                             Flowable.error(it)

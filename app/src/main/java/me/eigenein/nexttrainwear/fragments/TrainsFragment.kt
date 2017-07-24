@@ -42,7 +42,7 @@ class TrainsFragment : Fragment() {
 
         progressLayout = view.findViewById(R.id.fragment_trains_progress_layout)
 
-        routesRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view) as WearableRecyclerView
+        routesRecyclerView = view.findViewById(R.id.fragment_trains_recycler_view)
         routesRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         routesRecyclerView.adapter = adapter
         routesRecyclerView.setHasFixedSize(true)
@@ -55,6 +55,7 @@ class TrainsFragment : Fragment() {
         super.onResume()
 
         // Obtain current location and build possible route list.
+        val resumeTime = System.currentTimeMillis()
         disposable.add(
             GoogleApiClient.Builder(activity)
                 .addApi(LocationServices.API)
@@ -62,8 +63,8 @@ class TrainsFragment : Fragment() {
                 .flatMap {
                     LocationRequest.create()
                         .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                        .setNumUpdates(1)
                         .asFlowable(it)
+                        .filter { it.time >= resumeTime } // we only want fresh location fixes
                         .take(1) // otherwise we'll get timeout error anyway
                         .timeout(LOCATION_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 }
@@ -90,6 +91,7 @@ class TrainsFragment : Fragment() {
                         if (it.refreshCountDown() in AUTO_SCROLL_THRESHOLD_MILLIS..0 && journeyOptionsRecyclerView.isScrollIdle()) {
                             // Departed. Scroll to the next one.
                             journeyOptionsRecyclerView.smoothScrollToPosition(it.adapterPosition + 1)
+                            @Suppress("DEPRECATION")
                             activity.getVibrator().vibrate(AUTO_SCROLL_VIBRATE_PATTERN, -1)
                         }
                     }
