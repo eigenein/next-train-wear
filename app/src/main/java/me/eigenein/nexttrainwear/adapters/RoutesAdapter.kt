@@ -173,6 +173,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
         private val LOG_TAG = RoutesAdapter::class.java.simpleName
 
-        private const val RETRY_INTERVAL_SECONDS = 5L
+        private const val RETRY_INTERVAL_SECONDS = 5L // FIXME: exponential backoff.
     }
 }

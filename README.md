@@ -2,6 +2,10 @@
 
 ## Issue Tracker
 
+## Version 5
+
+* [ ] :bangbang: Не отключается GPS, `removeLocationUpdates` не отписывается.
+
 ## Version 4
 
 * [x] :warning: Используется старое местоположение.

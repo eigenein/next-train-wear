@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Vibrator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
@@ -15,7 +16,6 @@ import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import me.eigenein.nexttrainwear.exceptions.GoogleApiClientConnectionFailedException
 import me.eigenein.nexttrainwear.exceptions.LocationRequestFailedException
-import me.eigenein.nexttrainwear.exceptions.NoLocationException
 import org.simpleframework.xml.transform.RegistryMatcher
 import java.util.*
 
@@ -48,12 +48,9 @@ fun GoogleApiClient.Builder.asFlowable(): Flowable<GoogleApiClient> {
  */
 fun LocationRequest.asFlowable(googleApiClient: GoogleApiClient): Flowable<Location> {
     return Flowable.create({ emitter ->
-        val listener = { location: Location? ->
-            if (location != null) {
-                emitter.onNext(location)
-            } else {
-                emitter.onError(NoLocationException("Location is null"))
-            }
+        val listener = { location: Location ->
+            Log.d("LocationRequest.asFlowa", String.format("%s %s", location, Date(location.time)))
+            emitter.onNext(location)
         }
         LocationServices.FusedLocationApi
             .requestLocationUpdates(googleApiClient, this, listener)

@@ -55,7 +55,6 @@ class TrainsFragment : Fragment() {
         super.onResume()
 
         // Obtain current location and build possible route list.
-        val resumeTime = System.currentTimeMillis()
         disposable.add(
             GoogleApiClient.Builder(activity)
                 .addApi(LocationServices.API)
@@ -63,9 +62,11 @@ class TrainsFragment : Fragment() {
                 .flatMap {
                     LocationRequest.create()
                         .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                        .setInterval(0L)
+                        .setFastestInterval(0L)
+                        .setNumUpdates(1)
                         .asFlowable(it)
-                        .filter { it.time >= resumeTime } // we only want fresh location fixes
-                        .take(1) // otherwise we'll get timeout error anyway
+                        .take(1) // otherwise we'll get timeout error anyway despite of setNumUpdates(1)
                         .timeout(LOCATION_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 }
                 .map { DetectedStation(true, Station.findNearestStation(it)) }
@@ -98,9 +99,9 @@ class TrainsFragment : Fragment() {
             }
         )
 
-        // Refresh journey options.
+        // Update journey options.
         disposable.add(
-            handler.asFlowable(JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS).subscribe {
+            handler.asFlowable(JOURNEY_OPTIONS_UPDATE_INTERVAL_MILLIS).subscribe {
                 // FIXME: this can lead to a pair of concurrent requests.
                 routesRecyclerView.findFirstVisibleViewHolder<RoutesAdapter.ViewHolder>()?.refreshJourneyOptions()
             }
@@ -153,9 +154,9 @@ class TrainsFragment : Fragment() {
 
     companion object {
 
-        private const val LOCATION_TIMEOUT_SECONDS = 5L // FIXME: exponential backoff.
+        private const val LOCATION_TIMEOUT_SECONDS = 10L
         private const val COUNTDOWN_UPDATE_INTERVAL_MILLIS = 1000L
-        private const val JOURNEY_OPTIONS_REFRESH_INTERVAL_MILLIS = 60000L
+        private const val JOURNEY_OPTIONS_UPDATE_INTERVAL_MILLIS = 60000L
         private const val AUTO_SCROLL_THRESHOLD_MILLIS = -1500L // FIXME: better ideas?
 
         private val AUTO_SCROLL_VIBRATE_PATTERN = longArrayOf(0L, 200L, 200L, 200L)
