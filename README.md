@@ -5,6 +5,7 @@
 ## Version 5
 
 * [ ] :bangbang: Не отключается GPS, `removeLocationUpdates` не отписывается.
+* [ ] :thought_balloon: [Anko Layouts](https://github.com/Kotlin/anko/wiki/Anko-Layouts)
 
 ## Version 4
 
