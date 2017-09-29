@@ -2,11 +2,19 @@
 
 ## Issue Tracker
 
-## Version 5
+## Version 6
 
-* [ ] :bangbang: Не отключается GPS, `removeLocationUpdates` не отписывается.
+* [ ] :warning: При отправлении поезда список рейсов иногда прокручивается на много позиций вместо следующей.
+* [ ] :warning: При прокрутке станций назначения таймер обновляется только у левого видимого маршрута.
+* [ ] :warning: При переоткрытии приложения через большое время отображается старый рейс.
+* [ ] :warning: Исправить вызов `removeLocationUpdates` (закомментировать `setMaxUpdates(1)`).
+* [ ] :thought_balloon: В ambient mode отображать примерное время отправления ("2 min") и убрать wakelock.
 * [ ] :thought_balloon: [Anko Layouts](https://github.com/Kotlin/anko/wiki/Anko-Layouts)
 * [ ] :thought_balloon: https://android.jlelse.eu/handsome-codes-with-kotlin-6e183db4c7e5
+
+## Version 5
+
+* [x] :bangbang: Не отключается GPS, `removeLocationUpdates` не отписывается.
 
 ## Version 4
 
@@ -44,11 +52,6 @@
 
 ## Notes
 
-* [ ] :warning: При отправлении поезда список рейсов иногда прокручивается на много позиций вместо следующей.
-* [ ] :warning: При прокрутке станций назначения таймер обновляется только у левого видимого маршрута.
-* [ ] :warning: При переоткрытии приложения через большое время отображается старый рейс.
-* [ ] :warning: Исправить вызов `removeLocationUpdates` (закомментировать `setMaxUpdates(1)`).
-* [ ] :thought_balloon: В ambient mode отображать примерное время отправления ("2 min") и убрать wakelock.
 * [ ] :thought_balloon: Уведомлять про изменение или отмену рейса.
 * [ ] :thought_balloon: Выделять цветом отправившиеся рейсы.
 * [ ] :thought_balloon: Прокрутка рейсов запястьем.
