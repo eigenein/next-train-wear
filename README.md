@@ -6,6 +6,7 @@
 
 * [ ] :bangbang: Не отключается GPS, `removeLocationUpdates` не отписывается.
 * [ ] :thought_balloon: [Anko Layouts](https://github.com/Kotlin/anko/wiki/Anko-Layouts)
+* [ ] :thought_balloon: https://android.jlelse.eu/handsome-codes-with-kotlin-6e183db4c7e5
 
 ## Version 4
 
