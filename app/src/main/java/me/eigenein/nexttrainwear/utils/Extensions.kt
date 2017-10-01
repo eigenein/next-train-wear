@@ -12,6 +12,7 @@ import android.os.Vibrator
 import android.preference.PreferenceManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.wear.widget.WearableRecyclerView
 import android.support.wear.widget.drawer.WearableDrawerLayout
 import android.support.wear.widget.drawer.WearableNavigationDrawerView
 import android.util.Log
@@ -164,6 +165,9 @@ inline fun Activity.wearableDrawerLayout(init: WearableDrawerLayout.() -> Unit):
  */
 inline fun ViewManager.wearableNavigationDrawerView(init: WearableNavigationDrawerView.() -> Unit): WearableNavigationDrawerView =
     ankoView({ WearableNavigationDrawerView(it) }, theme = 0, init = init)
+
+inline fun ViewManager.wearableRecyclerView(theme: Int = 0, init: WearableRecyclerView.() -> Unit): WearableRecyclerView =
+    ankoView({ WearableRecyclerView(it) }, theme = theme, init = init)
 
 fun SharedPreferences.edit(init: SharedPreferences.Editor.() -> Unit) {
     val editor = edit()

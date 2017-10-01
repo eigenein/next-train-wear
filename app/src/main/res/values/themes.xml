@@ -4,4 +4,7 @@
         <item name="android:colorBackground">@color/lighter_background</item>
         <item name="android:colorAccent">@color/accent</item>
     </style>
+    <style name="VerticalRecyclerView">
+        <item name="android:scrollbars">vertical</item>
+    </style>
 </resources>
