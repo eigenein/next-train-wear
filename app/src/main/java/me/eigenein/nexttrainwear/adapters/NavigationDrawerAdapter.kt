@@ -3,13 +3,10 @@ package me.eigenein.nexttrainwear.adapters
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
-import android.support.wearable.view.drawer.WearableNavigationDrawer.WearableNavigationDrawerAdapter
+import android.support.wear.widget.drawer.WearableNavigationDrawerView
 import me.eigenein.nexttrainwear.R
 
-class NavigationDrawerAdapter(
-    context: Context,
-    private val listener: NavigationDrawerAdapter.OnItemSelectedListener
-) : WearableNavigationDrawerAdapter() {
+class NavigationDrawerAdapter(context: Context) : WearableNavigationDrawerView.WearableNavigationDrawerAdapter() {
 
     private val items = arrayOf(
         Pair(context.getString(R.string.navigation_drawer_trains), context.getDrawable(R.drawable.ic_train_black_24dp)),
@@ -23,12 +20,7 @@ class NavigationDrawerAdapter(
 
     override fun getItemText(index: Int): String = items[index].first
     override fun getItemDrawable(index: Int): Drawable = items[index].second
-    override fun onItemSelected(index: Int) = listener.onItemSelected(index)
     override fun getCount(): Int = items.size
-
-    interface OnItemSelectedListener {
-        fun onItemSelected(index: Int)
-    }
 
     companion object {
 

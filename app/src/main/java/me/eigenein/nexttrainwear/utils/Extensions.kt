@@ -1,5 +1,8 @@
 package me.eigenein.nexttrainwear.utils
 
+import android.app.Activity
+import android.app.FragmentManager
+import android.app.FragmentTransaction
 import android.content.Context
 import android.location.Location
 import android.os.Bundle
@@ -7,8 +10,11 @@ import android.os.Handler
 import android.os.Vibrator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.wear.widget.drawer.WearableDrawerLayout
+import android.support.wear.widget.drawer.WearableNavigationDrawerView
 import android.util.Log
 import android.view.View
+import android.view.ViewManager
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -16,12 +22,11 @@ import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import me.eigenein.nexttrainwear.exceptions.GoogleApiClientConnectionFailedException
 import me.eigenein.nexttrainwear.exceptions.LocationRequestFailedException
+import org.jetbrains.anko.custom.ankoView
 import org.simpleframework.xml.transform.RegistryMatcher
 import java.util.*
 
-operator fun Date.minus(other: Date): Long {
-    return this.time - other.time
-}
+operator fun Date.minus(other: Date): Long = this.time - other.time
 
 /**
  * Make an observable from Google API client builder emitting the built client when connected.
@@ -136,3 +141,15 @@ fun registryMatcher(init: RegistryMatcher.() -> Unit): RegistryMatcher {
     matcher.init()
     return matcher
 }
+
+fun FragmentManager.transaction(init: FragmentTransaction.() -> Unit) {
+    val transaction = beginTransaction()
+    transaction.init()
+    transaction.commit()
+}
+
+inline fun Activity.wearableDrawerLayout(init: WearableDrawerLayout.() -> Unit): WearableDrawerLayout =
+    ankoView({ WearableDrawerLayout(it) }, theme = 0, init = init)
+
+inline fun ViewManager.wearableNavigationDrawerView(init: WearableNavigationDrawerView.() -> Unit): WearableNavigationDrawerView =
+    ankoView({ WearableNavigationDrawerView(it) }, theme = 0, init = init)

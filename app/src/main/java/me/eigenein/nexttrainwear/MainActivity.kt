@@ -8,35 +8,54 @@ import android.os.Bundle
 import android.os.PowerManager
 import android.support.v4.app.ActivityCompat
 import android.support.wearable.activity.WearableActivity
-import android.support.wearable.view.drawer.WearableNavigationDrawer
 import android.util.Log
+import android.view.View
+import android.widget.FrameLayout
 import me.eigenein.nexttrainwear.adapters.NavigationDrawerAdapter
 import me.eigenein.nexttrainwear.fragments.SettingsFragment
 import me.eigenein.nexttrainwear.fragments.StationsFragment
 import me.eigenein.nexttrainwear.fragments.TrainsFragment
+import me.eigenein.nexttrainwear.utils.transaction
+import me.eigenein.nexttrainwear.utils.wearableDrawerLayout
+import me.eigenein.nexttrainwear.utils.wearableNavigationDrawerView
+import org.jetbrains.anko.backgroundColor
+import org.jetbrains.anko.backgroundResource
+import org.jetbrains.anko.frameLayout
+import org.jetbrains.anko.matchParent
 
-class MainActivity :
-    WearableActivity(),
-    NavigationDrawerAdapter.OnItemSelectedListener {
+class MainActivity : WearableActivity() {
 
+    private lateinit var contentFrame: FrameLayout
     private lateinit var wakeLock: PowerManager.WakeLock
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        wearableDrawerLayout {
+            layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
+
+            contentFrame = frameLayout {
+                id = View.generateViewId()
+                layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
+            }
+
+            wearableNavigationDrawerView {
+                layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
+                backgroundResource = R.color.lighter_background
+                isOpenOnlyAtTopEnabled = false
+                setAdapter(NavigationDrawerAdapter(this@MainActivity))
+                addOnItemSelectedListener {
+                    fragmentManager.transaction { replace(contentFrame.id, FRAGMENTS[it]()) }
+                }
+            }
+        }
+
+        setAmbientEnabled()
+
         wakeLock = (getSystemService(Context.POWER_SERVICE) as PowerManager)
             .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, LOG_TAG)
 
-        setContentView(R.layout.activity_main)
-        setAmbientEnabled()
-
-        val navigationDrawer: WearableNavigationDrawer = findViewById(R.id.navigation_drawer)
-        navigationDrawer.setAdapter(NavigationDrawerAdapter(this, this))
-        navigationDrawer.setShouldOnlyOpenWhenAtTop(false)
-
-        fragmentManager
-            .beginTransaction()
-            .replace(R.id.content_frame, TrainsFragment())
-            .commit()
+        fragmentManager.transaction { replace(contentFrame.id, TrainsFragment()) }
     }
 
     public override fun onStart() {
@@ -49,18 +68,14 @@ class MainActivity :
 
     override fun onEnterAmbient(ambientDetails: Bundle?) {
         super.onEnterAmbient(ambientDetails)
-        window.decorView.setBackgroundColor(Color.BLACK)
+        window.decorView.backgroundColor = Color.BLACK
         wakeLock.acquire() // FIXME: better ideas?
     }
 
     override fun onExitAmbient() {
         super.onExitAmbient()
-        window.decorView.setBackgroundResource(R.color.lighter_background)
+        window.decorView.backgroundResource = R.color.lighter_background
         wakeLock.release() // FIXME: better ideas?
-    }
-
-    override fun onItemSelected(index: Int) {
-        fragmentManager.beginTransaction().replace(R.id.content_frame, FRAGMENTS[index]()).commit()
     }
 
     override fun onRequestPermissionsResult(
