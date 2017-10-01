@@ -8,11 +8,11 @@ import android.widget.CheckBox
 import android.widget.CompoundButton
 import com.google.firebase.analytics.FirebaseAnalytics
 
-import me.eigenein.nexttrainwear.utils.Preferences
 import me.eigenein.nexttrainwear.R
 import me.eigenein.nexttrainwear.data.Station
 import me.eigenein.nexttrainwear.data.Stations
 import me.eigenein.nexttrainwear.utils.bundle
+import me.eigenein.nexttrainwear.utils.setStations
 
 class StationsAdapter(private val checkedStations: MutableSet<String>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -57,7 +57,7 @@ class StationsAdapter(private val checkedStations: MutableSet<String>)
             } else {
                 checkedStations.remove(station.code)
             }
-            Preferences.setStations(checkBox.context, checkedStations)
+            checkBox.context.setStations(checkedStations)
             analytics.logEvent("on_checked_changed", bundle {
                 putString("station_code", station.code)
                 putBoolean("is_checked", isChecked)

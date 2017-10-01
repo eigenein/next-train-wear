@@ -4,10 +4,12 @@ import android.app.Activity
 import android.app.FragmentManager
 import android.app.FragmentTransaction
 import android.content.Context
+import android.content.SharedPreferences
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
 import android.os.Vibrator
+import android.preference.PreferenceManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.wear.widget.drawer.WearableDrawerLayout
@@ -142,14 +144,32 @@ fun registryMatcher(init: RegistryMatcher.() -> Unit): RegistryMatcher {
     return matcher
 }
 
+/**
+ * Executes code block with fragment transaction.
+ */
 fun FragmentManager.transaction(init: FragmentTransaction.() -> Unit) {
     val transaction = beginTransaction()
     transaction.init()
     transaction.commit()
 }
 
+/**
+ * Anko extension.
+ */
 inline fun Activity.wearableDrawerLayout(init: WearableDrawerLayout.() -> Unit): WearableDrawerLayout =
     ankoView({ WearableDrawerLayout(it) }, theme = 0, init = init)
 
+/**
+ * Anko extension.
+ */
 inline fun ViewManager.wearableNavigationDrawerView(init: WearableNavigationDrawerView.() -> Unit): WearableNavigationDrawerView =
     ankoView({ WearableNavigationDrawerView(it) }, theme = 0, init = init)
+
+fun SharedPreferences.edit(init: SharedPreferences.Editor.() -> Unit) {
+    val editor = edit()
+    editor.init()
+    editor.apply()
+}
+
+fun Context.getPreferences() = PreferenceManager.getDefaultSharedPreferences(this)
+fun Context.editPreferences(init: SharedPreferences.Editor.() -> Unit) = getPreferences().edit(init)

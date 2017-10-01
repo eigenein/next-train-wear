@@ -72,7 +72,7 @@ class TrainsFragment : Fragment() {
                 .map { DetectedStation(true, Station.findNearestStation(it)) }
                 .doOnError { Log.e(LOG_TAG, "Failed to detect station: " + it) }
                 .onErrorReturn {
-                    val lastStation = Stations.STATION_BY_CODE[Preferences.getLastStationCode(activity)]
+                    val lastStation = Stations.STATION_BY_CODE[activity.getLastStationCode()]
                     DetectedStation(false, lastStation ?: Stations.AMSTERDAM_CENTRAAL)
                 }
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -118,7 +118,7 @@ class TrainsFragment : Fragment() {
      */
     private fun onStationDetected(detectedStation: DetectedStation) {
         Log.d(LOG_TAG, "Departure station: " + detectedStation)
-        Preferences.setLastStationCode(activity, detectedStation.station.code)
+        activity.setLastStationCode(detectedStation.station.code)
 
         val destinations = selectDestinations(detectedStation.station)
         Log.d(LOG_TAG, "Selected destinations: " + destinations.size)
@@ -136,7 +136,7 @@ class TrainsFragment : Fragment() {
      * Select destination stations to go to from the specified departure station.
      */
     private fun selectDestinations(departureStation: Station): List<Station> {
-        val stationCodes = Preferences.getStations(activity)
+        val stationCodes = activity.getStations()
 
         // Select favorite stations sorted by distance.
         val favoriteStations = stationCodes

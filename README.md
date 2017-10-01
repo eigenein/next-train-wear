@@ -10,7 +10,8 @@
 * [ ] :warning: Исправить вызов `removeLocationUpdates` (закомментировать `setMaxUpdates(1)`).
 * [ ] :thought_balloon: В ambient mode отображать примерное время отправления ("2 min") и убрать wakelock.
 * [ ] :thought_balloon: [Anko Layouts](https://github.com/Kotlin/anko/wiki/Anko-Layouts)
-* [ ] :thought_balloon: https://android.jlelse.eu/handsome-codes-with-kotlin-6e183db4c7e5
+* [ ] :thought_balloon: Изменить тип приложения для установки с телефона.
+* [x] :thought_balloon: https://android.jlelse.eu/handsome-codes-with-kotlin-6e183db4c7e5
 
 ## Version 5
 
