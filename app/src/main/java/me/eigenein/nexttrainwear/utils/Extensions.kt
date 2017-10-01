@@ -171,5 +171,5 @@ fun SharedPreferences.edit(init: SharedPreferences.Editor.() -> Unit) {
     editor.apply()
 }
 
-fun Context.getPreferences() = PreferenceManager.getDefaultSharedPreferences(this)
+fun Context.getPreferences(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 fun Context.editPreferences(init: SharedPreferences.Editor.() -> Unit) = getPreferences().edit(init)
